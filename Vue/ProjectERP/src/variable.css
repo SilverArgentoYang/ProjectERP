@@ -1,0 +1,14 @@
+:root {
+    /* 色库 */
+    --colorred: #d90000;
+    --colordred: #c20404;
+    --colorwhite: #ffffff;
+    --colorblack : #000000;
+    --colorgrey : #999999;
+    --colordgrey : #505050;
+    --colorlgrey : #dddddd;
+    --colorslgrey : #eeeeee;
+    --colororange : #ff8d1a;
+
+    --shadowblack : rgba(0,0,0,0.5);
+}

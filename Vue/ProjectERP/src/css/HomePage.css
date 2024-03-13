@@ -1,0 +1,67 @@
+
+/* 整体设置 */
+.homepagebody {
+    width: 1680px;
+    margin: auto;
+}
+
+/* 上半部分 */
+.special {
+    margin: 20px 0;
+    display: flex;
+}
+.rowpaper {
+    width: 660px;
+    height: 480px;
+    overflow: hidden;
+    border-radius: 25px;
+    &>.rowpapercontain {
+        width: 3300px;
+        height: 480px;
+        display: flex;
+        animation: rowpaper 10s ease infinite;
+        &>.img {
+            width: 660px;
+            height: 480px;
+            object-fit:cover;
+        }
+    }
+}
+.famous {
+    width: 1000px;
+    max-height: 560px;
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 20px;
+}
+
+/* 下半部分 */
+.normal {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 20px;
+}
+
+/* 动画 */
+@keyframes rowpaper {
+    0%,10% {
+        transform: translateX(0px);
+    }
+    20%,30% {
+        transform: translateX(-660px);
+    }
+    40%,50% {
+        transform: translateX(-1320px);
+    }
+    60%,70% {
+        transform: translateX(-1980px);
+    }
+    80%,90% {
+        transform: translateX(-2640px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
