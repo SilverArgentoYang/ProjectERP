@@ -40,6 +40,10 @@
         line-height: 30px;
         text-align: center;
     }
+    &>.choosing {
+        background-color: var(--colordred);
+        color: var(--colorwhite);
+    }
 }
 
 /* 选项 */

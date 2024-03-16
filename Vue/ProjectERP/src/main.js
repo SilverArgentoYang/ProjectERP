@@ -1,9 +1,13 @@
-import { createApp } from 'vue'
+import { createApp,} from 'vue'
 import './style.css'
 import App from './App.vue'
 import router from './Router'
+import axios from 'axios'
 //全局组件引入
 import Icons from './Resource/Icons.vue';
+
+//axios注册
+axios.defaults.baseURL= 'http://127.0.0.1:4523/m1/4156595-0-default';
 
 const app = createApp(App);
 //全局组件注册

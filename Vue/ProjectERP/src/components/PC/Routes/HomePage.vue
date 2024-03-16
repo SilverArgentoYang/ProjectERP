@@ -1,16 +1,70 @@
 <script setup>
     //VUE引用
-    import { inject } from 'vue';
+    import { inject, ref } from 'vue';
 
     // components
     import GoodsItem from './../GoodsItem.vue'
+    import axios from 'axios';
 
-    // 自定义声明
-    const {
-        goods,
-        rowpapergoods,
-        suggestgoods
-    }=inject('resource')
+    //读取轮播图
+    const rowpapergoods = ref([
+        {
+            id:"",
+            img:"",
+            fakeprice:"Undefined",
+            realprice:"Undefined",
+            name : "Undefined"
+        }
+    ]);
+    axios({
+        url:'/goods',
+        method:'get',
+        params:{
+            type:'rowpapergoods'
+        }
+    }).then((res)=>{
+        rowpapergoods.value = res.data.goods.slice();
+    });
+
+    //读取推荐商品
+    const suggestgoods = ref([
+        {
+            id:"",
+            img:"",
+            fakeprice:"Undefined",
+            realprice:"Undefined",
+            name : "Undefined"
+        }
+    ]);
+    axios({
+        url:'/goods',
+        method:'get',
+        params:{
+            type:'suggestsixgoods'
+        }
+    }).then((res)=>{
+        suggestgoods.value = res.data.goods.slice();
+    });
+
+    //读取所有商品
+    const goods = ref([
+        {
+            id:"",
+            img:"",
+            fakeprice:"Undefined",
+            realprice:"Undefined",
+            name : "Undefined"
+        }
+    ]);
+    axios({
+        url:'/goods',
+        method:'get',
+        params:{
+            type:'goods'
+        }
+    }).then(res => {
+        goods.value = res.data.goods.slice();
+    })
 </script>
 
 <template>
@@ -27,15 +81,12 @@
 
             <!-- 推荐内容 -->
             <div class="famous">
-                <!-- 后端重构后需要调整 -->
                 <GoodsItem v-for="item in suggestgoods" :good="item" class="famousitem"></GoodsItem>
             </div>
         </div>
 
         <!-- 下半部分 -->
         <div class="normal">
-            <!-- 后端重构后需要调整 -->
-            <GoodsItem v-for="item in goods" :good="item" class="normalitem"></GoodsItem>
             <GoodsItem v-for="item in goods" :good="item" class="normalitem"></GoodsItem>
         </div>
     </div>

@@ -3,28 +3,26 @@ import { inject } from 'vue';
     // components
     import PanelItem from './PanelItem.vue'
 
-    //状态管理
-    const store = inject('store');
-    const {
-        cartgoods,
-        favoritegoods,
-        historygoods
-    } = inject('resource');
+    //props导入
+    const props = defineProps({
+        itemlist:{
+            type:Array,
+            default:[{
+                id:0,
+                img:'',
+                fakeprice:'Undefined',
+                realprice:'Undefined',
+                name:'Undefined'
+            }]
+        }
+    });
 
 </script>
 
 <template>
     <div class="popoverpanelbody">
         <!-- 后端重构后需要调整 -->
-        <div v-if="store.state.nav_popoverpaneltarget == 'cart'">
-            <PanelItem v-for="item in cartgoods" :item="item"></PanelItem>
-        </div>
-        <div v-if="store.state.nav_popoverpaneltarget == 'favorites'">
-            <PanelItem v-for="item in favoritegoods" :item="item"></PanelItem>
-        </div>
-        <div v-if="store.state.nav_popoverpaneltarget == 'history'">
-            <PanelItem v-for="item in historygoods" :item="item"></PanelItem>
-        </div>
+        <PanelItem v-for="item in itemlist" :item="item"></PanelItem>
     </div>
 </template>
 

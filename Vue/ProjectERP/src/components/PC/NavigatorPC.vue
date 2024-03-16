@@ -1,47 +1,28 @@
 <script setup>
     //VUE引用
-    import { inject, ref } from 'vue';
+    import { inject, onMounted, ref, toRaw} from 'vue';
 
     // components
     import NavAvatorPanel from './NavAvatorPanel.vue';
     import NavPopoverPanel from './NavPopoverPanel.vue';
     import { useRouter } from 'vue-router';
-    const router = useRouter()
-    
-    // 状态管理
-    const store = inject('store');
-    function _avatorpanelshow(ishow) {
-        store._nav_avatorpanelshow(ishow);
-    }
+    import axios from 'axios';
+    let router = useRouter()
 
+    // 状态管理
+    let store = inject('store');
+    function _avatorpanelshow(ishow) {
+        if(store.state.user_islogin){
+            store._nav_avatorpanelshow(ishow);
+        }
+    }
     function _popoverpaneltarget(target) {
         store._nav_popoverpaneltarget(target);
     }
     function _popoverpanelshow(isshow) {
-        store._nav_popoverpanelshow(isshow);
-    }
-
-    //搜索和分类跳转
-    function _jumptokind(parameter) {
-        parameter=parameter.replace(/^\s+|\s+$/g,"");
-        if(parameter=="") {
-            parameter="全部";
+        if(store.state.user_islogin){
+            store._nav_popoverpanelshow(isshow);
         }
-        //此处parameter要传给后端，这里略过
-        this.searchboxtext = "";
-        router.push({
-            name:'SearchNTag',
-            params:{
-                title:parameter
-            }
-        });
-    }
-
-    //首页跳转
-    function _jumptohomepage() {
-        router.push({
-            name:'Home'
-        });
     }
 
     // 自定义声明
@@ -55,12 +36,146 @@
         
         nav_bg,
         nav_logo,
-        nav_avator,
-        
-        nav_labels
+        defaul_avator
     } = inject('resource');
     const searchboxtext = ref("");
 
+    //搜索和分类跳转
+    function _jumptokind(paramstext,paramstype) {
+        paramstext=paramstext.replace(/^\s+|\s+$/g,"");
+        if(paramstext=="") {
+            paramstext="_all";
+        }
+        this.searchboxtext = "";
+        router.push({
+            name:'SearchNTag',
+            params:{
+                title:paramstext,
+                titletype:paramstype
+            }
+        }).then(()=>{
+            location.reload();
+        });
+    }
+
+    //跳转到首页
+    function _jumptohomepage() {
+        router.push({
+            name:'Home'
+        }).then(()=>{
+            location.reload();
+        });
+    }
+
+    //登录和注册
+    const loguser = ref({
+        avator:'',
+        userid:'',
+        user_name:'',
+        vip_level:'',
+        vip_count:'',
+        cartlist:[{
+            id:0,
+            img:'',
+            fakeprice:'Undefined',
+            realprice:'Undefined',
+            name:'Undefined'
+        }],
+        favoritelist:[{
+            id:0,
+            img:'',
+            fakeprice:'Undefined',
+            realprice:'Undefined',
+            name:'Undefined'
+        }],
+        historylist:[{
+            id:0,
+            img:'',
+            fakeprice:'Undefined',
+            realprice:'Undefined',
+            name:'Undefined'
+        }]
+    });
+    const panellist = ref([]);
+    panellist.value = loguser.value.cartlist.slice();
+    //初始化登录状态
+    try {
+        if(localStorage.getItem('user') == null || localStorage.getItem('user') == 'null'){
+            //未登录
+            loguser.value.avator = defaul_avator;
+        }else{
+            // 登录
+            loguser.value = _login(localStorage.getItem('user'));
+        }
+    }catch{console.log('error');}
+    //登录
+    function _locallogin(userid) {
+        if(!store.state.user_islogin){
+            localStorage.setItem('user',userid);
+            location.reload();
+        }
+    }
+    //登录主程序
+    function _login(userid) {
+        store._userlogin(userid);
+        console.log('login');
+        let loguser = ref({
+            avator:'',
+            userid:'',
+            user_name:'',
+            vip_level:'',
+            vip_count:'',
+            cartlist:[{
+                id:0,
+                img:'',
+                fakeprice:'Undefined',
+                realprice:'Undefined',
+                name:'Undefined'
+            }],
+            favoritelist:[{
+                id:0,
+                img:'',
+                fakeprice:'Undefined',
+                realprice:'Undefined',
+                name:'Undefined'
+            }],
+            historylist:[{
+                id:0,
+                img:'',
+                fakeprice:'Undefined',
+                realprice:'Undefined',
+                name:'Undefined'
+            }]
+        });
+        //读取用户信息
+        axios({
+            url:'/user',
+            method:'get',
+            params:{
+                userid:userid
+            }
+        }).then(res => {
+            loguser.value.userid = userid;
+            loguser.value.avator = res.data.user.avator;
+            loguser.value.user_name = res.data.user.user_name;
+            loguser.value.vip_level = res.data.user.vip_level;
+            loguser.value.vip_count = res.data.user.vip_count;
+            loguser.value.cartlist = res.data.user.cartlist.slice();
+            loguser.value.favoritelist = res.data.user.favoritelist.slice();
+            loguser.value.historylist = res.data.user.historylist.slice();
+        })
+        
+        return loguser.value;
+    }
+
+    //读取分类
+    const nav_labels = ref([]);
+    axios({
+        url:'/navlabels',
+        method:'get'
+    }).then(res => {
+        nav_labels.value = res.data.nav_labels;
+    });
 </script>
 <template>
     <div class="navigatorbody">
@@ -77,16 +192,17 @@
 
             <!-- 左侧 -->
             <div class="labels">
-                <li class="button" v-for="item in nav_labels" @click="_jumptokind(item.name)">{{ item.name }}</li>
+                <li class="button" v-for="item in nav_labels" @click="_jumptokind(item.name,'label')">{{ item.name }}</li>
             </div>
             <div class="blank2"></div>
 
             <!-- 搜索框 -->
             <div class="searchbox">
-                <div>
+                <form @submit.prevent="_jumptokind(searchboxtext,'search')">
                     <input type="text" class="searchimput" name="searchtext" v-model="searchboxtext">
-                    <Icons class="searchbutton button" @click="_jumptokind(searchboxtext)"><search /></Icons> 
-                </div>
+                    <Icons class="searchbutton button" @click="_jumptokind(searchboxtext,'search')"><search /></Icons> 
+                    <input type="submit" style="width: 0; height: 0;border: none;">
+                </form>
             </div>
             <div class="blank2"></div>
 
@@ -94,21 +210,21 @@
             <div class="usersetting">
 
                 <!-- 用户菜单 -->
-                <li><div class="avator" @mouseover="_avatorpanelshow(true)" @mouseleave="_avatorpanelshow(false)">
-                    <img :src="nav_avator" alt="" class="avatorimg">
-                    <NavAvatorPanel class="avatorpanel" :hidden = "!store.state.nav_avatorpanelshow"></NavAvatorPanel>
+                <li><div :class="{'avator':true,'islogin':store.state.user_islogin}" @mouseover="_avatorpanelshow(true)" @mouseleave="_avatorpanelshow(false)">
+                    <img :src="loguser.avator" alt="" class="avatorimg button"  @click="_locallogin('001')">
+                    <NavAvatorPanel class="avatorpanel" :hidden = "!store.state.nav_avatorpanelshow" :user="loguser"></NavAvatorPanel>
                 </div></li>
 
                 <ul>
                     <div @mouseleave="_popoverpanelshow(false)">
-                        <div><NavPopoverPanel class="popoverpanel" :style="'left:' + store.state.nav_popoverpanelpos + 'px;'" :hidden = "!store.state.nav_popoverpanelshow"></NavPopoverPanel></div>
-                        <li @mouseover="_popoverpaneltarget('cart');_popoverpanelshow(true)">
+                        <div><NavPopoverPanel :itemlist="panellist" class="popoverpanel" :style="'left:' + store.state.nav_popoverpanelpos + 'px;'" :hidden = "!store.state.nav_popoverpanelshow"></NavPopoverPanel></div>
+                        <li @mouseover="panellist = loguser.cartlist.slice();_popoverpaneltarget('cart');_popoverpanelshow(true)">
                             <Icons class="cart"><cart /></Icons> 
                         </li>
-                        <li @mouseover="_popoverpaneltarget('favorites');_popoverpanelshow(true)">
+                        <li @mouseover="panellist = loguser.favoritelist.slice();_popoverpaneltarget('favorites');_popoverpanelshow(true)">
                             <Icons class="favorites"><favorite /></Icons> 
                         </li>
-                        <li @mouseover="_popoverpaneltarget('history');_popoverpanelshow(true)">
+                        <li @mouseover="panellist = loguser.historylist.slice();_popoverpaneltarget('history');_popoverpanelshow(true)">
                             <Icons class="history"><history /></Icons> 
                         </li>
                     </div>

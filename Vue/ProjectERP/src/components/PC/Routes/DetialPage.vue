@@ -13,47 +13,47 @@ import GoodsItem from './../GoodsItem.vue'
     }=inject('resource');
 
     //路由传入
-    const props = defineProps({
-        good:{
-            type:Object,
-            default:{
-                imgs:[""],
-                name:"Undefined",
-                sale:"Undefined",
-                realprice:"Undefined",
-                fakeprice:"Undefined",
-                class:[
-                    {
-                        name:"Undefined",
-                        img:""
-                    }
-                ],
-                detialimg:[""]
-            }
-        },
-        user:{
-            type:Object,
-            default:{
-                address:["Undefined"]
-            }
-        },
-        comments:{
-            type:Array,
-            default:[
-                {
-                    user:{
-                        username:"Undefined",
-                        img:""
-                    },
-                    info:{
-                        time:"Undefined",
-                        bought:"Undefined"
-                    },
-                    text:"Undefined"
-                }
-            ]
-        }
-    });
+    // const props = defineProps({
+    //     good:{
+    //         type:Object,
+    //         default:{
+    //             imgs:[""],
+    //             name:"Undefined",
+    //             sale:"Undefined",
+    //             realprice:"Undefined",
+    //             fakeprice:"Undefined",
+    //             class:[
+    //                 {
+    //                     name:"Undefined",
+    //                     img:""
+    //                 }
+    //             ],
+    //             detialimg:[""]
+    //         }
+    //     },
+    //     user:{
+    //         type:Object,
+    //         default:{
+    //             address:["Undefined"]
+    //         }
+    //     },
+    //     comments:{
+    //         type:Array,
+    //         default:[
+    //             {
+    //                 user:{
+    //                     username:"Undefined",
+    //                     img:""
+    //                 },
+    //                 info:{
+    //                     time:"Undefined",
+    //                     bought:"Undefined"
+    //                 },
+    //                 text:"Undefined"
+    //             }
+    //         ]
+    //     }
+    // });
 </script>
 
 <template>

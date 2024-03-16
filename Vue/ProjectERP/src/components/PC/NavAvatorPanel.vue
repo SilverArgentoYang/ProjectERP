@@ -5,9 +5,35 @@
     //自定义声明
     const {
         right_arrow,
-        avator_panel_options,
-        users
+        space,
+        setting,
+        outlog,
     } = inject('resource');
+    const store = inject('store');
+
+    //props导入
+    const props = defineProps({
+        user:{
+            type:Object,
+            default:{
+                avator:'',
+                userid:'',
+                user_name:'Undefine',
+                vip_level:'Undefine',
+                vip_count:'Undefine'
+            }
+        }
+    });
+
+    //退出登录
+    function _locallogout() {
+        if(store.state.user_islogin){
+            console.log('logout');
+            store._userlogout();
+            localStorage.setItem('user','null');
+            location.reload();
+        }
+    }
 </script>
 
 <template>
@@ -15,16 +41,26 @@
 
         <!-- 上半部分 -->
         <div class="blank"></div>
-        <div class="username">{{ users[0].user_name }}</div><!-- 后端数据临时使用 -->
+        <div class="username">{{ user.user_name }}</div><!-- 后端数据临时使用 -->
         <div class="vip">
-            <span class="level">会员等级：{{ users[0].vip_level }}</span><!-- 后端数据临时使用 -->
-            <span class="count">积分:{{ users[0].vip_count }}</span><!-- 后端数据临时使用 -->
+            <span class="level">会员等级：{{ user.vip_level }}</span><!-- 后端数据临时使用 -->
+            <span class="count">积分:{{ user.vip_count }}</span><!-- 后端数据临时使用 -->
         </div>
 
         <!-- 下半部分 -->
-        <div v-for="item in avator_panel_options" class="options">
-            <Icons class="icon" :IsInList = "item.icon"></Icons>
-            <div class="text">{{ item.text }}</div>
+        <div class="options button">
+            <Icons class="icon"><space /></Icons>
+            <div class="text">个人中心</div>
+            <Icons class="arrow"><right_arrow /></Icons>
+        </div>
+        <div class="options button">
+            <Icons class="icon"><setting /></Icons>
+            <div class="text">系统设置</div>
+            <Icons class="arrow"><right_arrow /></Icons>
+        </div>
+        <div class="options button" @click="_locallogout()">
+            <Icons class="icon"><outlog /></Icons>
+            <div class="text">退出登录</div>
             <Icons class="arrow"><right_arrow /></Icons>
         </div>
 
