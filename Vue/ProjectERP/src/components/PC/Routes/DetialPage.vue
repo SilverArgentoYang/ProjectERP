@@ -1,7 +1,11 @@
 <script setup>
     // components
-    import { inject } from 'vue';
+    import { inject,ref } from 'vue';
 import GoodsItem from './../GoodsItem.vue'
+import axios from 'axios';
+
+    //store
+    const store = inject('store');
 
     //资源载入
     const {
@@ -13,47 +17,115 @@ import GoodsItem from './../GoodsItem.vue'
     }=inject('resource');
 
     //路由传入
-    // const props = defineProps({
-    //     good:{
-    //         type:Object,
-    //         default:{
-    //             imgs:[""],
-    //             name:"Undefined",
-    //             sale:"Undefined",
-    //             realprice:"Undefined",
-    //             fakeprice:"Undefined",
-    //             class:[
-    //                 {
-    //                     name:"Undefined",
-    //                     img:""
-    //                 }
-    //             ],
-    //             detialimg:[""]
-    //         }
-    //     },
-    //     user:{
-    //         type:Object,
-    //         default:{
-    //             address:["Undefined"]
-    //         }
-    //     },
-    //     comments:{
-    //         type:Array,
-    //         default:[
-    //             {
-    //                 user:{
-    //                     username:"Undefined",
-    //                     img:""
-    //                 },
-    //                 info:{
-    //                     time:"Undefined",
-    //                     bought:"Undefined"
-    //                 },
-    //                 text:"Undefined"
-    //             }
-    //         ]
-    //     }
-    // });
+    const props = defineProps({
+        goodid:{
+            type:String,
+            default:""
+        },
+    });
+
+    //读取商品信息
+    const good = ref({
+        id:'',
+        imgs:[""],
+        name:"Undefined",
+        salecount:"Undefined",
+        realprice:"Undefined",
+        fakeprice:"Undefined",
+        class:[
+            {
+                name:"Undefined",
+                img:""
+            }
+        ],
+        detialimg:[""]
+    });
+    axios({
+        url:'/good',
+        method:'get',
+        params:{
+            goodid:props.goodid
+        }
+    }).then(res=> {
+        good.value.id = props.goodid;
+        good.value.imgs = res.data.good.imgs.slice();
+        good.value.name = res.data.good.name;
+        good.value.salecount = res.data.good.salecount;
+        good.value.realprice = res.data.good.realprice;
+        good.value.fakeprice = res.data.good.fakeprice;
+        good.value.class = res.data.good.class.slice();
+        good.value.detialimg = res.data.good.detialimg.slice();
+    });
+
+    //获取用户信息
+    const user = ref({
+        userid:'',
+        address:[{
+            name:'',
+            address:'',
+            phone:''
+        }]
+    });
+    user.value.userid = localStorage.getItem('user');
+    if(!store.state.user_islogin) {
+        user.value.address[0] = '请登录';
+    }else{
+        axios({
+            url:'/user',
+            method:'get',
+            params:{
+                userid:user.value.userid
+            }
+        }).then(res=> {
+            user.value.address = res.data.user.address.slice();
+        })
+    }
+
+    //获取评论信息
+    const comments = ref([
+        {
+            commentid:'',
+            user:{
+                userid:'',
+                username:"Undefined",
+                img:""
+            },
+            info:{
+                time:"Undefined",
+                boughtclass:"Undefined"
+            },
+            text:"Undefined"
+        }
+    ]);
+    axios({
+        url:'/comments',
+        method:'get',
+        params:{
+            goodid:props.goodid
+        }
+    }).then(res=>{
+        comments.value = res.data.comments.slice();
+    });
+
+    //获取推荐商品
+    const suggestgoods = ref([
+        {
+            id:"",
+            img:"",
+            fakeprice:"Undefined",
+            realprice:"Undefined",
+            name : "Undefined"
+        }
+    ]);
+    axios({
+        url:'/goods',
+        method:'get',
+        params:{
+            type:'suggesttengoods'
+        }
+    }).then((res)=>{
+        suggestgoods.value = res.data.goods.slice();
+    });
 </script>
 
 <template>
@@ -62,7 +134,7 @@ import GoodsItem from './../GoodsItem.vue'
         <div class="detialhead">
             <!-- 图片 -->
             <div class="imgs">
-                <div class="large"><img src="" alt=""></div>
+                <div class="large"><img :src="good.imgs[0]" alt=""></div>
                 <div class="minis">
                     <img v-for="item in good.imgs" :src="item" alt="">
                 </div>
@@ -77,7 +149,7 @@ import GoodsItem from './../GoodsItem.vue'
                             <Icons class="icon"><share /></Icons>
                         </div>
                     </div>
-                    <div class="subtitle">月销：{{good.sale}}</div>
+                    <div class="subtitle">月销：{{good.salecount}}</div>
                     <!-- 价格 -->
                     <div class="price">
                         <div class="realprice">￥{{good.realprice}}</div>
@@ -86,7 +158,7 @@ import GoodsItem from './../GoodsItem.vue'
                 </div>
                 <!-- 地址 -->
                 <div class="address">
-                    <div class="text">配送地址：{{user.address[0]}}</div>
+                    <div class="text">配送地址：{{user.address[0].address}}</div>
                     <Icons class="icon"><down_arrow /></Icons>
                 </div>
                 <!-- 选择颜色分类 -->
@@ -149,7 +221,7 @@ import GoodsItem from './../GoodsItem.vue'
                     <img :src="item.user.img" alt="" class="useravator">
                     <div>
                         <div class="username">{{item.user.username}}</div>
-                        <div class="cominfo">{{item.info.time}} {{item.info.bought}}</div>
+                        <div class="cominfo">{{item.info.time}} {{item.info.boughtclass}}</div>
                     </div>
                 </div>
                 <div class="context">{{item.text}}</div>
@@ -165,7 +237,7 @@ import GoodsItem from './../GoodsItem.vue'
             <div class="title">推荐商品</div>
             <div class="list">
                 <!-- 后端重构后需要调整 -->
-                <GoodsItem v-for="item in 10"></GoodsItem>
+                <GoodsItem v-for="item in suggestgoods" :good="item"></GoodsItem>
             </div>
         </div>
     </div>

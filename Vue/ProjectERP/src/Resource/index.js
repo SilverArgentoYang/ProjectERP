@@ -28,9 +28,6 @@ import item_img2 from './Imgs/itemimg2.jpg';
 
 //仓库本体
 const resources = {
-    //这里声明变量
-
-    //这里声明资源
     cart,
     favorite,
     history,
@@ -53,6 +50,8 @@ const resources = {
     nav_logo,
     nav_avator,
     defaul_avator,
+    item_img1,
+    item_img2
 }
 
 export default resources;

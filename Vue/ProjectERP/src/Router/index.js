@@ -9,7 +9,7 @@ const routes = [
     {path:"/Home",name:'Home', redirect:"/"},
     {path:"/",component:HomePage},
     {path:"/SearchNTag/:title/:titletype",name:'SearchNTag',component:KindPage,props:true},
-    {path:"/Detial",name:'Detial',component:DetialPage,props:true},
+    {path:"/Detial/:goodid",name:'Detial',component:DetialPage,props:true},
     {path:"/:path(.*)",component:NotFound}
 ];
 
