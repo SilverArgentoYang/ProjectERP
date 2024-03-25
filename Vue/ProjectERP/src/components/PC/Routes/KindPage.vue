@@ -162,8 +162,12 @@
                     <div class="option1">
                         价格
                         <div>
-                            <Icons class="upanddown button" @click="_sort(4,pricelow,pricehigh)"><up_arrow /></Icons>
-                            <Icons class="upanddown button" @click="_sort(5,pricelow,pricehigh)"><down_arrow /></Icons>
+                            <Icons class="upanddown button"
+                                @click="_sort(4,pricelow,pricehigh)
+                            "><up_arrow /></Icons>
+                            <Icons class="upanddown button"
+                                @click="_sort(5,pricelow,pricehigh)
+                            "><down_arrow /></Icons>
                         </div>
                     </div>
                     <div class="option2">
@@ -181,14 +185,21 @@
 
                 <div class="right">
                     {{page}}/{{pagetotal = parseInt(goods.length / 15)+1}}
-                    <Icons :class="'leftandright button'+(page==1?'':' enable')" @click="_pagedown()"><left_arrow /></Icons>
-                    <Icons :class="'leftandright button'+(page==pagetotal?'':' enable')" @click="_pageup()"><right_arrow /></Icons>
+                    <Icons :class="'leftandright button'+(page==1?'':' enable')"
+                        @click="_pagedown()
+                    "><left_arrow /></Icons>
+                    <Icons :class="'leftandright button'+(page==pagetotal?'':' enable')"
+                        @click="_pageup()
+                    "><right_arrow /></Icons>
                 </div>
             </div>
         </div>
         <div class="itemlist">
             <!-- 下半部分 -->
-            <GoodsItem v-for="item in goods.slice((page-1)*15,page*15)" :good="item" class="normalitem"></GoodsItem>
+            <GoodsItem class="normalitem"
+                v-for="item in goods.slice((page-1)*15,page*15)"
+                :good="item"
+            ></GoodsItem>
         </div>
     </div>
 </template>

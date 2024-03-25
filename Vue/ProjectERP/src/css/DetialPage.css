@@ -1,7 +1,7 @@
 
 /* 整体设置 */
 .detialbody {
-    width: 1680px;
+    max-width: var(--pagemaxwidth);
     margin: auto;
 }
 
@@ -14,7 +14,8 @@
     box-sizing: border-box;
     margin-top: 30px;
     display: flex;
-    gap: 70px;
+    flex-wrap: wrap;
+    gap: 20px 70px;
 }
 /* 商品展示图 */
 .imgs {
@@ -52,13 +53,20 @@
     height: 48px;
     display: flex;
     &>.title {
-        width: 100%;
+        width: fit-content;
         height: 100%;
         font-size: 32px;
         line-height: 48px;
         font-weight: bold;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
     }
     &>.share {
+        margin-left: auto;
         display: flex;
         gap: 20px;
         &>.icon {
@@ -98,35 +106,41 @@
 }
 /* 地址 */
 .address {
-    width: 390px;
+    max-width: 390px;
     height: 50px;
     border-radius: 15px;
     box-shadow: 0 0 10px var(--shadowblack);
     display: flex;
     padding: 10px 20px;
     box-sizing: border-box;
-    gap: 10px;
-    &>.text {
-        width: 100%;
+    font-size: 20px;
+    line-height: 30px;
+    &>.textbox {
+        flex: 1;
         height: 100%;
-        font-size: 20px;
-        line-height: 30px;
-        text-overflow: ellipsis;
         overflow: hidden;
-        word-break: break-all;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
+        &>.text{
+            margin-bottom: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
     }
     &>.icon {
         width: 30px;
         height: 30px;
+        margin-left: auto;
         fill: var(--colordgrey);
+        align-self: end;
     }
 }
 /* 选择颜色分类 */
 .typechoose {
-    width: 990px;
+    max-width: 990px;
+    min-height: 180px;
     height: 180px;
     border-radius: 15px;
     box-shadow: 0 0 10px var(--shadowblack);
@@ -165,13 +179,13 @@
 }
 /* 购买 */
 .buynsave {
-    width: 600px;
-    height: 60px;
+    max-width: 600px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     &>.buy {
         width: 280px;
-        height: 100%;
+        height: 60px;
         border-radius: 32px;
         background-color: var(--colorred);
         font-size: 25px;
@@ -181,7 +195,7 @@
     }
     &>.save {
         width: 280px;
-        height: 100%;
+        height: 60px;
         border-radius: 32px;
         background-color: var(--colororange);
         font-size: 25px;
@@ -240,38 +254,39 @@
     /* 排序 */
     &>.filternsort {
         width: 100%;
-        height: 40px;
         display: flex;
         margin-bottom: 20px;
         &>.filter {
             width: 170px;
-            height: 100%;
+            height: 40px;
             border-radius: 22px;
             border: 1px solid var(--colordgrey);
             margin-right: 10px;
             font-size: 20px;
             text-align: center;
             line-height: 40px;
+            overflow: hidden;
         }
         &>.sort {
             width: 150px;
-            height: 100%;
+            height: 40px;
             border-radius: 22px;
             border: 1px solid var(--colordgrey);
             padding: 0 10px;
             margin-left: auto;
             display: flex;
-            align-items: center;
-            &>.text {
-                width: 100%;
+            align-items: end;
+            &>.textbox {
+                flex: 1;
                 height: 100%;
                 font-size: 20px;
                 text-align: center;
                 line-height: 40px;
+                overflow: hidden;
             }
             &>.icon {
                 width: 25px;
-                height: 25px;
+                height: 40px;
                 fill: var(--colordgrey);
             }
         }
@@ -311,6 +326,11 @@
             font-size: 20px;
             line-height: 30px;
         }
+        & .img {
+            width: 100px;
+            height: 100px;
+            object-fit:cover;
+        }
         &>.active {
             width: 100%;
             height: 30px;
@@ -345,4 +365,20 @@
         flex-wrap: wrap;
         gap: 20px;
     }
+}
+
+/* 放大选框 */
+.largebox {
+    height: auto!important;
+}
+
+/* 选择颜色分类 */
+.typechoosing {
+    background-color: var(--colorred)!important;
+    color: var(--colorwhite)!important;
+}
+
+/* 收藏 */
+.isfavorite {
+    fill: var(--colorred)!important;
 }

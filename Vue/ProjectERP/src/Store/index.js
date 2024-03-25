@@ -1,5 +1,5 @@
 //状态管理仓库
-import {reactive} from 'vue'
+import {reactive} from 'vue';
 
 //仓库本体
 const store = {
@@ -18,8 +18,7 @@ const store = {
             "history" : 2
         },
         //登录状态
-        user_islogin:false,
-        userid:''
+        user_islogin:false
     }),
 
     //这里控制状态的方法
@@ -38,12 +37,30 @@ const store = {
     },
     //登录
     _userlogin :function(userid){
-        this.state.user_islogin = true;
-        this.state.userid = userid;
+        localStorage.setItem('user',userid);
+        location.reload();
     },
-    // 注销
+    _setloginstate :function(){
+        this.state.user_islogin = true;
+    },
+    //退出登录
     _userlogout :function(){
-        this.state.user_islogin = false;
+        localStorage.setItem('user','null');
+        location.reload();
+    },
+
+    //弹出浮窗
+    _showmessage :function(message) {
+        var messagebox = document.createElement('div');
+        messagebox.textContent = message;
+        messagebox.style="position:fixed;top:5%;left:50%;padding:5px;background-color:#000000;color:#ffffff;transition:opacity 0.3s ease-in-out;z-index:10;border-radius:5px;opcity:0.8"
+        document.body.appendChild(messagebox);
+        setTimeout(function() {
+            messagebox.style.opacity = 0;
+            setTimeout(function() {
+                document.body.removeChild(messagebox);
+            },300);
+        },100);
     }
 }
 

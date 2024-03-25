@@ -1,7 +1,7 @@
 
 /* 整体设置 */
 .kindpagebody {
-    width: 1680px;
+    max-width: var(--pagemaxwidth);
     margin: auto;
 }
 

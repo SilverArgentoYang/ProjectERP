@@ -21,7 +21,6 @@ import { inject } from 'vue';
 
 <template>
     <div class="popoverpanelbody">
-        <!-- 后端重构后需要调整 -->
         <PanelItem v-for="item in itemlist" :item="item"></PanelItem>
     </div>
 </template>

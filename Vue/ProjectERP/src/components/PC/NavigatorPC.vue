@@ -7,10 +7,10 @@
     import NavPopoverPanel from './NavPopoverPanel.vue';
     import { useRouter } from 'vue-router';
     import axios from 'axios';
-    let router = useRouter()
+    const router = useRouter()
 
     // 状态管理
-    let store = inject('store');
+    const store = inject('store');
     function _avatorpanelshow(ishow) {
         if(store.state.user_islogin){
             store._nav_avatorpanelshow(ishow);
@@ -99,83 +99,44 @@
     const panellist = ref([]);
     panellist.value = loguser.value.cartlist.slice();
     //初始化登录状态
-    try {
+    function _setlogstate() {
         if(localStorage.getItem('user') == null || localStorage.getItem('user') == 'null'){
             //未登录
             loguser.value.avator = defaul_avator;
         }else{
-            // 登录
-            loguser.value = _login(localStorage.getItem('user'));
-        }
-    }catch{console.log('error');}
-    //登录
-    function _locallogin(userid) {
-        if(!store.state.user_islogin){
-            localStorage.setItem('user',userid);
-            location.reload();
+            // 登录状态
+            axios({
+                url:'/user',
+                method:'get',
+                params:{
+                    userid:localStorage.getItem('user')
+                }
+            }).then(res => {
+                loguser.value.userid = res.data.user.userid;
+                loguser.value.avator = res.data.user.avator;
+                loguser.value.user_name = res.data.user.user_name;
+                loguser.value.vip_level = res.data.user.vip_level;
+                loguser.value.vip_count = res.data.user.vip_count;
+                loguser.value.cartlist = res.data.user.cartlist.slice();
+                loguser.value.favoritelist = res.data.user.favoritelist.slice();
+                loguser.value.historylist = res.data.user.historylist.slice();
+            });
+            store._setloginstate();
         }
     }
-    //登录主程序
-    function _login(userid) {
-        store._userlogin(userid);
-        console.log('login');
-        let loguser = ref({
-            avator:'',
-            userid:'',
-            user_name:'',
-            vip_level:'',
-            vip_count:'',
-            cartlist:[{
-                id:0,
-                img:'',
-                fakeprice:'Undefined',
-                realprice:'Undefined',
-                name:'Undefined'
-            }],
-            favoritelist:[{
-                id:0,
-                img:'',
-                fakeprice:'Undefined',
-                realprice:'Undefined',
-                name:'Undefined'
-            }],
-            historylist:[{
-                id:0,
-                img:'',
-                fakeprice:'Undefined',
-                realprice:'Undefined',
-                name:'Undefined'
-            }]
-        });
-        //读取用户信息
-        axios({
-            url:'/user',
-            method:'get',
-            params:{
-                userid:userid
-            }
-        }).then(res => {
-            loguser.value.userid = userid;
-            loguser.value.avator = res.data.user.avator;
-            loguser.value.user_name = res.data.user.user_name;
-            loguser.value.vip_level = res.data.user.vip_level;
-            loguser.value.vip_count = res.data.user.vip_count;
-            loguser.value.cartlist = res.data.user.cartlist.slice();
-            loguser.value.favoritelist = res.data.user.favoritelist.slice();
-            loguser.value.historylist = res.data.user.historylist.slice();
-        })
-        
-        return loguser.value;
-    }
+    _setlogstate();
 
     //读取分类
     const nav_labels = ref([]);
-    axios({
-        url:'/navlabels',
-        method:'get'
-    }).then(res => {
-        nav_labels.value = res.data.nav_labels;
-    });
+    function _setlabels(){
+        axios({
+            url:'/navlabels',
+            method:'get'
+        }).then(res => {
+            nav_labels.value = res.data.nav_labels;
+        });
+    }
+    _setlabels();
 </script>
 <template>
     <div class="navigatorbody">
@@ -188,56 +149,82 @@
 
         <!-- 导航栏 -->
         <div class="navigator">
-            <div class="blank"></div>
-
             <!-- 左侧 -->
             <div class="labels">
-                <li class="button" v-for="item in nav_labels" @click="_jumptokind(item.name,'label')">{{ item.name }}</li>
+                <li class="button"
+                    v-for="item in nav_labels"
+                    @click="_jumptokind(item.name,'label')
+                ">{{ item.name }}</li>
             </div>
-            <div class="blank2"></div>
 
             <!-- 搜索框 -->
             <div class="searchbox">
                 <form @submit.prevent="_jumptokind(searchboxtext,'search')">
                     <input type="text" class="searchimput" name="searchtext" v-model="searchboxtext">
-                    <Icons class="searchbutton button" @click="_jumptokind(searchboxtext,'search')"><search /></Icons> 
+                    <Icons class="searchbutton button"
+                        @click="_jumptokind(searchboxtext,'search')
+                    "><search /></Icons>
                     <input type="submit" style="width: 0; height: 0;border: none;">
                 </form>
             </div>
-            <div class="blank2"></div>
 
             <!-- 右侧 -->
             <div class="usersetting">
 
                 <!-- 用户菜单 -->
-                <li><div :class="{'avator':true,'islogin':store.state.user_islogin}" @mouseover="_avatorpanelshow(true)" @mouseleave="_avatorpanelshow(false)">
-                    <img :src="loguser.avator" alt="" class="avatorimg button"  @click="_locallogin('001')">
-                    <NavAvatorPanel class="avatorpanel" :hidden = "!store.state.nav_avatorpanelshow" :user="loguser"></NavAvatorPanel>
-                </div></li>
+                <div class="avator"
+                        @mouseover="_avatorpanelshow(true)"
+                        @mouseleave="_avatorpanelshow(false)"
+                    >
+                        <img :class="{
+                                'avatorimg':true,
+                                'button':true,
+                                'islogin':store.state.user_islogin
+                            }"
+                            :src="loguser.avator"
+                            @click="loguser=store._userlogin('001')"
+                        >
+                        <div><NavAvatorPanel
+                            class="avatorpanel"
+                            :hidden="!store.state.nav_avatorpanelshow"
+                            :user="loguser"
+                        /></div>
+                </div>
 
-                <ul>
-                    <div @mouseleave="_popoverpanelshow(false)">
-                        <div><NavPopoverPanel :itemlist="panellist" class="popoverpanel" :style="'left:' + store.state.nav_popoverpanelpos + 'px;'" :hidden = "!store.state.nav_popoverpanelshow"></NavPopoverPanel></div>
-                        <li @mouseover="panellist = loguser.cartlist.slice();_popoverpaneltarget('cart');_popoverpanelshow(true)">
-                            <Icons class="cart"><cart /></Icons> 
-                        </li>
-                        <li @mouseover="panellist = loguser.favoritelist.slice();_popoverpaneltarget('favorites');_popoverpanelshow(true)">
-                            <Icons class="favorites"><favorite /></Icons> 
-                        </li>
-                        <li @mouseover="panellist = loguser.historylist.slice();_popoverpaneltarget('history');_popoverpanelshow(true)">
-                            <Icons class="history"><history /></Icons> 
-                        </li>
-                    </div>
-                    <li>
-                        <Icons class="massages"><message /></Icons> 
-                    </li>
-                    <li>
-                        <Icons class="nav_service"><service /></Icons> 
-                    </li>
+                <!-- 导航菜单 -->
+                <ul @mouseleave="_popoverpanelshow(false)">
+                    <!-- 收藏夹、历史记录、购物车菜单 -->
+                    <div><NavPopoverPanel class="popoverpanel"
+                        :itemlist="panellist"
+                        :style="'left:'+store.state.nav_popoverpanelpos+'px;'"
+                        :hidden="!store.state.nav_popoverpanelshow"
+                    /></div>
+
+                    <Icons class="cart icon"
+                        @mouseover="
+                            panellist = loguser.cartlist.slice();
+                            _popoverpaneltarget('cart');
+                            _popoverpanelshow(true)
+                        "
+                    ><cart /></Icons> 
+                    <Icons class="favorites icon"
+                        @mouseover="
+                            panellist=loguser.favoritelist.slice();
+                            _popoverpaneltarget('favorites');
+                            _popoverpanelshow(true)
+                        "
+                    ><favorite /></Icons>
+                    <Icons class="history icon"
+                        @mouseover="
+                            panellist=loguser.historylist.slice();
+                            _popoverpaneltarget('history');
+                            _popoverpanelshow(true)
+                        "
+                    ><history /></Icons>
                 </ul>
+                <Icons class="massages icon"><message /></Icons>
+                <Icons class="nav_service icon"><service /></Icons>
             </div>
-            <div class="blank"></div>
-            
         </div>
     </div>
 </template>

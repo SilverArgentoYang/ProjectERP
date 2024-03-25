@@ -1,6 +1,6 @@
 <script setup>
-    // components
-    import { inject,ref } from 'vue';
+    // import
+    import { inject,markRaw,ref,shallowRef } from 'vue';
 import GoodsItem from './../GoodsItem.vue'
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ import axios from 'axios';
     const {
         favorite2,
         share,
+        up_arrow,
         down_arrow,
         like,
         reply
@@ -27,6 +28,7 @@ import axios from 'axios';
     //读取商品信息
     const good = ref({
         id:'',
+        isfavorite:false,
         imgs:[""],
         name:"Undefined",
         salecount:"Undefined",
@@ -34,6 +36,7 @@ import axios from 'axios';
         fakeprice:"Undefined",
         class:[
             {
+                id:'',
                 name:"Undefined",
                 img:""
             }
@@ -48,6 +51,7 @@ import axios from 'axios';
         }
     }).then(res=> {
         good.value.id = props.goodid;
+        good.value.isfavorite = res.data.good.isfavorite;
         good.value.imgs = res.data.good.imgs.slice();
         good.value.name = res.data.good.name;
         good.value.salecount = res.data.good.salecount;
@@ -55,12 +59,15 @@ import axios from 'axios';
         good.value.fakeprice = res.data.good.fakeprice;
         good.value.class = res.data.good.class.slice();
         good.value.detialimg = res.data.good.detialimg.slice();
+    }).catch(err=>{
+        console.log(err);
     });
 
     //获取用户信息
     const user = ref({
         userid:'',
         address:[{
+            id:'',
             name:'',
             address:'',
             phone:''
@@ -78,10 +85,14 @@ import axios from 'axios';
             }
         }).then(res=> {
             user.value.address = res.data.user.address.slice();
-        })
+        }).catch(err=>{
+            console.log(err);
+        });
     }
 
     //获取评论信息
+    const commentstype = ref('all');
+    const commentsort = ref('nature');
     const comments = ref([
         {
             commentid:'',
@@ -101,10 +112,14 @@ import axios from 'axios';
         url:'/comments',
         method:'get',
         params:{
-            goodid:props.goodid
+            goodid:props.goodid,
+            type:commentstype.value,
+            sort:commentsort.value
         }
     }).then(res=>{
         comments.value = res.data.comments.slice();
+    }).catch(err=>{
+        console.log(err);
     });
 
     //获取推荐商品
@@ -125,7 +140,191 @@ import axios from 'axios';
         }
     }).then((res)=>{
         suggestgoods.value = res.data.goods.slice();
+    }).catch(err=>{
+        console.log(err);
     });
+
+    //更换图片
+    const largeimgid = ref(0);
+    function _changeimg(imgid) {
+        largeimgid.value = imgid;
+    }
+
+    //扩大地址选框
+    const addresslarge = ref(false);
+    const addressarrow = shallowRef(new Object);
+    addressarrow.value = down_arrow;
+    function _addresslarge() {
+        if(!addresslarge.value) {
+            addresslarge.value = true;
+            addressarrow.value = up_arrow;
+        }else{
+            addresslarge.value = false;
+            addressarrow.value = down_arrow;
+        }
+    }
+
+    //选择地址
+    const addresschoose = ref(0);
+    function _addresschoose(addressid) {
+        if(addressid < user.value.address.length && addresslarge.value) {
+            addresschoose.value = addressid;
+            const temp = user.value.address[addressid];
+            for(var i = addressid; i > 0; i--) {
+                user.value.address[i] = user.value.address[i-1];
+            }
+            user.value.address[0] = temp;
+            _addresslarge();
+        }else if(addressid < user.value.address.length){
+            _addresslarge();
+        }
+    }
+
+    //扩大颜色分类选框
+    const typelarge = ref(false);
+    const typearrow = shallowRef(new Object);
+    typearrow.value = down_arrow;
+    function _typelarge() {
+        if(!typelarge.value) {
+            typelarge.value = true;
+            typearrow.value = up_arrow;
+        }else{
+            typelarge.value = false;
+            typearrow.value = down_arrow;
+        }
+    }
+
+    //选择颜色分类
+    const typechoose = ref(0);
+    function _typechoose(typeid) {
+        typechoose.value = typeid;
+    }
+
+    //收藏
+    function _changefavorite() {
+        if(!good.value.isfavorite) {
+            axios({
+                url:'/addfavorite',
+                method:'post',
+                params:{
+                    goodid:good.value.id
+                }
+            }).then(res =>{
+                good.value.isfavorite = true;
+            }).catch(err=>{
+                console.log(err);
+            });
+        }else{
+            axios({
+                url:'/removefavorite',
+                method:'post',
+                params:{
+                    goodid:good.value.id
+                }
+            }).then(res =>{
+                good.value.isfavorite = false;
+            }).catch(err=>{
+                console.log(err);
+            });
+        }
+    }
+
+    //分享
+    function _copyurl() {
+        navigator.clipboard.writeText(window.location.href).then(
+            function() {
+                store._showmessage('链接复制成功');
+            },
+            function() {
+                store._showmessage('链接复制失败');
+            }
+        )
+    }
+
+    //购物车
+    function _addcart() {
+        if(!good.value.iscart) {
+            axios({
+                url:'/addcart',
+                method:'post',
+                params:{
+                    goodid:good.value.id
+                }
+            }).then(res =>{
+                good.value.iscart = true;
+            }).catch(err=>{
+                console.log(err);
+            });
+        }else{
+            store._showmessage('已在购物车中');
+        }
+    }
+
+    //评论筛选排序
+    function _changecomments(type, sort) {
+        if(commentstype.value != type || commentsort.value != sort){
+            commentstype.value = type;
+            commentsort.value = sort;
+            axios({
+                url:'/comments',
+                method:'get',
+                params:{
+                    goodid:props.goodid,
+                    type:commentstype.value,
+                    sort:commentsort.value
+                }
+            }).then(res=>{
+                comments.value = res.data.comments.slice();
+            }).catch(err=>{
+                console.log(err);
+            });
+        }
+    }
+
+    //评论排序展开
+    const commentsortoptions = ref([{
+        name:'nature',
+        text:'默认排序'
+    },
+    {
+        name:'time',
+        text:'最近评论'
+    },
+    {
+        name:'like',
+        text:'点赞数优先'
+    },
+    {
+        name:'comment',
+        text:'评论数优先'
+    }])
+    const commentsortlarge = ref(false);
+    const commentsortarrow = shallowRef(new Object);
+    commentsortarrow.value = down_arrow;
+    function _commentsortlarge() {
+        if(!commentsortlarge.value) {
+            commentsortlarge.value = true;
+            commentsortarrow.value = up_arrow;
+        }else{
+            commentsortlarge.value = false;
+            commentsortarrow.value = down_arrow;
+        }
+    }
+
+    //评论排序选择
+    function _choosecommentsort(sortid) {
+        if(sortid < commentsortoptions.value.length && commentsortlarge.value) {
+            const temp = commentsortoptions.value[sortid];
+            for(var i = sortid; i > 0; i--) {
+                commentsortoptions.value[i] = commentsortoptions.value[i-1];
+            }
+            commentsortoptions.value[0] = temp;
+            _changecomments(commentstype.value,commentsortoptions.value[0].name);
+            _commentsortlarge();
+        }else if(sortid < commentsortoptions.value.length){
+            _commentsortlarge();
+        }
+    }
 </script>
 
 <template>
@@ -134,9 +333,9 @@ import axios from 'axios';
         <div class="detialhead">
             <!-- 图片 -->
             <div class="imgs">
-                <div class="large"><img :src="good.imgs[0]" alt=""></div>
+                <div class="large"><img :src="good.imgs[largeimgid]" alt=""></div>
                 <div class="minis">
-                    <img v-for="item in good.imgs" :src="item" alt="">
+                    <img class="button" v-for="item,index in good.imgs" :src="item" alt="" @click="_changeimg(index)">
                 </div>
             </div>
             <div class="controlpad">
@@ -145,8 +344,14 @@ import axios from 'axios';
                     <div class="titleandshare">
                         <div class="title">{{good.name}}</div>
                         <div class="share">
-                            <Icons class="icon"><favorite2 /></Icons>
-                            <Icons class="icon"><share /></Icons>
+                            <Icons :class="{
+                                icon:true,
+                                button:true,
+                                isfavorite:good.isfavorite
+                            }"
+                            @click="_changefavorite()"
+                            ><favorite2 /></Icons>
+                            <Icons class="icon button" @click="_copyurl()"><share /></Icons>
                         </div>
                     </div>
                     <div class="subtitle">月销：{{good.salecount}}</div>
@@ -157,27 +362,40 @@ import axios from 'axios';
                     </div>
                 </div>
                 <!-- 地址 -->
-                <div class="address">
-                    <div class="text">配送地址：{{user.address[0].address}}</div>
-                    <Icons class="icon"><down_arrow /></Icons>
+                <div :class="{address:true,largebox:addresslarge}">
+                    <div style="width: 100px;">配送地址：</div>
+                    <div class="textbox">
+                        <div class="text button"
+                            v-for="item,index in user.address"
+                            @click="_addresschoose(index)"
+                        >{{item.address}}</div>
+                    </div>
+                    <Icons class="icon button" @click="_addresslarge()"><addressarrow /></Icons>
                 </div>
                 <!-- 选择颜色分类 -->
-                <div class="typechoose">
+                <div :class="{typechoose:true,largebox:typelarge}">
                     <div class="list">
                         <div style="width: 100%;height: 30px;line-height: 20px;">颜色分类：</div>
                         <div style="display: flex;flex-wrap: wrap;gap: 10px;">
-                            <div v-for="item in good.class" class="listitem">
+                            <div :class="{
+                                listitem:true,
+                                button:true,
+                                typechoosing:typechoose==index
+                            }"
+                                v-for="item,index in good.class"
+                                @click="_typechoose(index)"
+                            >
                                 <img :src="item.img" alt="" class="img">
                                 <div class="text">{{item.name}}</div>
                             </div>
                         </div>
                     </div>
-                    <Icons class="icon"><down_arrow /></Icons>
+                    <Icons class="icon button" @click="_typelarge()"><typearrow /></Icons>
                 </div>
                 <!-- 购买 -->
                 <div class="buynsave">
                     <div class="buy">立即购买</div>
-                    <div class="save">加入购物车</div>
+                    <div class="save button" @click="_addcart()">加入购物车</div>
                 </div>
             </div>
         </div>
@@ -207,11 +425,26 @@ import axios from 'axios';
             <div class="title">商品评价</div>
             <!-- 筛选排序 -->
             <div class="filternsort">
-                <div class="filter">全部</div>
-                <div class="filter">有图</div>
-                <div class="sort">
-                    <div class="text">默认排序</div>
-                    <Icons class="icon"><down_arrow /></Icons>
+                <div :class="{
+                    filter:true,
+                    button:true,
+                    typechoosing:commentstype=='all'
+                }" @click="_changecomments('all',commentsort)">全部</div>
+                <div :class="{
+                    filter:true,
+                    button:true,
+                    typechoosing:commentstype=='img'
+                }" @click="_changecomments('img',commentsort)">有图</div>
+                <div :class="{
+                    sort:true,
+                    largebox:commentsortlarge
+                }">
+                    <div class="textbox">
+                        <div class="text button" v-for="item,index in commentsortoptions"
+                            @click="_choosecommentsort(index)"
+                        >{{item.text}}</div>
+                    </div>
+                    <Icons class="icon button" @click="_commentsortlarge()"><commentsortarrow /></Icons>
                 </div>
             </div>
             <!-- 评论内容 -->
@@ -225,9 +458,12 @@ import axios from 'axios';
                     </div>
                 </div>
                 <div class="context">{{item.text}}</div>
+                <div style="margin-left: 70px;display: flex;gap: 10px;" v-if="item.img">
+                    <img class="img" :src="itemimg" alt="" v-for="itemimg in item.img">
+                </div>
                 <div class="active">
-                    <Icons class="icon like"><like /></Icons>
-                    <Icons class="icon reply"><reply /></Icons>
+                    <Icons class="icon like button"><like /></Icons>
+                    <Icons class="icon reply button"><reply /></Icons>
                 </div>
             </div>
         </div>
@@ -236,7 +472,6 @@ import axios from 'axios';
         <div class="more">
             <div class="title">推荐商品</div>
             <div class="list">
-                <!-- 后端重构后需要调整 -->
                 <GoodsItem v-for="item in suggestgoods" :good="item"></GoodsItem>
             </div>
         </div>

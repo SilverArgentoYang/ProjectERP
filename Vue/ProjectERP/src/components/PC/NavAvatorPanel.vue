@@ -24,16 +24,6 @@
             }
         }
     });
-
-    //退出登录
-    function _locallogout() {
-        if(store.state.user_islogin){
-            console.log('logout');
-            store._userlogout();
-            localStorage.setItem('user','null');
-            location.reload();
-        }
-    }
 </script>
 
 <template>
@@ -58,7 +48,7 @@
             <div class="text">系统设置</div>
             <Icons class="arrow"><right_arrow /></Icons>
         </div>
-        <div class="options button" @click="_locallogout()">
+        <div class="options button" @click="store._userlogout();">
             <Icons class="icon"><outlog /></Icons>
             <div class="text">退出登录</div>
             <Icons class="arrow"><right_arrow /></Icons>

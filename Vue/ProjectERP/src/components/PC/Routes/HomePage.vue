@@ -1,10 +1,12 @@
 <script setup>
     //VUE引用
     import { inject, ref } from 'vue';
+    import axios from 'axios';
+    import { useRouter } from 'vue-router';
+    const router = useRouter();
 
     // components
     import GoodsItem from './../GoodsItem.vue'
-    import axios from 'axios';
 
     //读取轮播图
     const rowpapergoods = ref([
@@ -64,7 +66,17 @@
         }
     }).then(res => {
         goods.value = res.data.goods.slice();
-    })
+    });
+    
+    //跳转详情页
+    function _jumptodetial(goodid){
+        router.push({
+            name:'Detial',
+            params:{
+                goodid:goodid
+            }
+        });
+    }
 </script>
 
 <template>
@@ -75,7 +87,11 @@
             <!-- 轮播图 -->
             <div class="rowpaper">
                 <div class="rowpapercontain">
-                    <img v-for="item in rowpapergoods" :src="item.img" alt="" class="img">
+                    <img class="img button"
+                        v-for="item in rowpapergoods"
+                        :src="item.img" alt=""
+                        @click="_jumptodetial(item.id)
+                    ">
                 </div>
             </div>
 

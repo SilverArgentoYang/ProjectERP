@@ -1,20 +1,33 @@
 <script setup>
-    
+    //import
+    import { useRouter } from 'vue-router';
+    const router = useRouter();
+
     //传值导入
     const props = defineProps({
         item: {
             type : Object,
             default : {
+                id:"",
                 img:"",
                 name : ""
             }
         }
     });
-
+    
+    //跳转详情页
+    function _jumptodetial(goodid){
+        router.push({
+            name:'Detial',
+            params:{
+                goodid:goodid
+            }
+        });
+    }
 </script>
 
 <template>
-    <div class="itemBody">
+    <div class="itemBody button" @click="_jumptodetial(item.id)">
         <img :src="item.img" alt="" class="itemimg">
         <div class="itemname">{{ item.name }}</div>
     </div>

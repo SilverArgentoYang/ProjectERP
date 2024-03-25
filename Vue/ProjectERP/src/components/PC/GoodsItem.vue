@@ -1,9 +1,14 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
+    //import
+    const router = useRouter();
     //传值导入
     const props = defineProps({
         good : {
             type:Object,
             default:{
+                id:'',
                 img:"",
                 realprice:"0.00",
                 fakeprice:"0.00",
@@ -11,10 +16,20 @@
             }
         }
     });
+
+    //跳转详情页
+    function _jumptodetial(goodid){
+        router.push({
+            name:'Detial',
+            params:{
+                goodid:goodid
+            }
+        });
+    }
 </script>
 
 <template>
-    <div class="Itembody button">
+    <div class="Itembody button" @click="_jumptodetial(good.id)">
         <img :src="good.img" alt="" class="img">
         <div class="price">
             <div class="realprice">￥{{good.realprice}}</div>

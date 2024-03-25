@@ -1,7 +1,7 @@
 
 /* 整体设置 */
 .homepagebody {
-    width: 1680px;
+    max-width: var(--pagemaxwidth);
     margin: auto;
 }
 
@@ -9,6 +9,8 @@
 .special {
     margin: 20px 0;
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px 0;
 }
 .rowpaper {
     width: 660px;
@@ -34,6 +36,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px 20px;
+    overflow: hidden;
 }
 
 /* 下半部分 */
