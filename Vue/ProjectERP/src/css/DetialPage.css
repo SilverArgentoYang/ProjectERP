@@ -321,8 +321,9 @@
             }
         }
         &>.context {
-            width: 100%;
-            margin: 10px 70px;
+            max-width: 100%;
+            margin: 10px 0;
+            margin-left: 70px;
             font-size: 20px;
             line-height: 30px;
         }
@@ -342,6 +343,41 @@
                 width: 32px;
                 height: 32px;
                 fill: var(--colorgrey);
+            }
+        }
+        &>.childcomments {
+            margin: 10px 0;
+            margin-left: 70px;
+            max-width: 100%;
+            background-color: var(--colorlgrey);
+            &>.childcommentitembox>.childcommentitem {
+                padding: 10px;
+                display: flex;
+                box-sizing: border-box;
+                font-size: 15px;
+                line-height: 15px;
+            }
+        }
+        &>.replying {
+            max-width: 100%;
+            margin: 10px 0;
+            margin-left: 70px;
+            display: flex;
+            &>input {
+                height: 30px;
+                flex: 1;
+                box-sizing: border-box;
+            }
+            &>.submitereply {
+                width: 70px;
+                height: 30px;
+                margin-left: 10px;
+                border-radius: 5px;
+                font-size: 15px;
+                text-align: center;
+                line-height: 30px;
+                color: var(--colorwhite);
+                background-color: var(--colorred);
             }
         }
     }
@@ -380,5 +416,10 @@
 
 /* 收藏 */
 .isfavorite {
+    fill: var(--colorred)!important;
+}
+
+/* 图标变红 */
+.red {
     fill: var(--colorred)!important;
 }

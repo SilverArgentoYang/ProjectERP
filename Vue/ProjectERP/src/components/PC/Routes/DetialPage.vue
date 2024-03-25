@@ -325,6 +325,57 @@ import axios from 'axios';
             _commentsortlarge();
         }
     }
+
+    //点赞评论
+    function _likecomment(commentid,index) {
+        if(!comments.value[index].isliked) {
+            axios({
+                url:'/likecomment',
+                method:'post',
+                params:{
+                    commentid:commentid
+                }
+            }).then(res=>{
+            });
+            comments.value[index].isliked = true;
+        }else{
+            axios({
+                url:'/dislikecomment',
+                method:'post',
+                params:{
+                    commentid:commentid
+                }
+            }).then(res=>{
+            });
+            comments.value[index].isliked = false;
+        }
+    }
+
+    //回复评论
+    const isreplying = ref(-1);
+    const replytext = ref('')
+    function _showreplybox(index) {
+        if(isreplying.value != index) {
+            isreplying.value = index;
+        }else {
+            isreplying.value = -1;
+        }
+        replytext.value = '';
+    }
+    function _replysent(commentid) {
+        if(replytext.value != '') {
+            axios({
+                url:'/replycomment',
+                method:'post',
+                params:{
+                    commentid:commentid
+                }
+            }).then(res=>{
+            });
+            isreplying.value = -1;
+            replytext.value = '';
+        }
+    }
 </script>
 
 <template>
@@ -448,7 +499,7 @@ import axios from 'axios';
                 </div>
             </div>
             <!-- 评论内容 -->
-            <div v-for="item in comments" class="item">
+            <div v-for="item,index in comments" class="item">
                 <div class="cutline"></div>
                 <div class="user">
                     <img :src="item.user.img" alt="" class="useravator">
@@ -462,8 +513,31 @@ import axios from 'axios';
                     <img class="img" :src="itemimg" alt="" v-for="itemimg in item.img">
                 </div>
                 <div class="active">
-                    <Icons class="icon like button"><like /></Icons>
-                    <Icons class="icon reply button"><reply /></Icons>
+                    <Icons :class="{
+                        icon :true,
+                        like :true,
+                        button :true,
+                        red :item.isliked
+                    }"
+                        @click="_likecomment(item.commentid,index)"
+                    ><like /></Icons>
+                    <Icons class="icon reply button"
+                        style="fill: var(--colorred);"
+                        @click="_showreplybox(index)"
+                    ><reply /></Icons>
+                </div>
+                <div class="childcomments">
+                    <div class="childcommentitembox" v-for="childitem,index in item.childcomments">
+                        <div class="childcommentitem">
+                            <div class="childusername">{{ childitem.user.username }}：</div>
+                            <div class="childcontext">{{ childitem.text }}</div>
+                        </div>
+                        <div class="cutline" v-if="index < item.childcomments.length-1"></div>
+                    </div>
+                </div>
+                <div class="replying" v-show="isreplying == index">
+                    <input type="text" v-model="replytext">
+                    <div class="submitereply button" @click="_replysent(item.commentid)">发 表</div>
                 </div>
             </div>
         </div>
