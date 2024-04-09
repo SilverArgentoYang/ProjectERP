@@ -39,6 +39,7 @@
         border-radius: 15px;
         line-height: 30px;
         text-align: center;
+        font-size: 15px;
     }
     &>.choosing {
         background-color: var(--colordred);
@@ -90,6 +91,7 @@
         border: 1px solid var(--colorgrey);
         display: flex;
         &>.input {
+            font-size: 15px;
             width: 100%;
             border: none;
             outline: none;
@@ -127,4 +129,77 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+}
+
+@media only screen and (max-width: 1700px) {
+    /* 工具栏 */
+    .toolsbar {
+        padding: 10rem 15rem;
+        gap: 10rem;
+    }
+    
+    /* 标题 */
+    .title {
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    
+    /* 标签 */
+    .tags {
+        gap: 10rem;
+        &>.tag {
+            height: 30rem;
+            padding: 0 25rem;
+            line-height: 30rem;
+            font-size: 15rem;
+        }
+    }
+    
+    /* 选项 */
+    .options {
+        height: 30rem;
+    }
+    .left {
+        width: 680rem;
+        &>.option1 {
+            width: 90rem;
+            line-height: 30rem;
+            font-size: 15rem;
+        }
+        & .upanddown {
+            width: 15rem;
+            height: 15rem;
+        }
+    
+        &>.option2 {
+            line-height: 30rem;
+            font-size: 15rem;
+            margin-left: 25rem;
+            gap: 5rem;
+        }
+        & .inputbox {
+            width: 90rem;
+            &>.input {
+                font-size: 15rem;
+                margin-left: 5rem;
+            }
+        }
+    
+    }
+    .right {
+        width: 90rem;
+        font-size: 15rem;
+        gap: 4rem;
+        &>.leftandright {
+            width: 20rem;
+            height: 20rem;
+        }
+    }
+    
+    /* 下半部分 */
+    .itemlist {
+        margin-top: 40rem;
+        gap: 20rem;
+    }
 }

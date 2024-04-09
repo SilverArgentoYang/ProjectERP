@@ -138,6 +138,7 @@
     }
     _setlabels();
 </script>
+
 <template>
     <div class="navigatorbody">
 
@@ -221,9 +222,9 @@
                             _popoverpanelshow(true)
                         "
                     ><history /></Icons>
+                    <Icons class="massages icon" @mouseover="_popoverpanelshow(false)"><message /></Icons>
+                    <Icons class="nav_service icon" @mouseover="_popoverpanelshow(false)"><service /></Icons>
                 </ul>
-                <Icons class="massages icon"><message /></Icons>
-                <Icons class="nav_service icon"><service /></Icons>
             </div>
         </div>
     </div>

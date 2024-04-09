@@ -9,8 +9,7 @@
 .special {
     margin: 20px 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px 0;
+    gap: 20px 20px;
 }
 .rowpaper {
     width: 660px;
@@ -32,11 +31,11 @@
 .famous {
     width: 1000px;
     max-height: 560px;
-    margin-left: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px 20px;
     overflow: hidden;
+    flex: 1;
 }
 
 /* 下半部分 */
@@ -66,5 +65,35 @@
     }
     100% {
         transform: translateX(0px);
+    }
+}
+
+@media only screen and (max-width: 1700px) {
+    /* 上半部分 */
+    .special {
+        margin: 20rem 0;
+        gap: 20rem 20rem;
+    }
+    .rowpaper {
+        width: 660rem;
+        height: 480rem;
+        &>.rowpapercontain {
+            width: 3300rem;
+            height: 480rem;
+            &>.img {
+                width: 660rem;
+                height: 480rem;
+            }
+        }
+    }
+    .famous {
+        width: 1000rem;
+        max-height: 560rem;
+        gap: 20rem 20rem;
+    }
+    
+    /* 下半部分 */
+    .normal {
+        gap: 20rem 20rem;
     }
 }

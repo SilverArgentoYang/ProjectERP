@@ -29,7 +29,7 @@ const store = {
     //购物车、收藏夹、历史记录面板目标
     _nav_popoverpaneltarget : function(target) {
         this.state.nav_popoverpaneltarget = target;
-        this.state.nav_popoverpanelpos = this.state.nav_popoverpaneltargets[target] * 50 + 25;
+        this.state.nav_popoverpanelpos = this.state.nav_popoverpaneltargets[target] * 50 + 17.5;
     },
     //购物车、收藏夹、历史记录面板打开关闭
     _nav_popoverpanelshow : function(isshow) {

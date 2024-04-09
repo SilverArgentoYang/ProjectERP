@@ -81,4 +81,27 @@ import { useRouter } from 'vue-router';
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
     }
+
+    @media only screen and (max-width: 1700px) {
+        .Itembody {
+            width: 320rem;
+            height: 270rem;
+        }
+
+        .img {
+            width: 320rem;
+            height: 180rem;
+        }
+
+        .price {
+            height: 40rem;
+            line-height: 40rem;
+            font-size: 20rem;
+        }
+        .name {
+            height: 50rem;
+            font-size: 15rem;
+            line-height: 25rem;
+        }
+    }
 </style>
