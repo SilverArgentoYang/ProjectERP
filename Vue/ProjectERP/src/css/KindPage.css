@@ -32,19 +32,19 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    &>.tag {
-        height: 30px;
-        padding: 0 25px;
-        border: 1px dashed var(--colorgrey);
-        border-radius: 15px;
-        line-height: 30px;
-        text-align: center;
-        font-size: 15px;
-    }
-    &>.choosing {
-        background-color: var(--colordred);
-        color: var(--colorwhite);
-    }
+}
+.tags>.tag {
+    height: 30px;
+    padding: 0 25px;
+    border: 1px dashed var(--colorgrey);
+    border-radius: 15px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 15px;
+}
+.tags>.choosing {
+    background-color: var(--colordred);
+    color: var(--colorwhite);
 }
 
 /* 选项 */
@@ -58,49 +58,47 @@
     width: 680px;
     height: 100%;
     display: flex;
-    &>.option1 {
-        width: 90px;
-        height: 100%;
-        line-height: 30px;
-        font-size: 15px;
-        color: var(--colordgrey);
-        border: 1px solid var(--colorgrey);
-        display: flex;
-        justify-content:center;
-    }
-    & .upanddown {
-        width: 15px;
-        height: 15px;
-        fill: var(--colorgrey);
-        display: block;
-        margin-left: 150%;
-    }
-
-    &>.option2 {
-        height: 100%;
-        line-height: 30px;
-        font-size: 15px;
-        color: var(--colordgrey);
-        display: flex;
-        margin-left: 25px;
-        gap: 5px;
-    }
-    & .inputbox {
-        width: 90px;
-        height: 100%;
-        border: 1px solid var(--colorgrey);
-        display: flex;
-        &>.input {
-            font-size: 15px;
-            width: 100%;
-            border: none;
-            outline: none;
-            height: 100%;
-            margin-left: 5px;
-            flex: 1;
-        }
-    }
-
+}
+.left>.option1 {
+    width: 90px;
+    height: 100%;
+    line-height: 30px;
+    font-size: 15px;
+    color: var(--colordgrey);
+    border: 1px solid var(--colorgrey);
+    display: flex;
+    justify-content:center;
+}
+.left .upanddown {
+    width: 15px;
+    height: 15px;
+    fill: var(--colorgrey);
+    display: block;
+    margin-left: 150%;
+}
+.left>.option2 {
+    height: 100%;
+    line-height: 30px;
+    font-size: 15px;
+    color: var(--colordgrey);
+    display: flex;
+    margin-left: 25px;
+    gap: 5px;
+}
+.left .inputbox {
+    width: 90px;
+    height: 100%;
+    border: 1px solid var(--colorgrey);
+    display: flex;
+}
+.left .inputbox>.input {
+    font-size: 15px;
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 100%;
+    margin-left: 5px;
+    flex: 1;
 }
 .right {
     width: 90px;
@@ -111,15 +109,15 @@
     gap: 4px;
     justify-content:right;
     align-items: center;
-    &>.leftandright {
-        width: 20px;
-        height: 20px;
-        fill: var(--colorgrey);
-        border: 1px solid var(--colorgrey);
-    }
-    &>.enable {
-        fill: var(--colorblack);
-    }
+}
+.right>.leftandright {
+    width: 20px;
+    height: 20px;
+    fill: var(--colorgrey);
+    border: 1px solid var(--colorgrey);
+}
+.right>.enable {
+    fill: var(--colorblack);
 }
 
 /* 下半部分 */
@@ -131,7 +129,7 @@
     gap: 20px;
 }
 
-@media only screen and (max-width: 1700px) {
+@media only screen and (max-width: 1680px) {
     /* 工具栏 */
     .toolsbar {
         padding: 10rem 15rem;
@@ -148,55 +146,53 @@
     /* 标签 */
     .tags {
         gap: 10rem;
-        &>.tag {
-            height: 30rem;
-            padding: 0 25rem;
-            line-height: 30rem;
-            font-size: 15rem;
-        }
     }
-    
+    .tags>.tag {
+        height: 30rem;
+        padding: 0 25rem;
+        line-height: 30rem;
+        font-size: 15rem;
+    }
+
     /* 选项 */
     .options {
         height: 30rem;
     }
     .left {
         width: 680rem;
-        &>.option1 {
-            width: 90rem;
-            line-height: 30rem;
-            font-size: 15rem;
-        }
-        & .upanddown {
-            width: 15rem;
-            height: 15rem;
-        }
-    
-        &>.option2 {
-            line-height: 30rem;
-            font-size: 15rem;
-            margin-left: 25rem;
-            gap: 5rem;
-        }
-        & .inputbox {
-            width: 90rem;
-            &>.input {
-                font-size: 15rem;
-                margin-left: 5rem;
-            }
-        }
-    
+    }
+    .left>.option1 {
+        width: 90rem;
+        line-height: 30rem;
+        font-size: 15rem;
+    }
+    .left .upanddown {
+        width: 15rem;
+        height: 15rem;
+    }
+    .left>.option2 {
+        line-height: 30rem;
+        font-size: 15rem;
+        margin-left: 25rem;
+        gap: 5rem;
+    }
+    .left .inputbox {
+        width: 90rem;
+    }
+    .left .inputbox>.input {
+        font-size: 15rem;
+        margin-left: 5rem;
     }
     .right {
         width: 90rem;
         font-size: 15rem;
         gap: 4rem;
-        &>.leftandright {
-            width: 20rem;
-            height: 20rem;
-        }
     }
-    
+    .right>.leftandright {
+        width: 20rem;
+        height: 20rem;
+    }
+
     /* 下半部分 */
     .itemlist {
         margin-top: 40rem;

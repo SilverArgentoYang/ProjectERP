@@ -25,12 +25,12 @@
     top: 50%;
     transform: translate(-50%,-50%);    
     object-fit:contain;
-    &:hover {
-        scale: 1.1;
-    }
-    &:active {
-        scale: 1.0;
-    }
+}
+.LOGO:hover {
+    transform: scale(1.1)translate(-50%,-50%);
+}
+.LOGO:active {
+    transform: scale(1.0)translate(-50%,-50%);
 }
 
 /* 导航栏 */
@@ -39,9 +39,9 @@
     margin: auto;
     display: flex;
     height: 50px;
-    &>div {
-        height: 100%;
-    }
+}
+.navigator>div {
+    height: 100%;
 }
 
 /* 搜索框 */
@@ -51,36 +51,36 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    &>form {
-        width: 100%;
-        height: 40px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        background-color: var(--colorwhite);
-        &>.searchimput {
-            border: none;
-            outline: none;
-            height: 100%;
-            margin-left: 10px;
-            flex: 1;
-            font-size: 18px;
-        }
-        &>.searchimput:focus {
-            border: none;
-            outline: none;
-        }
-        &>.searchbutton {
-            width: 35px;
-            height: 35px;
-            margin-right: 10px;
-            fill: var(--colordgrey);
-            border-radius: 5px;
-            &:hover {
-                background-color: var(--colorslgrey);
-            }
-        }
-    }
+}
+.searchbox>form {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    background-color: var(--colorwhite);
+}
+.searchbox>form>.searchimput {
+    border: none;
+    outline: none;
+    height: 100%;
+    margin-left: 10px;
+    flex: 1;
+    font-size: 18px;
+}
+.searchbox>form>.searchimput:focus {
+    border: none;
+    outline: none;
+}
+.searchbox>form>.searchbutton {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    fill: var(--colordgrey);
+    border-radius: 5px;
+}
+.searchbox>form>.searchbutton:hover {
+    background-color: var(--colorslgrey);
 }
 
 /* 左侧 */
@@ -88,20 +88,20 @@
     overflow: hidden;
     flex-shrink: 1;
     margin-right: auto;
-    &>li {
-        float: left;
-        width: 100px;
-        max-width: 100px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        color: var(--colorwhite);
-        &:hover {
-            background-color: var(--colordred);
-        }
-    }
+}
+.labels>li {
+    float: left;
+    width: 100px;
+    max-width: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--colorwhite);
+}
+.labels>li:hover {
+    background-color: var(--colordred);
 }
 
 /* 右侧 */
@@ -112,55 +112,53 @@
     align-items: center;
     gap:15px;
     margin-left: auto;
-    /* 用户菜单 */
-    &>.avator {
-        margin-left: 10px;
-        width: 40px;
-        height: 50px;
-        transition-duration: 0s;
-        display: flex;
-        align-items: center;
-        &:hover {
-            z-index: 10;
-            &>.islogin {
-                position: absolute;
-                transform: translate(-20px,30%);
-                transform: scale(2.5);
-                transition-duration: 0.3s;
-            }
-        }
-        &>.avatorimg {
-            width: 40px;
-            height: 40px;
-            border-radius: 100%;
-            transform-origin: right top;
-        }
-        &>div {
-            position: absolute;
-            &>.avatorpanel {
-                position: absolute;
-                transform: translate(-50%,25px);
-                z-index: -1;
-            }
-        }
-    }
-
-    /* 收藏夹、历史记录、购物车菜单 */
-    &>ul {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        gap:15px;
-    }
-    &>ul>div{
-        position: absolute;
-        &>.popoverpanel {
-            position: absolute;
-            z-index: 10;
-            transform: translate(-50%,25px);
-            transition-duration: 0.3s;
-        }
-    }
+}
+/* 用户菜单 */
+.usersetting>.avator {
+    margin-left: 10px;
+    width: 40px;
+    height: 50px;
+    transition-duration: 0s;
+    display: flex;
+    align-items: center;
+}
+.usersetting>.avator:hover {
+    z-index: 10;
+}
+.usersetting>.avator:hover>.islogin {
+    position: absolute;
+    transform: scale(2.5);
+    transition-duration: 0.3s;
+}
+.usersetting>.avator>.avatorimg {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    transform-origin: right top;
+}
+.usersetting>.avator>div {
+    position: absolute;
+}
+.usersetting>.avator>div>.avatorpanel {
+    position: absolute;
+    transform: translate(-50%,25px);
+    z-index: -1;
+}
+/* 收藏夹、历史记录、购物车菜单 */
+.usersetting>ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap:15px;
+}
+.usersetting>ul>div{
+    position: absolute;
+}
+.usersetting>ul>div>.popoverpanel {
+    position: absolute;
+    z-index: 10;
+    transform: translate(-50%,25px);
+    transition-duration: 0.3s;
 }
 .usersetting .icon {
     width: 35px;

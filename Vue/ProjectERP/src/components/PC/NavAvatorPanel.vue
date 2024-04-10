@@ -1,6 +1,8 @@
 <script setup>
     //VUE引用
     import { inject, ref } from 'vue';
+import { useRouter } from 'vue-router';
+    const router = useRouter();
 
     //自定义声明
     const {
@@ -24,6 +26,16 @@
             }
         }
     });
+
+    //个人中心
+    function _gotopersonalspace() {
+        router.push({
+            name:'OrderManage',
+            params:{
+                userid:props.user.userid
+            }
+        });
+    }
 </script>
 
 <template>
@@ -38,7 +50,7 @@
         </div>
 
         <!-- 下半部分 -->
-        <div class="options button">
+        <div class="options button" @click="_gotopersonalspace()">
             <Icons class="icon"><space /></Icons>
             <div class="text">个人中心</div>
             <Icons class="arrow"><right_arrow /></Icons>
@@ -90,15 +102,13 @@
         text-align: center;
         line-height: 45px;
         color: var(--colorblack);
-
-        &>.level {
-            flex: 1;
-        }
-        &>.count {
-            flex: 1;
-        }
     }
-
+    .vip>.level {
+        flex: 1;
+    }
+    .vip>.count {
+        flex: 1;
+    }
     /* 下半部分 */
     .options {
         width: 100%;
@@ -110,22 +120,21 @@
         text-align: center;
         line-height: 45px;
         color: var(--colorblack);
-
-        &>.icon {
-            width: 40px;
-            height: 40px;
-            margin-left: 15px;
-            fill: var(--colorgrey);
-        }
-        &>.text {
-            flex: 1;
-            height: 40px;
-        }
-        &>.arrow {
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            fill: var(--colorgrey);
-        }
+    }
+    .options>.icon {
+        width: 40px;
+        height: 40px;
+        margin-left: 15px;
+        fill: var(--colorgrey);
+    }
+    .options>.text {
+        flex: 1;
+        height: 40px;
+    }
+    .options>.arrow {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+        fill: var(--colorgrey);
     }
 </style>

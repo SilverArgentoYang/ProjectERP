@@ -16,17 +16,17 @@
     height: 480px;
     overflow: hidden;
     border-radius: 25px;
-    &>.rowpapercontain {
-        width: 3300px;
-        height: 480px;
-        display: flex;
-        animation: rowpaper 10s ease infinite;
-        &>.img {
-            width: 660px;
-            height: 480px;
-            object-fit:cover;
-        }
-    }
+}
+.rowpaper>.rowpapercontain {
+    width: 3300px;
+    height: 480px;
+    display: flex;
+    animation: rowpaper 10s ease infinite;
+}
+.rowpaper>.rowpapercontain>.img {
+    width: 660px;
+    height: 480px;
+    object-fit:cover;
 }
 .famous {
     width: 1000px;
@@ -68,7 +68,7 @@
     }
 }
 
-@media only screen and (max-width: 1700px) {
+@media only screen and (max-width: 1680px) {
     /* 上半部分 */
     .special {
         margin: 20rem 0;
@@ -77,14 +77,14 @@
     .rowpaper {
         width: 660rem;
         height: 480rem;
-        &>.rowpapercontain {
-            width: 3300rem;
-            height: 480rem;
-            &>.img {
-                width: 660rem;
-                height: 480rem;
-            }
-        }
+    }
+    .rowpaper>.rowpapercontain {
+        width: 3300rem;
+        height: 480rem;
+    }
+    .rowpaper>.rowpapercontain>.img {
+        width: 660rem;
+        height: 480rem;
     }
     .famous {
         width: 1000rem;

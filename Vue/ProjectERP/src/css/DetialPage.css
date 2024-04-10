@@ -34,11 +34,11 @@
     height: 85px;
     display: flex;
     justify-content: space-between;
-    &>img {
-        width: 85px;
-        height: 85px;
-        object-fit:cover;
-    }
+}
+.minis>img {
+    width: 85px;
+    height: 85px;
+    object-fit:cover;
 }
 /* 右侧菜单 */
 .controlpad {
@@ -52,29 +52,29 @@
     width: 100%;
     height: 48px;
     display: flex;
-    &>.title {
-        width: fit-content;
-        height: 100%;
-        font-size: 32px;
-        line-height: 48px;
-        font-weight: bold;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        word-break: break-all;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-    }
-    &>.share {
-        margin-left: auto;
-        display: flex;
-        gap: 20px;
-        &>.icon {
-            width: 32px;
-            height: 32px;
-            fill: var(--colorgrey);
-        }
-    }
+}
+.titleandshare>.title {
+    width: fit-content;
+    height: 100%;
+    font-size: 32px;
+    line-height: 48px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+.titleandshare>.share {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+}
+.titleandshare>.share>.icon {
+    width: 32px;
+    height: 32px;
+    fill: var(--colorgrey);
 }
 .subtitle {
     width: 100%;
@@ -90,19 +90,19 @@
     display: flex;
     align-items: end;
     gap: 5px;
-    &>.realprice {
-        font-size: 32px;
-        line-height: 48px;
-        font-weight: bold;
-        color: var(--colorred);
-    }
-    &>.fakeprice {
-        font-size: 25px;
-        font-weight: bold;
-        line-height: 37px;
-        color: var(--colorgrey);
-        text-decoration: line-through;
-    }
+}
+.price>.realprice {
+    font-size: 32px;
+    line-height: 48px;
+    font-weight: bold;
+    color: var(--colorred);
+}
+.price>.fakeprice {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 37px;
+    color: var(--colorgrey);
+    text-decoration: line-through;
 }
 /* 地址 */
 .address {
@@ -115,27 +115,27 @@
     box-sizing: border-box;
     font-size: 20px;
     line-height: 30px;
-    &>.textbox {
-        flex: 1;
-        height: 100%;
-        overflow: hidden;
-        &>.text{
-            margin-bottom: 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            word-break: break-all;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-        }
-    }
-    &>.icon {
-        width: 30px;
-        height: 30px;
-        margin-left: auto;
-        fill: var(--colordgrey);
-        align-self: end;
-    }
+}
+.address>.textbox {
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+}
+.address>.textbox>.text {
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+.address>.icon {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    fill: var(--colordgrey);
+    align-self: end;
 }
 /* 选择颜色分类 */
 .typechoose {
@@ -149,33 +149,33 @@
     display: flex;
     gap: 10px;
     align-items: end;
-    &>.list {
-        width: 100%;
-        height: 100%;
-        font-size: 20px;
-        line-height: 40px;
-        overflow: hidden;
-        & .listitem {
-            width: 220px;
-            height: 57px;
-            border: 1px solid var(--colordgrey);
-            border-radius: 10px;
-            padding: 7.5px 10px;
-            box-sizing: border-box;
-            display: flex;
-            gap: 10px;
-        }
-        & .img {
-            width: 40px;
-            height: 40px;
-            object-fit:cover;
-        }
-    }
-    &>.icon {
-        width: 30px;
-        height: 30px;
-        fill: var(--colordgrey);
-    }
+}
+.typechoose>.list {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    overflow: hidden;
+}
+.typechoose>.list .listitem {
+    width: 220px;
+    height: 57px;
+    border: 1px solid var(--colordgrey);
+    border-radius: 10px;
+    padding: 7.5px 10px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+}
+.typechoose>.list .img {
+    width: 40px;
+    height: 40px;
+    object-fit:cover;
+}
+.typechoose>.icon {
+    width: 30px;
+    height: 30px;
+    fill: var(--colordgrey);
 }
 /* 购买 */
 .buynsave {
@@ -183,26 +183,26 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    &>.buy {
-        width: 280px;
-        height: 60px;
-        border-radius: 32px;
-        background-color: var(--colorred);
-        font-size: 25px;
-        color: var(--colorwhite);
-        text-align: center;
-        line-height: 60px;
-    }
-    &>.save {
-        width: 280px;
-        height: 60px;
-        border-radius: 32px;
-        background-color: var(--colororange);
-        font-size: 25px;
-        color: var(--colorwhite);
-        text-align: center;
-        line-height: 60px;
-    }
+}
+.buynsave>.buy {
+    width: 280px;
+    height: 60px;
+    border-radius: 32px;
+    background-color: var(--colorred);
+    font-size: 25px;
+    color: var(--colorwhite);
+    text-align: center;
+    line-height: 60px;
+}
+.buynsave>.save {
+    width: 280px;
+    height: 60px;
+    border-radius: 32px;
+    background-color: var(--colororange);
+    font-size: 25px;
+    color: var(--colorwhite);
+    text-align: center;
+    line-height: 60px;
 }
 
 /* 商品描述 */
@@ -213,17 +213,17 @@
     padding: 25px;
     box-sizing: border-box;
     margin-top: 30px;
-    &>.title {
-        width: 100%;
-        height: 40px;
-        font-size: 25px;
-        font-weight: bold;
-        line-height: 25px;
-    }
-    &>.img {
-        width: 100%;
-        object-fit:cover;
-    }
+}
+.detialmain>.title {
+    width: 100%;
+    height: 40px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 25px;
+}
+.detialmain>.img {
+    width: 100%;
+    object-fit:cover;
 }
 
 /* 温馨提醒 */
@@ -244,163 +244,163 @@
     box-shadow: 0 0 10px var(--shadowblack);
     padding: 25px;
     box-sizing: border-box;
-    &>.title {
-        width: 100%;
-        height: 40px;
-        font-size: 25px;
-        font-weight: bold;
-        line-height: 25px;
-    }
-    /* 排序 */
-    &>.filternsort {
-        width: 100%;
-        display: flex;
-        margin-bottom: 20px;
-        &>.filter {
-            width: 170px;
-            height: 40px;
-            border-radius: 22px;
-            border: 1px solid var(--colordgrey);
-            margin-right: 10px;
-            font-size: 20px;
-            text-align: center;
-            line-height: 40px;
-            overflow: hidden;
-        }
-        &>.sort {
-            width: 150px;
-            height: 40px;
-            border-radius: 22px;
-            border: 1px solid var(--colordgrey);
-            padding: 0 10px;
-            margin-left: auto;
-            display: flex;
-            align-items: end;
-            &>.textbox {
-                flex: 1;
-                height: 100%;
-                font-size: 20px;
-                text-align: center;
-                line-height: 40px;
-                overflow: hidden;
-            }
-            &>.icon {
-                width: 25px;
-                height: 40px;
-                fill: var(--colordgrey);
-            }
-        }
-    }
-    /* 评论内容 */
-    &>.item {
-        width: 100%;
-        &>.user {
-            width: 100%;
-            height: 60px;
-            margin-top: 25px;
-            display: flex;
-            gap: 10px;
-            &>.useravator {
-                width: 60px;
-                height: 60px;
-                object-fit:cover;
-            }
-            & .username {
-                width: 100%;
-                height: 20px;
-                font-size: 20px;
-                font-weight: bold;
-                line-height: 20px;
-            }
-            & .cominfo {
-                width: 100%;
-                height: 30px;
-                font-size: 15px;
-                line-height: 30px;
-                color: var(--colorgrey);
-            }
-        }
-        &>.context {
-            max-width: 100%;
-            margin: 10px 0;
-            margin-left: 70px;
-            font-size: 20px;
-            line-height: 30px;
-        }
-        & .img {
-            width: 100px;
-            height: 100px;
-            object-fit:cover;
-        }
-        &>.active {
-            width: 100%;
-            height: 30px;
-            display: flex;
-            gap: 20px;
-            justify-content: right;
-            margin-bottom: 10px;
-            &>.icon {
-                width: 32px;
-                height: 32px;
-                fill: var(--colorgrey);
-            }
-        }
-        &>.childcomments {
-            margin: 10px 0;
-            margin-left: 70px;
-            max-width: 100%;
-            background-color: var(--colorlgrey);
-            &>.childcommentitembox>.childcommentitem {
-                padding: 10px;
-                display: flex;
-                box-sizing: border-box;
-                font-size: 15px;
-                line-height: 15px;
-            }
-        }
-        &>.replying {
-            max-width: 100%;
-            margin: 10px 0;
-            margin-left: 70px;
-            display: flex;
-            &>input {
-                height: 30px;
-                flex: 1;
-                box-sizing: border-box;
-            }
-            &>.submitereply {
-                width: 70px;
-                height: 30px;
-                margin-left: 10px;
-                border-radius: 5px;
-                font-size: 15px;
-                text-align: center;
-                line-height: 30px;
-                color: var(--colorwhite);
-                background-color: var(--colorred);
-            }
-        }
-    }
+}
+.comment>.title {
+    width: 100%;
+    height: 40px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 25px;
+}
+/* 排序 */
+.comment>.filternsort {
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+}
+.comment>.filternsort>.filter {
+    width: 170px;
+    height: 40px;
+    border-radius: 22px;
+    border: 1px solid var(--colordgrey);
+    margin-right: 10px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    overflow: hidden;
+}
+.comment>.filternsort>.sort {
+    width: 150px;
+    height: 40px;
+    border-radius: 22px;
+    border: 1px solid var(--colordgrey);
+    padding: 0 10px;
+    margin-left: auto;
+    display: flex;
+    align-items: end;
+}
+.comment>.filternsort>.sort>.textbox {
+    flex: 1;
+    height: 100%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    overflow: hidden;
+}
+.comment>.filternsort>.sort>.icon {
+    width: 25px;
+    height: 40px;
+    fill: var(--colordgrey);
+}
+/* 评论内容 */
+.comment>.item {
+    width: 100%;
+}
+.comment>.item>.user {
+    width: 100%;
+    height: 60px;
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+}
+.comment>.item>.user>.useravator {
+    width: 60px;
+    height: 60px;
+    object-fit:cover;
+}
+.comment>.item>.user .username {
+    width: 100%;
+    height: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+}
+.comment>.item>.user .cominfo {
+    width: 100%;
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+    color: var(--colorgrey);
+}
+.comment>.item>.context {
+    max-width: 100%;
+    margin: 10px 0;
+    margin-left: 70px;
+    font-size: 20px;
+    line-height: 30px;
+}
+.comment>.item .img {
+    width: 100px;
+    height: 100px;
+    object-fit:cover;
+}
+.comment>.item>.active {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: right;
+    margin-bottom: 10px;
+}
+.comment>.item>.active>.icon {
+    width: 32px;
+    height: 32px;
+    fill: var(--colorgrey);
+}
+.comment>.item>.childcomments {
+    margin: 10px 0;
+    margin-left: 70px;
+    max-width: 100%;
+    background-color: var(--colorlgrey);
+}
+.comment>.item>.childcomments>.childcommentitembox>.childcommentitem {
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 15px;
+}
+.comment>.item>.replying {
+    max-width: 100%;
+    margin: 10px 0;
+    margin-left: 70px;
+    display: flex;
+}
+.comment>.item>.replying>input {
+    height: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+.comment>.item>.replying>.submitereply {
+    width: 70px;
+    height: 30px;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    line-height: 30px;
+    color: var(--colorwhite);
+    background-color: var(--colorred);
 }
 
 /* 推荐商品 */
 .more {
     width: 100%;
     margin-top: 30px;
-    &>.title {
-        width: 100%;
-        height: 40px;
-        font-size: 25px;
-        font-weight: bold;
-        line-height: 25px;
-    }
-    &>.list {
-        width: 100%;
-        margin-top: 30px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
+}
+.more>.title {
+    width: 100%;
+    height: 40px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 25px;
+}
+.more>.list {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 /* 放大选框 */
@@ -424,7 +424,7 @@
     fill: var(--colorred)!important;
 }
 
-@media only screen and (max-width: 1700px) {
+@media only screen and (max-width: 1680px) {
     /* 头部 */
     .detialhead {
         padding: 25rem;
@@ -442,10 +442,10 @@
     .minis {
         width: 450rem;
         height: 85rem;
-        &>img {
-            width: 85rem;
-            height: 85rem;
-        }
+    }
+    .minis>img {
+        width: 85rem;
+        height: 85rem;
     }
     /* 右侧菜单 */
     .controlpad {
@@ -454,17 +454,17 @@
     /* 标题 */
     .titleandshare {
         height: 48rem;
-        &>.title {
-            font-size: 32rem;
-            line-height: 48rem;
-        }
-        &>.share {
-            gap: 20rem;
-            &>.icon {
-                width: 32rem;
-                height: 32rem;
-            }
-        }
+    }
+    .titleandshare>.title {
+        font-size: 32rem;
+        line-height: 48rem;
+    }
+    .titleandshare>.share {
+        gap: 20rem;
+    }
+    .titleandshare>.share>.icon {
+        width: 32rem;
+        height: 32rem;
     }
     .subtitle {
         height: 30rem;
@@ -475,14 +475,14 @@
     .price {
         height: 48rem;
         gap: 5rem;
-        &>.realprice {
-            font-size: 32rem;
-            line-height: 48rem;
-        }
-        &>.fakeprice {
-            font-size: 25rem;
-            line-height: 37rem;
-        }
+    }
+    .price>.realprice {
+        font-size: 32rem;
+        line-height: 48rem;
+    }
+    .price>.fakeprice {
+        font-size: 25rem;
+        line-height: 37rem;
     }
     /* 地址 */
     .address {
@@ -491,15 +491,13 @@
         padding: 10rem 20rem;
         font-size: 20rem;
         line-height: 30rem;
-        &>.textbox {
-            &>.text{
-                margin-bottom: 10rem;
-            }
-        }
-        &>.icon {
-            width: 30rem;
-            height: 30rem;
-        }
+    }
+    .address>.textbox>.text{
+        margin-bottom: 10rem;
+    }
+    .address>.icon {
+        width: 30rem;
+        height: 30rem;
     }
     /* 选择颜色分类 */
     .typechoose {
@@ -508,53 +506,51 @@
         height: 180rem;
         padding: 10rem 20rem;
         gap: 10rem;
-        &>.list {
-            font-size: 20rem;
-            line-height: 40rem;
-            & .listitem {
-                width: 220rem;
-                height: 57rem;
-                padding: 7.5rem 10rem;
-                gap: 10rem;
-            }
-            & .img {
-                width: 40rem;
-                height: 40rem;
-            }
-        }
-        &>.icon {
-            width: 30rem;
-            height: 30rem;
-        }
+    }
+    .typechoose>.list {
+        font-size: 20rem;
+        line-height: 40rem;
+    }
+    .typechoose>.list .listitem {
+        width: 220rem;
+        height: 57rem;
+        padding: 7.5rem 10rem;
+        gap: 10rem;
+    }
+    .typechoose>.list .img {
+        width: 40rem;
+        height: 40rem;
+    }
+    .typechoose>.icon {
+        width: 30rem;
+        height: 30rem;
     }
     /* 购买 */
     .buynsave {
         max-width: 600rem;
-        &>.buy {
-            width: 280rem;
-            height: 60rem;
-            font-size: 25rem;
-            line-height: 60rem;
-        }
-        &>.save {
-            width: 280rem;
-            height: 60rem;
-            font-size: 25rem;
-            line-height: 60rem;
-        }
     }
-    
+    .buynsave>.buy {
+        width: 280rem;
+        height: 60rem;
+        font-size: 25rem;
+        line-height: 60rem;
+    }
+    .buynsave>.save {
+        width: 280rem;
+        height: 60rem;
+        font-size: 25rem;
+        line-height: 60rem;
+    }
     /* 商品描述 */
     .detialmain {
         padding: 25rem;
         margin-top: 30rem;
-        &>.title {
-            height: 40rem;
-            font-size: 25rem;
-            line-height: 25rem;
-        }
     }
-    
+    .detialmain>.title {
+        height: 40rem;
+        font-size: 25rem;
+        line-height: 25rem;
+    }
     /* 温馨提醒 */
     .warning {
         margin-top: 30rem;
@@ -567,112 +563,109 @@
     /* 评论 */
     .comment {
         padding: 25rem;
-        &>.title {
-            height: 40rem;
-            font-size: 25rem;
-            line-height: 25rem;
-        }
-        /* 排序 */
-        &>.filternsort {
-            margin-bottom: 20rem;
-            &>.filter {
-                width: 170rem;
-                height: 40rem;
-                margin-right: 10rem;
-                font-size: 20rem;
-                line-height: 40rem;
-            }
-            &>.sort {
-                width: 150rem;
-                height: 40rem;
-                padding: 0 10rem;
-                &>.textbox {
-                    font-size: 20rem;
-                    line-height: 40rem;
-                }
-                &>.icon {
-                    width: 25rem;
-                    height: 40rem;
-                }
-            }
-        }
-        /* 评论内容 */
-        &>.item {
-            &>.user {
-                height: 60rem;
-                margin-top: 25rem;
-                gap: 10rem;
-                &>.useravator {
-                    width: 60rem;
-                    height: 60rem;
-                }
-                & .username {
-                    height: 20rem;
-                    font-size: 20rem;
-                    line-height: 20rem;
-                }
-                & .cominfo {
-                    height: 30rem;
-                    font-size: 15rem;
-                    line-height: 30rem;
-                }
-            }
-            &>.context {
-                margin: 10rem 0;
-                margin-left: 70rem;
-                font-size: 20rem;
-                line-height: 30rem;
-            }
-            & .img {
-                width: 100rem;
-                height: 100rem;
-            }
-            &>.active {
-                height: 30rem;
-                gap: 20rem;
-                margin-bottom: 10rem;
-                &>.icon {
-                    width: 32rem;
-                    height: 32rem;
-                }
-            }
-            &>.childcomments {
-                margin: 10rem 0;
-                margin-left: 70rem;
-                &>.childcommentitembox>.childcommentitem {
-                    padding: 10rem;
-                    font-size: 15rem;
-                    line-height: 15rem;
-                }
-            }
-            &>.replying {
-                margin: 10rem 0;
-                margin-left: 70rem;
-                &>input {
-                    height: 30rem;
-                }
-                &>.submitereply {
-                    width: 70rem;
-                    height: 30rem;
-                    margin-left: 10rem;
-                    font-size: 15rem;
-                    line-height: 30rem;
-                }
-            }
-        }
     }
-    
+    .comment>.title {
+        height: 40rem;
+        font-size: 25rem;
+        line-height: 25rem;
+    }
+    /* 排序 */
+    .comment>.filternsort {
+        margin-bottom: 20rem;
+    }
+    .comment>.filternsort>.filter {
+        width: 170rem;
+        height: 40rem;
+        margin-right: 10rem;
+        font-size: 20rem;
+        line-height: 40rem;
+    }
+    .comment>.filternsort>.sort {
+        width: 150rem;
+        height: 40rem;
+        padding: 0 10rem;
+    }
+    .comment>.filternsort>.sort>.textbox {
+        font-size: 20rem;
+        line-height: 40rem;
+    }
+    .comment>.filternsort>.sort>.icon {
+        width: 25rem;
+        height: 40rem;
+    }
+    /* 评论内容 */
+    .comment>.item>.user {
+        height: 60rem;
+        margin-top: 25rem;
+        gap: 10rem;
+    }
+    .comment>.item>.user>.useravator {
+        width: 60rem;
+        height: 60rem;
+    }
+    .comment>.item>.user .username {
+        height: 20rem;
+        font-size: 20rem;
+        line-height: 20rem;
+    }
+    .comment>.item>.user .cominfo {
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    .comment>.item>.context {
+        margin: 10rem 0;
+        margin-left: 70rem;
+        font-size: 20rem;
+        line-height: 30rem;
+    }
+    .comment>.item .img {
+        width: 100rem;
+        height: 100rem;
+    }
+    .comment>.item>.active {
+        height: 30rem;
+        gap: 20rem;
+        margin-bottom: 10rem;
+    }
+    .comment>.item>.active>.icon {
+        width: 32rem;
+        height: 32rem;
+    }
+    .comment>.item>.childcomments {
+        margin: 10rem 0;
+        margin-left: 70rem;
+    }
+    .comment>.item>.childcomments>.childcommentitembox>.childcommentitem {
+        padding: 10rem;
+        font-size: 15rem;
+        line-height: 15rem;
+    }
+    .comment>.item>.replying {
+        margin: 10rem 0;
+        margin-left: 70rem;
+    }
+    .comment>.item>.replying>input {
+        height: 30rem;
+    }
+    .comment>.item>.replying>.submitereply {
+        width: 70rem;
+        height: 30rem;
+        margin-left: 10rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
     /* 推荐商品 */
     .more {
         margin-top: 30rem;
-        &>.title {
-            height: 40rem;
-            font-size: 25rem;
-            line-height: 25rem;
-        }
-        &>.list {
-            margin-top: 30rem;
-            gap: 20rem;
-        }
+    }
+    .more>.title {
+        height: 40rem;
+        font-size: 25rem;
+        line-height: 25rem;
+    }
+    .more>.list {
+        margin-top: 30rem;
+        gap: 20rem;
     }
 }

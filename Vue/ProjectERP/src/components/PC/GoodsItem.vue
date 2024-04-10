@@ -82,7 +82,7 @@ import { useRouter } from 'vue-router';
         -webkit-line-clamp: 2;
     }
 
-    @media only screen and (max-width: 1700px) {
+    @media only screen and (max-width: 1680px) {
         .Itembody {
             width: 320rem;
             height: 270rem;
