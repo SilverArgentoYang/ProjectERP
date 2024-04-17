@@ -24,6 +24,9 @@
             store._nav_popoverpanelshow(isshow);
         }
     }
+    function _spc_leftbarselected(selected) {
+        store._spc_leftbarselected(selected);
+    }
 
     // 自定义声明
     const {
@@ -137,6 +140,14 @@
         });
     }
     _setlabels();
+
+    // 前往购物车页面
+    function _gotocartpage() {
+        _spc_leftbarselected(1);
+        router.push({
+            name:'Cart',
+        });
+    }
 </script>
 
 <template>
@@ -201,29 +212,30 @@
                         :hidden="!store.state.nav_popoverpanelshow"
                     /></div>
 
-                    <Icons class="cart icon"
+                    <Icons class="cart icon button"
                         @mouseover="
                             panellist = loguser.cartlist.slice();
                             _popoverpaneltarget('cart');
                             _popoverpanelshow(true)
                         "
+                        @click="_gotocartpage()"
                     ><cart /></Icons> 
-                    <Icons class="favorites icon"
+                    <Icons class="favorites icon button"
                         @mouseover="
                             panellist=loguser.favoritelist.slice();
                             _popoverpaneltarget('favorites');
                             _popoverpanelshow(true)
                         "
                     ><favorite /></Icons>
-                    <Icons class="history icon"
+                    <Icons class="history icon button"
                         @mouseover="
                             panellist=loguser.historylist.slice();
                             _popoverpaneltarget('history');
                             _popoverpanelshow(true)
                         "
                     ><history /></Icons>
-                    <Icons class="massages icon" @mouseover="_popoverpanelshow(false)"><message /></Icons>
-                    <Icons class="nav_service icon" @mouseover="_popoverpanelshow(false)"><service /></Icons>
+                    <Icons class="massages icon button" @mouseover="_popoverpanelshow(false)"><message /></Icons>
+                    <Icons class="nav_service icon button" @mouseover="_popoverpanelshow(false)"><service /></Icons>
                 </ul>
             </div>
         </div>

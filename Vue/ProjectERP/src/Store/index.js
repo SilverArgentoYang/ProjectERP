@@ -18,7 +18,9 @@ const store = {
             "history" : 2
         },
         //登录状态
-        user_islogin:false
+        user_islogin:false,
+        //个人空间左侧菜单
+        spc_leftbarselected:0
     }),
 
     //这里控制状态的方法
@@ -61,6 +63,11 @@ const store = {
                 document.body.removeChild(messagebox);
             },300);
         },100);
+    },
+
+    //个人空间左侧菜单
+    _spc_leftbarselected(selected) {
+        this.state.spc_leftbarselected = selected;
     }
 }
 

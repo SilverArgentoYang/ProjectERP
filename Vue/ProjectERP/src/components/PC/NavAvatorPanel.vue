@@ -11,7 +11,11 @@ import { useRouter } from 'vue-router';
         setting,
         outlog,
     } = inject('resource');
+    // 状态管理
     const store = inject('store');
+    function _spc_leftbarselected(selected) {
+        store._spc_leftbarselected(selected);
+    }
 
     //props导入
     const props = defineProps({
@@ -29,11 +33,9 @@ import { useRouter } from 'vue-router';
 
     //个人中心
     function _gotopersonalspace() {
+        _spc_leftbarselected(0);
         router.push({
             name:'OrderManage',
-            params:{
-                userid:props.user.userid
-            }
         });
     }
 </script>
