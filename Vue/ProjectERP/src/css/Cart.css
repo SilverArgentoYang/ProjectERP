@@ -1,0 +1,204 @@
+
+/* 标题 */
+.titlenprice {
+    display: flex;
+    height: 30px;
+    align-items: center;
+}
+.titlenprice>.title {
+    flex: 1;
+    font-size: 20px;
+    font-weight: bold;
+}
+.titlenprice>.text {
+    font-size: 20px;
+    font-weight: bold;
+}
+.titlenprice>.price {
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--colorred);
+}
+.titlenprice>.pay {
+    width: 80px;
+    height: 30px;
+    margin-left: 20px;
+    background-color: var(--colorred);
+    border-radius: 16px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--colorwhite);
+    text-align: center;
+    line-height: 30px;
+}
+
+/* 表头 */
+.tablehead {
+    display: flex;
+    height: 30px;
+    align-items: center;
+}
+.tablehead>.subtitle {
+    font-size: 20px;
+    font-weight: bold;
+}
+.checkbox {
+    width: 25px;
+    height: 15px;
+}
+.img {
+    width: 75px;
+    margin-left: 5px;
+}
+.info {
+    width: 300px;
+    margin-left: 50px;
+}
+.price {
+    width: 150px;
+    text-align: center;
+}
+.count {
+    flex: 1;
+    text-align: center;
+}
+.totleprice {
+    flex: 1;
+    text-align: center;
+}
+.command {
+    flex: 1;
+    text-align: center;
+}
+
+/* 列表主体 */
+.maintable {
+    margin-top: 30px;
+}
+.maintable>.listitem>.mainitem {
+    display: flex;
+    height: 75px;
+    align-items: center;
+}
+.maintable>.listitem>.mainitem>.img {
+    height: 75px;
+}
+.maintable>.listitem>.mainitem>.info {
+    font-size: 18px;
+}
+.maintable>.listitem>.mainitem>.price {
+    font-size: 18px;
+}
+.maintable>.listitem>.mainitem>.count>.counttextbox {
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    text-align: center;
+}
+.maintable>.listitem>.mainitem>.totleprice {
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--colorred);
+}
+.maintable>.listitem>.mainitem>.command {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.maintable>.listitem>.mainitem>.command>.cmdbutton {
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: var(--colorred);
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--colorwhite);
+    text-align: center;
+    line-height: 40px;
+}
+
+.cutline {
+    margin: 10px 0; 
+}
+
+
+@media only screen and (max-width: 1680px) {
+    /* 标题 */
+    .titlenprice {
+        height: 30rem;
+    }
+    .titlenprice>.title {
+        font-size: 20rem;
+    }
+    .titlenprice>.text {
+        font-size: 20rem;
+    }
+    .titlenprice>.price {
+        font-size: 25rem;
+    }
+    .titlenprice>.pay {
+        width: 80rem;
+        height: 30rem;
+        margin-left: 20rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    
+    /* 表头 */
+    .tablehead {
+        height: 30rem;
+    }
+    .tablehead>.subtitle {
+        font-size: 20rem;
+    }
+    .checkbox {
+        width: 25rem;
+        height: 15rem;
+    }
+    .img {
+        width: 75rem;
+        margin-left: 5rem;
+    }
+    .info {
+        width: 300rem;
+        margin-left: 50rem;
+    }
+    .price {
+        width: 150rem;
+    }
+    
+    /* 列表主体 */
+    .maintable {
+        margin-top: 30rem;
+    }
+    .maintable>.listitem>.mainitem {
+        height: 75rem;
+    }
+    .maintable>.listitem>.mainitem>.img {
+        height: 75rem;
+    }
+    .maintable>.listitem>.mainitem>.info {
+        font-size: 18rem;
+    }
+    .maintable>.listitem>.mainitem>.price {
+        font-size: 18rem;
+    }
+    .maintable>.listitem>.mainitem>.count>.counttextbox {
+        width: 100rem;
+        height: 30rem;
+        font-size: 18rem;
+    }
+    .maintable>.listitem>.mainitem>.totleprice {
+        font-size: 25rem;
+    }
+    .maintable>.listitem>.mainitem>.command>.cmdbutton {
+        width: 120rem;
+        height: 40rem;
+        font-size: 20rem;
+        line-height: 40rem;
+    }
+    
+    .cutline {
+        margin: 10rem 0; 
+    }
+}
