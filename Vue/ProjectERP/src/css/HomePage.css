@@ -12,22 +12,75 @@
     gap: 20px 20px;
 }
 .rowpaper {
+    position: relative;
     width: 660px;
     height: 480px;
     overflow: hidden;
     border-radius: 25px;
 }
+
+.rowpaper>.overshell {
+    position: absolute;
+    width: 660px;
+    height: 480px;
+    font-size: 14px;
+    display: flex;
+}
+.rowpaper>.leftright {
+    height: 450px;
+    z-index: 10;
+    opacity: 0;
+    transition-duration: 0.5s;
+    justify-content: space-between;
+    align-items: center;
+}
+.rowpaper>.leftright:hover {
+    opacity: 1;
+    transition-duration: 0.5s;
+}
+.rowpaper>.leftright>.goneighbour {
+    width: 50px;
+    height: 100px;
+    background-color: var(--rgbagrey);
+}
+.rowpaper>.leftright>.goneighbour>.icon {
+    width: 50px;
+    height: 100px;
+}
+.rowpaper>.gopage {
+    padding: 10px 20px;
+    justify-content: end;
+    align-items: end;
+    z-index: 5;
+    box-sizing: border-box;
+    gap: 10px;
+}
+.rowpaper>.gopage>.pagesign {
+    width: 25px;
+    height: 25px;
+    background-color: var(--shadowblack);
+    border-radius: 25px;
+    color: var(--colorwhite);
+    line-height: 25px;
+    text-align: center;
+}
+.rowpaper>.gopage>.pagesignselected {
+    background-color: var(--colorred);
+}
+
 .rowpaper>.rowpapercontain {
+    position: absolute;
     width: 3300px;
     height: 480px;
     display: flex;
-    animation: rowpaper 10s ease infinite;
+    transition-duration: 1s;
 }
 .rowpaper>.rowpapercontain>.img {
     width: 660px;
     height: 480px;
     object-fit:cover;
 }
+
 .famous {
     width: 1000px;
     max-height: 560px;
@@ -49,22 +102,22 @@
 /* 动画 */
 @keyframes rowpaper {
     0%,10% {
-        transform: translateX(0px);
+        left:0px;
     }
     20%,30% {
-        transform: translateX(-660px);
+        left:-660px;
     }
     40%,50% {
-        transform: translateX(-1320px);
+        left:-1320px;
     }
     60%,70% {
-        transform: translateX(-1980px);
+        left:-1980px;
     }
     80%,90% {
-        transform: translateX(-2640px);
+        left:-2640px;
     }
     100% {
-        transform: translateX(0px);
+        left:0px;
     }
 }
 
@@ -77,6 +130,32 @@
     .rowpaper {
         width: 660rem;
         height: 480rem;
+    }
+    
+    .rowpaper>.overshell {
+        width: 660rem;
+        height: 480rem;
+        font-size: 14rem;
+    }
+    .rowpaper>.leftright {
+        height: 450rem;
+    }
+    .rowpaper>.leftright>.goneighbour {
+        width: 50rem;
+        height: 100rem;
+    }
+    .rowpaper>.leftright>.goneighbour>.icon {
+        width: 50rem;
+        height: 100rem;
+    }
+    .rowpaper>.gopage {
+        padding: 10rem 20rem;
+        gap: 10rem;
+    }
+    .rowpaper>.gopage>.pagesign {
+        width: 25rem;
+        height: 25rem;
+        line-height: 25rem;
     }
     .rowpaper>.rowpapercontain {
         width: 3300rem;

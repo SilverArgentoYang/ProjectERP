@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { ref,inject } from 'vue';
     //请求数据
     const userid = ref(localStorage.getItem('user'));
     const user = ref({
@@ -26,6 +26,12 @@ import { ref } from 'vue';
         });
     }
     _getuserdata();
+    // 状态管理
+    const store = inject('store');
+    function _spc_leftbarselected(selected) {
+        store._spc_leftbarselected(selected);
+    }
+    _spc_leftbarselected(0);
     // 标签切换
     const subtitleselected = ref(0);
     function _getorders(type) {
