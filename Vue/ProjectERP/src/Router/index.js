@@ -6,6 +6,7 @@ import DetialPage from '../components/PC/Routes/DetialPage.vue';
 import PersonalSpace from '../components/PC/Routes/PersonalSpace.vue';
 import OrderManage from '../components/PC/Routes/PersonalSpaceChildren/OrderManage.vue';
 import Cart from '../components/PC/Routes/PersonalSpaceChildren/Cart.vue'
+import Favorite from '../components/PC/Routes/PersonalSpaceChildren/Favorite.vue'
 import NotFound from '../components/NotFound.vue';
 
 const routes = [
@@ -21,6 +22,7 @@ const routes = [
         children:[
             {path:"OrderManage",name:'OrderManage',component:OrderManage,props:true},
             {path:"Cart",name:'Cart',component:Cart,props:true},
+            {path:"Favorite",name:'Favorite',component:Favorite,props:true}
         ]
     },
     {path:"/:path(.*)",component:NotFound}

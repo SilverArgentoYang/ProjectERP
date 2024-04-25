@@ -1,0 +1,36 @@
+
+/* 标题 */
+.titlencommand {
+    display: flex;
+    height: 30px;
+    align-items: center;
+}
+.titlencommand>.title {
+    flex: 1;
+    font-size: 20px;
+    font-weight: bold;
+}
+.titlencommand>.command {
+    width: 80px;
+    height: 30px;
+    margin-left: 20px;
+    background-color: var(--colorred);
+    border-radius: 16px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--colorwhite);
+    text-align: center;
+    line-height: 30px;
+}
+
+/* 主体 */
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+
+.cutline {
+    margin: 10rem 0; 
+}

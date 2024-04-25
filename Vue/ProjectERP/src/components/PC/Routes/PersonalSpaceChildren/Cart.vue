@@ -26,6 +26,7 @@ import {ref,inject} from 'vue';
     function _spc_leftbarselected(selected) {
         store._spc_leftbarselected(selected);
     }
+    //刷新时保持左侧菜单栏选项
     _spc_leftbarselected(1);
     //计算总价
     function _totalprice() {

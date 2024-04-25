@@ -18,6 +18,7 @@ import share from './Icons//Share.vue';
 import favorite2 from './Icons/Favorite2.vue';
 import like from './Icons/Like.vue';
 import reply from './Icons/Reply.vue';
+import close from './Icons/Close.vue'
 
 import nav_bg from './Imgs/bg1024.jpg';
 import nav_logo from './Imgs/LOGO512.png';
@@ -45,6 +46,7 @@ const resources = {
     space,
     setting,
     outlog,
+    close,
 
     nav_bg,
     nav_logo,

@@ -219,7 +219,7 @@ import axios from 'axios';
                 url:'/removefavorite',
                 method:'post',
                 params:{
-                    goodid:good.value.id
+                    goodid:[good.value.id]
                 }
             }).then(res =>{
                 good.value.isfavorite = false;

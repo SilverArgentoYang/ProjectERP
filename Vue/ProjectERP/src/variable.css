@@ -13,6 +13,7 @@
 
     --shadowblack : rgba(0,0,0,0.5);
     --rgbagrey : rgba(153,153,153,0.5);
+    --rgbawhite : rgba(255,255,255,0.5);
 
     --pagemaxwidth : 1680px;
 }

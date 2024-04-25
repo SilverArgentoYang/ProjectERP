@@ -20,7 +20,10 @@ const store = {
         //登录状态
         user_islogin:false,
         //个人空间左侧菜单
-        spc_leftbarselected:0
+        spc_leftbarselected:0,
+        //收藏夹历史记录管理
+        fav_command:false,
+        fav_commandhistory:[],
     }),
 
     //这里控制状态的方法
@@ -68,6 +71,20 @@ const store = {
     //个人空间左侧菜单
     _spc_leftbarselected(selected) {
         this.state.spc_leftbarselected = selected;
+    },
+
+    //收藏夹历史记录管理
+    _fav_command(params) {
+        this.state.fav_command = params;
+    },
+    _fav_commandhistoryadd(id) {
+        this.state.fav_commandhistory.push(id);
+    },
+    _fav_commandhistoryread() {
+        return this.state.fav_commandhistory;
+    },
+    _fav_commandreset() {
+        this.state.fav_commandhistory.length = 0;
     }
 }
 

@@ -30,6 +30,13 @@ import { useRouter } from 'vue-router';
                 });
                 break;
             }
+            // 进入收藏夹页面
+            case 2:{
+                router.push({
+                    name:'Favorite'
+                });
+                break;
+            }
         }
     }
 </script>

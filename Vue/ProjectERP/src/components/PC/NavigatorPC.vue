@@ -148,6 +148,13 @@
             name:'Cart',
         });
     }
+    // 前往收藏夹页面
+    function _gotofavoritepage() {
+        _spc_leftbarselected(2);
+        router.push({
+            name:'Favorite',
+        });
+    }
 </script>
 
 <template>
@@ -226,6 +233,7 @@
                             _popoverpaneltarget('favorites');
                             _popoverpanelshow(true)
                         "
+                        @click="_gotofavoritepage()"
                     ><favorite /></Icons>
                     <Icons class="history icon button"
                         @mouseover="
