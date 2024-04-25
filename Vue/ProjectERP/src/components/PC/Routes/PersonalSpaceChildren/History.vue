@@ -16,30 +16,33 @@ import {ref,inject} from 'vue';
         store._fav_commandreset();
     }
     //刷新时保持左侧菜单栏选项
-    _spc_leftbarselected(2);
+    _spc_leftbarselected(4);
     //components
     import Gooditem from '../../GoodsItemsmall.vue';
     //导入商品
-    const favorites = ref([{
-        id:'',
-        img:"",
-        realprice:"",
-        fakeprice:"",
-        name:""
-    }]);
-    function _getfavorites() {
+    const history = ref({
+        time:[''],
+        goods:[[{
+            id:'',
+            img:"",
+            realprice:"",
+            fakeprice:"",
+            name:""
+        }]]
+    });
+    function _gethistory() {
         axios({
-            url:'/favorite',
+            url:'/history',
             method:'get',
             params:{
                 userid:localStorage.getItem('user')
             }
         }).then(res=>{
-            favorites.value = res.data.favorites.slice();
+            history.value.time = res.data.history.time.slice();
+            history.value.goods = res.data.history.goods.slice();
         });
     }
-    _getfavorites();
-
+    _gethistory();
     //管理按钮
     const commanding = ref(false);
     function _command() {
@@ -56,7 +59,7 @@ import {ref,inject} from 'vue';
             var commandhistory = [];
             commandhistory = _fav_commandhistoryread();
             axios({
-                url:'/removefavorite',
+                url:'/removehistory',
                 method:'post',
                 params:{
                     userid:localStorage.getItem('user'),
@@ -79,13 +82,19 @@ import {ref,inject} from 'vue';
             <div class="command button" @click="_command()" v-show="!commanding">管理</div>
             <div class="command button" @click="_commanddone()" v-show="commanding">完成</div>
         </div>
-        <div class="cutline"></div>
-        <div class="main">
-            <Gooditem v-for="item in favorites" :good="item"></Gooditem>
+        <div class="timegroup" v-for="item,index in history.time">
+            <div class="cutlinegroup">
+                <div class="cutline"></div>
+                <div class="timetitle">{{ item }}</div>
+                <div class="cutline"></div>
+            </div>
+            <div class="goods">
+                <Gooditem v-for="item in history.goods[index]" :good="item"></Gooditem>
+            </div>
         </div>
     </div>
 </template>
     
 <style scoped>
-    @import url(../../../../css/Favorite.css);
+    @import url(../../../../css/History.css);
 </style>

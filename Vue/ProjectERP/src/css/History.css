@@ -24,15 +24,27 @@
 }
 
 /* 主体 */
-.main {
+.timegroup>.cutlinegroup {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 30px;
+    margin: 10px 0;
+}
+.timegroup>.cutlinegroup>.cutline {
+    flex: 1;
+}
+.timegroup>.cutlinegroup>.timetitle {
+    width: 150px;
+    font-size: 20px;
+    height: 100%;
+    text-align: center;
+    line-height: 30px;
+}
+.timegroup>.goods {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-}
-
-
-.cutline {
-    margin: 10px 0; 
 }
 
 
@@ -53,12 +65,17 @@
     }
     
     /* 主体 */
-    .main {
+    .timegroup>.cutlinegroup {
         gap: 20rem;
+        height: 30rem;
+        margin: 10rem 0;
     }
-    
-    
-    .cutline {
-        margin: 10rem 0; 
+    .timegroup>.cutlinegroup>.timetitle {
+        width: 150rem;
+        font-size: 20rem;
+        line-height: 30rem;
+    }
+    .timegroup>.goods {
+        gap: 20rem;
     }
 }

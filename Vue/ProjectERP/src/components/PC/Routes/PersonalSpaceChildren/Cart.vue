@@ -67,7 +67,7 @@ import {ref,inject} from 'vue';
     //删除商品
     function _deleteitem(index) {
         axios({
-            url:'/postCartDelete',
+            url:'/removecart',
             method:'post',
             params:{
                 userid:localStorage.getItem('user'),

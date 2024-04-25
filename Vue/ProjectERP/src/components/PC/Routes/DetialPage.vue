@@ -24,7 +24,18 @@ import axios from 'axios';
             default:""
         },
     });
-
+    //添加历史记录
+    function _addhistory() {
+        axios({
+            url:'addhistory',
+            method:'post',
+            params:{
+                userid:localStorage.getItem('user'),
+                goodid:props.goodid
+            }
+        })
+    }
+    _addhistory();
     //读取商品信息
     const good = ref({
         id:'',
@@ -81,7 +92,7 @@ import axios from 'axios';
             url:'/user',
             method:'get',
             params:{
-                userid:user.value.userid
+                userid:localStorage.getItem('user')
             }
         }).then(res=> {
             user.value.address = res.data.user.address.slice();
@@ -112,6 +123,7 @@ import axios from 'axios';
         url:'/comments',
         method:'get',
         params:{
+            userid:localStorage.getItem('user'),
             goodid:props.goodid,
             type:commentstype.value,
             sort:commentsort.value
@@ -207,6 +219,7 @@ import axios from 'axios';
                 url:'/addfavorite',
                 method:'post',
                 params:{
+                    userid:localStorage.getItem('user'),
                     goodid:good.value.id
                 }
             }).then(res =>{
@@ -219,6 +232,7 @@ import axios from 'axios';
                 url:'/removefavorite',
                 method:'post',
                 params:{
+                    userid:localStorage.getItem('user'),
                     goodid:[good.value.id]
                 }
             }).then(res =>{
@@ -241,13 +255,14 @@ import axios from 'axios';
         )
     }
 
-    //购物车
+    //添加购物车
     function _addcart() {
         if(!good.value.iscart) {
             axios({
                 url:'/addcart',
                 method:'post',
                 params:{
+                    userid:localStorage.getItem('user'),
                     goodid:good.value.id
                 }
             }).then(res =>{
@@ -333,6 +348,7 @@ import axios from 'axios';
                 url:'/likecomment',
                 method:'post',
                 params:{
+                    userid:localStorage.getItem('user'),
                     commentid:commentid
                 }
             }).then(res=>{
@@ -343,6 +359,7 @@ import axios from 'axios';
                 url:'/dislikecomment',
                 method:'post',
                 params:{
+                    userid:localStorage.getItem('user'),
                     commentid:commentid
                 }
             }).then(res=>{
@@ -368,6 +385,7 @@ import axios from 'axios';
                 url:'/replycomment',
                 method:'post',
                 params:{
+                    userid:localStorage.getItem('user'),
                     commentid:commentid
                 }
             }).then(res=>{

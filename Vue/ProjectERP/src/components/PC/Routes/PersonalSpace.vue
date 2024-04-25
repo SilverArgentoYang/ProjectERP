@@ -37,6 +37,13 @@ import { useRouter } from 'vue-router';
                 });
                 break;
             }
+            // 进入历史记录页面
+            case 4:{
+                router.push({
+                    name:'History'
+                });
+                break;
+            }
         }
     }
 </script>

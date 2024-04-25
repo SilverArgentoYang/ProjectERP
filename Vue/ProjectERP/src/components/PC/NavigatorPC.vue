@@ -155,6 +155,13 @@
             name:'Favorite',
         });
     }
+    // 前往历史记录页面
+    function _gotohistorypage() {
+        _spc_leftbarselected(4);
+        router.push({
+            name:'History',
+        });
+    }
 </script>
 
 <template>
@@ -241,6 +248,7 @@
                             _popoverpaneltarget('history');
                             _popoverpanelshow(true)
                         "
+                        @click="_gotohistorypage()"
                     ><history /></Icons>
                     <Icons class="massages icon button" @mouseover="_popoverpanelshow(false)"><message /></Icons>
                     <Icons class="nav_service icon button" @mouseover="_popoverpanelshow(false)"><service /></Icons>
