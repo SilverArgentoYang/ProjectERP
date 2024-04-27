@@ -100,5 +100,5 @@ import { useRouter } from 'vue-router';
 </template>
     
 <style scoped>
-    @import url(../../../css/PersonalSpace.css);
+    @import url(../../css/PersonalSpace.css);
 </style>

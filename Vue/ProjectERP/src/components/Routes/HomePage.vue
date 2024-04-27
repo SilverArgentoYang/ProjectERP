@@ -25,10 +25,10 @@
         }
     ]);
     axios({
-        url:'/goods',
+        url:'/getGoodsSuggest',
         method:'get',
         params:{
-            type:'rowpapergoods'
+            number:5
         }
     }).then((res)=>{
         rowpapergoods.value = res.data.goods.slice();
@@ -45,10 +45,10 @@
         }
     ]);
     axios({
-        url:'/goods',
+        url:'/getGoodsSuggest',
         method:'get',
         params:{
-            type:'suggestsixgoods'
+            number:6
         }
     }).then((res)=>{
         suggestgoods.value = res.data.goods.slice();
@@ -65,11 +65,8 @@
         }
     ]);
     axios({
-        url:'/goods',
-        method:'get',
-        params:{
-            type:'goods'
-        }
+        url:'/getGoodsMain',
+        method:'get'
     }).then(res => {
         goods.value = res.data.goods.slice();
     });
@@ -164,5 +161,5 @@
 </template>
 
 <style scoped>
-    @import url(../../../css/HomePage.css);
+    @import url(../../css/HomePage.css);
 </style>

@@ -55,7 +55,7 @@ import axios from 'axios';
         detialimg:[""]
     });
     axios({
-        url:'/good',
+        url:'/getGoodDetial',
         method:'get',
         params:{
             goodid:props.goodid
@@ -89,7 +89,7 @@ import axios from 'axios';
         user.value.address[0] = '请登录';
     }else{
         axios({
-            url:'/user',
+            url:'/getUserMain',
             method:'get',
             params:{
                 userid:localStorage.getItem('user')
@@ -120,7 +120,7 @@ import axios from 'axios';
         }
     ]);
     axios({
-        url:'/comments',
+        url:'/getGoodComments',
         method:'get',
         params:{
             userid:localStorage.getItem('user'),
@@ -145,10 +145,10 @@ import axios from 'axios';
         }
     ]);
     axios({
-        url:'/goods',
+        url:'/getGoodsSuggest',
         method:'get',
         params:{
-            type:'suggesttengoods'
+            number:10
         }
     }).then((res)=>{
         suggestgoods.value = res.data.goods.slice();
@@ -571,5 +571,5 @@ import axios from 'axios';
 </template>
 
 <style scoped>
-    @import url(../../../css/DetialPage.css);
+    @import url(../../css/DetialPage.css);
 </style>

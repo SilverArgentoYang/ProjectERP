@@ -29,11 +29,12 @@
     //读取标签
     const tags = ref([
         {
+            choosing:false,
             name:'Undefined'
         }
     ]);
     axios({
-        url:'/tags',
+        url:'/getTagsGoods',
         method:'get',
         params:{
             comp:props.title
@@ -63,7 +64,7 @@
         }
     }
     axios({
-        url:'/goods',
+        url:'/getGoodsMain',
         method:'get',
         params:data.value
     }).then(res => {
@@ -75,42 +76,40 @@
     const page = ref(1);
     //下一页上一页
     function _pageup() {
-        if(this.page < this.pagetotal) {
-            this.page += 1;
+        if(page.value < pagetotal.value) {
+            page.value += 1;
         }
     }
     function _pagedown() {
-        if(this.page > 1) {
-            this.page -= 1;
+        if(page.value > 1) {
+            page.value -= 1;
         }
     }
     //标签
-    function _tagselect(tagname,index) {
-        if(this.tagchoose != index){
-            axios({
-                url:'/goods',
-                method:'get',
-                params:{
-                    search:this.data.search,
-                    label:this.data.label,
-                    tag:tagname,
-                }
-            }).then(res=> {
-                this.goods = res.data.goods.slice();
-            });
-            this.tagchoose = index;
+    function _tagselect(index) {
+        if(!tags.value[index].choosing){
+            tags.value[index].choosing = true;
         }else{
-            axios({
-                url:'/goods',
-                method:'get',
-                params:this.data
-            }).then(res=> {
-                this.goods = res.data.goods.slice();
-            });
-            this.tagchoose = null;
+            tags.value[index].choosing = false;
         }
+        var tagchoose = [];
+        tags.value.forEach(item => {
+            if(item.choosing) {
+                tagchoose.push(item.name);
+            }
+        });
+        axios({
+            url:'/getGoodsMain',
+            method:'get',
+            params:{
+                search:data.value.search,
+                label:data.value.label,
+                tags:tagchoose
+            }
+        }).then(res=> {
+            goods.value = res.data.goods.slice();
+        });
     }
-    const tagchoose = ref();
 
     // 二次检索
     const sort = ref(-1);
@@ -119,7 +118,7 @@
     function _sort(sort,pricelow,pricehigh){
         this.sort = sort;
         axios({
-            url:'/goods',
+            url:'/getGoodsMain',
             method:'get',
             params:{
                 search:this.data.search,
@@ -145,8 +144,8 @@
             <div class="tags">
                 <div 
                     v-for="item,index in tags" 
-                    :class="{'tag':true,'button':true,'choosing':tagchoose==index}" 
-                    @click="_tagselect(item.name,index)"
+                    :class="{'tag':true,'button':true,'choosing':item.choosing}" 
+                    @click="_tagselect(index)"
                 >{{item.name}}</div>
             </div>
 
@@ -186,8 +185,8 @@
                 <div class="right">
                     {{page}}/{{pagetotal = parseInt(goods.length / 15)+1}}
                     <Icons :class="'leftandright button'+(page==1?'':' enable')"
-                        @click="_pagedown()
-                    "><left_arrow /></Icons>
+                        @click="_pagedown()"
+                    ><left_arrow /></Icons>
                     <Icons :class="'leftandright button'+(page==pagetotal?'':' enable')"
                         @click="_pageup()
                     "><right_arrow /></Icons>
@@ -205,5 +204,5 @@
 </template>
 
 <style scoped>
-    @import url(../../../css/KindPage.css);
+    @import url(../../css/KindPage.css);
 </style>

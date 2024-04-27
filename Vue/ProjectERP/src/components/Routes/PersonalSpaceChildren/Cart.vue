@@ -11,7 +11,7 @@ import {ref,inject} from 'vue';
     }]);
     function _getCart() {
         axios({
-            url:'/getUserCart',
+            url:'/getCart',
             method:'get',
             params:{
                 userid:localStorage.getItem('user')
@@ -128,5 +128,5 @@ import {ref,inject} from 'vue';
 </template>
     
 <style scoped>
-    @import url(../../../../css/Cart.css);
+    @import url(../../../css/Cart.css);
 </style>

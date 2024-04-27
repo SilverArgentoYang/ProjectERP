@@ -1,10 +1,10 @@
 <script setup>
     // components
-    import NavigatorPC from './NavigatorPC.vue';
+    import Navigator from './Navigator.vue';
 
 </script>
 <template>
-    <NavigatorPC></NavigatorPC>
+    <Navigator></Navigator>
     <div class="blank"></div>
     <RouterView></RouterView>
 </template>

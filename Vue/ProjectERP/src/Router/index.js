@@ -1,13 +1,13 @@
 import {createRouter,createWebHashHistory} from 'vue-router';
 
-import HomePage from '../components/PC/Routes/HomePage.vue';
-import KindPage from '../components/PC/Routes/KindPage.vue';
-import DetialPage from '../components/PC/Routes/DetialPage.vue';
-import PersonalSpace from '../components/PC/Routes/PersonalSpace.vue';
-import OrderManage from '../components/PC/Routes/PersonalSpaceChildren/OrderManage.vue';
-import Cart from '../components/PC/Routes/PersonalSpaceChildren/Cart.vue';
-import Favorite from '../components/PC/Routes/PersonalSpaceChildren/Favorite.vue';
-import History from '../components/PC/Routes/PersonalSpaceChildren/History.vue';
+import HomePage from '../components/Routes/HomePage.vue';
+import KindPage from '../components/Routes/KindPage.vue';
+import DetialPage from '../components/Routes/DetialPage.vue';
+import PersonalSpace from '../components/Routes/PersonalSpace.vue';
+import OrderManage from '../components/Routes/PersonalSpaceChildren/OrderManage.vue';
+import Cart from '../components/Routes/PersonalSpaceChildren/Cart.vue';
+import Favorite from '../components/Routes/PersonalSpaceChildren/Favorite.vue';
+import History from '../components/Routes/PersonalSpaceChildren/History.vue';
 import NotFound from '../components/NotFound.vue';
 
 const routes = [

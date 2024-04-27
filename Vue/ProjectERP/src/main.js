@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './Router'
 //axios
 import axios from 'axios'
+import qs from 'qs'
 axios.defaults.baseURL= 'http://127.0.0.1:4523/m1/4156595-0-default';
 //全局组件引入
 import Icons from './Resource/Icons.vue';
@@ -15,6 +16,11 @@ document.documentElement.style.fontSize = (cliwidth / 1680) + 'px';
 window.onresize = function() {
     const cliwidth = document.documentElement.clientWidth;
     document.documentElement.style.fontSize = (cliwidth / 1680) + 'px';
+}
+
+//axois全局配置
+axios.defaults.paramsSerializer = function(params) {
+    return qs.stringify(params, {indices: false})
 }
 
 

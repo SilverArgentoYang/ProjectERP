@@ -3,7 +3,7 @@
   import {ref, onMounted, inject, provide} from 'vue'
 
   // components
-  import MainPagePC from "./components/PC/MainPagePC.vue";
+  import MainPage from "./components/MainPage.vue";
 
   // 自定义声明
   import Resource from './Resource';
@@ -15,5 +15,5 @@
 </script>
 
 <template>
-  <MainPagePC></MainPagePC>
+  <MainPage></MainPage>
 </template>

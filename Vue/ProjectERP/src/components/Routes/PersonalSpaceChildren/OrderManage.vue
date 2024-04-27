@@ -117,5 +117,5 @@ import { ref,inject } from 'vue';
 </template>
     
 <style scoped>
-    @import url(../../../../css/OrderManagePC.css);
+    @import url(../../../css/OrderManage.css);
 </style>

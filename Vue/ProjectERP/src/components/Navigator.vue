@@ -77,30 +77,8 @@
         user_name:'',
         vip_level:'',
         vip_count:'',
-        cartlist:[{
-            id:0,
-            img:'',
-            fakeprice:'Undefined',
-            realprice:'Undefined',
-            name:'Undefined'
-        }],
-        favoritelist:[{
-            id:0,
-            img:'',
-            fakeprice:'Undefined',
-            realprice:'Undefined',
-            name:'Undefined'
-        }],
-        historylist:[{
-            id:0,
-            img:'',
-            fakeprice:'Undefined',
-            realprice:'Undefined',
-            name:'Undefined'
-        }]
     });
     const panellist = ref([]);
-    panellist.value = loguser.value.cartlist.slice();
     //初始化登录状态
     function _setlogstate() {
         if(localStorage.getItem('user') == null || localStorage.getItem('user') == 'null'){
@@ -109,7 +87,7 @@
         }else{
             // 登录状态
             axios({
-                url:'/user',
+                url:'/getUserMain',
                 method:'get',
                 params:{
                     userid:localStorage.getItem('user')
@@ -120,9 +98,6 @@
                 loguser.value.user_name = res.data.user.user_name;
                 loguser.value.vip_level = res.data.user.vip_level;
                 loguser.value.vip_count = res.data.user.vip_count;
-                loguser.value.cartlist = res.data.user.cartlist.slice();
-                loguser.value.favoritelist = res.data.user.favoritelist.slice();
-                loguser.value.historylist = res.data.user.historylist.slice();
             });
             store._setloginstate();
         }
@@ -133,7 +108,7 @@
     const nav_labels = ref([]);
     function _setlabels(){
         axios({
-            url:'/navlabels',
+            url:'/getLabelsNav',
             method:'get'
         }).then(res => {
             nav_labels.value = res.data.nav_labels;
@@ -162,6 +137,53 @@
             name:'History',
         });
     }
+
+    //请求购物车信息
+    const cartlist = ref([]);
+    function _getcart() {
+        axios({
+            url:'/getCart',
+            method:'get',
+            params:{
+                userid:localStorage.getItem('user')
+            }
+        }).then(res=>{
+            cartlist.value = res.data.cart.slice();
+        })
+    }
+    //请求收藏夹信息
+    const favoritelist = ref([]);
+    function _getfavorite() {
+        axios({
+            url:'/getFavorite',
+            method:'get',
+            params:{
+                userid:localStorage.getItem('user')
+            }
+        }).then(res=>{
+            favoritelist.value = res.data.favorites.slice();
+        })
+    }
+    //请求历史记录信息
+    const historylist = ref([]);
+    function _gethistory() {
+        axios({
+            url:'/getHistory',
+            method:'get',
+            params:{
+                userid:localStorage.getItem('user')
+            }
+        }).then(res=>{
+            res.data.history.goods.forEach(item => {
+                item.forEach(item => {
+                    historylist.value.push(item);
+                });
+            });
+        })
+    }
+    _getcart();
+    _getfavorite();
+    _gethistory();
 </script>
 
 <template>
@@ -228,7 +250,7 @@
 
                     <Icons class="cart icon button"
                         @mouseover="
-                            panellist = loguser.cartlist.slice();
+                            panellist=cartlist.slice();
                             _popoverpaneltarget('cart');
                             _popoverpanelshow(true)
                         "
@@ -236,7 +258,7 @@
                     ><cart /></Icons> 
                     <Icons class="favorites icon button"
                         @mouseover="
-                            panellist=loguser.favoritelist.slice();
+                            panellist=favoritelist.slice();
                             _popoverpaneltarget('favorites');
                             _popoverpanelshow(true)
                         "
@@ -244,7 +266,7 @@
                     ><favorite /></Icons>
                     <Icons class="history icon button"
                         @mouseover="
-                            panellist=loguser.historylist.slice();
+                            panellist=historylist.slice();
                             _popoverpaneltarget('history');
                             _popoverpanelshow(true)
                         "
@@ -258,5 +280,5 @@
     </div>
 </template>
 <style scoped>
-    @import url(../../css/NavigatorPC.css);
+    @import url(../css/Navigator.css);
 </style>
