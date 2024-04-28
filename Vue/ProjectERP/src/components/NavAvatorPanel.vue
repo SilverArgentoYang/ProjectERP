@@ -38,6 +38,13 @@ import { useRouter } from 'vue-router';
             name:'OrderManage',
         });
     }
+    //跳转设置界面
+    function _gotosettingpage() {
+        _spc_leftbarselected(5);
+        router.push({
+            name:'Setting',
+        });
+    }
 </script>
 
 <template>
@@ -57,7 +64,7 @@ import { useRouter } from 'vue-router';
             <div class="text">个人中心</div>
             <Icons class="arrow"><right_arrow /></Icons>
         </div>
-        <div class="options button">
+        <div class="options button" @click="_gotosettingpage()">
             <Icons class="icon"><setting /></Icons>
             <div class="text">系统设置</div>
             <Icons class="arrow"><right_arrow /></Icons>

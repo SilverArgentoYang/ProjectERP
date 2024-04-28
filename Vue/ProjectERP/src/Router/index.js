@@ -9,6 +9,8 @@ import Cart from '../components/Routes/PersonalSpaceChildren/Cart.vue';
 import Favorite from '../components/Routes/PersonalSpaceChildren/Favorite.vue';
 import History from '../components/Routes/PersonalSpaceChildren/History.vue';
 import NotFound from '../components/NotFound.vue';
+import Message from '../components/Routes/PersonalSpaceChildren/Message.vue';
+import Setting from '../components/Routes/PersonalSpaceChildren/Setting.vue';
 
 const routes = [
     {path:"/Home",name:'Home', redirect:"/"},
@@ -24,7 +26,9 @@ const routes = [
             {path:"OrderManage",name:'OrderManage',component:OrderManage,props:true},
             {path:"Cart",name:'Cart',component:Cart,props:true},
             {path:"Favorite",name:'Favorite',component:Favorite,props:true},
+            {path:"Message",name:'Message',component:Message,props:true},
             {path:"History",name:'History',component:History,props:true},
+            {path:"Setting",name:'Setting',component:Setting,props:true},
         ]
     },
     {path:"/:path(.*)",component:NotFound}

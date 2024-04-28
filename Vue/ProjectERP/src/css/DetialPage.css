@@ -366,10 +366,13 @@
     margin-left: 70px;
     display: flex;
 }
-.comment>.item>.replying>input {
-    height: 30px;
+.comment>.item>.replying>.replayinput {
+    height: 60px;
+    font-size: 15px;
+    line-height: 30px;
     flex: 1;
     box-sizing: border-box;
+    resize: none;
 }
 .comment>.item>.replying>.submitereply {
     width: 70px;
@@ -645,8 +648,10 @@
         margin: 10rem 0;
         margin-left: 70rem;
     }
-    .comment>.item>.replying>input {
-        height: 30rem;
+    .comment>.item>.replying>.replayinput {
+        height: 60rem;
+        font-size: 15rem;
+        line-height: 30rem;
     }
     .comment>.item>.replying>.submitereply {
         width: 70rem;

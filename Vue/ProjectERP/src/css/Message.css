@@ -1,0 +1,41 @@
+
+/* 标题 */
+.title {
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 30px;
+    margin: 20px 0;
+}
+/* 副标题 */
+.tablehead {
+    width: 100%;
+    height: 43px;
+}
+.tablehead>.filter {
+    height: 40px;
+    display: flex;
+    gap: 1px;
+    align-items: end;
+}
+.tablehead>.filter>.subtitle {
+    width: 110px;
+    height: 35px;
+    background-color: var(--colorddred);
+    color: var(--colorwhite);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 35px;
+    text-align: center;
+}
+.tablehead>.filter>.selected {
+    height: 40px;
+    background-color: var(--colorred);
+    font-size: 20px;
+    line-height: 40px;
+}
+.tablehead>.underline {
+    width: 100%;
+    height: 3px;
+    background-color: var(--colorred);
+}

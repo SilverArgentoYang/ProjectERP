@@ -554,7 +554,8 @@ import axios from 'axios';
                     </div>
                 </div>
                 <div class="replying" v-show="isreplying == index">
-                    <input type="text" v-model="replytext">
+                    <!-- <input class="replayinput" type="text" v-model="replytext"> -->
+                    <textarea class="replayinput" v-model="replytext"></textarea>
                     <div class="submitereply button" @click="_replysent(item.commentid)">发 表</div>
                 </div>
             </div>

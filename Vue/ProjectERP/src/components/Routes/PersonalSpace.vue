@@ -37,10 +37,24 @@ import { useRouter } from 'vue-router';
                 });
                 break;
             }
+            // 进入消息页面
+            case 3:{
+                router.push({
+                    name:'Message'
+                });
+                break;
+            }
             // 进入历史记录页面
             case 4:{
                 router.push({
                     name:'History'
+                });
+                break;
+            }
+            // 进入历史记录页面
+            case 5:{
+                router.push({
+                    name:'Setting'
                 });
                 break;
             }

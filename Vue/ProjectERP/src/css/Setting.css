@@ -1,0 +1,337 @@
+
+/* 标题 */
+.title,.subtitle {
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 30px;
+}
+.button {
+    height: 30px;
+    border-radius: 5px;
+    background-color: var(--colorred);
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    color: var(--colorwhite);
+}
+.submit,.default,.changeaccount,.deleteaccount {
+    width: 90px;
+}
+.addaddress {
+    width: 95px;
+}
+.change,.delete {
+    width: 60px;
+}
+
+/* 个人信息 */
+.userinfo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.userinfo>.cell {
+    width: 450px;
+    display: flex;
+    gap:5px;
+}
+.userinfo>.cell>.text {
+    width: 80px;
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+}
+.userinfo>.avator>.img {
+    width: 60px;
+    height: 60px;
+}
+.userinfo>.username>.nameinput {
+    height: 30px;
+    padding: 0 5px;
+    font-size: 15px;
+    line-height: 30px;
+    flex: 1;
+}
+.userinfo>.aboutme>.aboutmeinput {
+    height: 105px;
+    padding: 5px;
+    font-size: 15px;
+    line-height: 20px;
+    flex: 1;
+    resize: none;
+}
+.userinfo>.sex {
+    align-items: center;
+}
+.userinfo>.sex>.sexlabel {
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+    margin-right: 15px;
+}
+.userinfo>.sex>.sexinput {
+    width: 15px;
+    height: 15px;
+}
+.userinfo>.date>.datelabel {
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+}
+.userinfo>.date>.dateinput {
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+}
+.userinfo>.date>.year {
+    width: 90px;
+}
+.userinfo>.date>.month,.userinfo>.date>.day {
+    width: 60px;
+}
+
+/* 收货地址 */
+.address{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.address>.subtitlenadd {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.address>.addresstable>.tablehead {
+    font-size: 18px !important;
+    color: var(--colorwhite);
+}
+.address>.addresstable>.tablehead>.tablecell {
+    background-color: var(--colorred);
+}
+.address>.addresstable>.tableline {
+    display: flex;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+}
+.address>.addresstable>.tableline>.tablecell {
+    height: 100%;
+    border: 1px solid var(--colorldgrey);
+}
+.address>.addresstable>.tableline>.name {
+    width: 210px;
+}
+.address>.addresstable>.tableline>.detial {
+    width: 510px;
+}
+.address>.addresstable>.tableline>.phone {
+    width: 210px;
+}
+.address>.addresstable>.tableline>.command {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:7px
+}
+.address>.addresstable>.tableline>.command>.defaulted {
+    height: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid var(--colorblack);
+}
+
+/* 修改密码 */
+.password {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.password>.cell {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+.password>.cell>.text {
+    width: 80px;
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+}
+.password>.cell>.passwordinput {
+    height: 30px;
+    padding: 0 5px;
+    font-size: 15px;
+    line-height: 30px;
+    flex: 1;
+}
+
+/* 帐号管理 */
+.acountmanage {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.acountmanage>.command {
+    display: flex;
+    gap: 15px;
+}
+
+.cutline {
+    margin: 10px 0;
+}
+
+@media only screen and (max-width: 1680px) {
+    /* 标题 */
+    .title,.subtitle {
+        height: 30rem;
+        font-size: 20rem;
+        line-height: 30rem;
+    }
+    .button {
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    .submit,.default,.changeaccount,.deleteaccount {
+        width: 90rem;
+    }
+    .addaddress {
+        width: 95rem;
+    }
+    .change,.delete {
+        width: 60rem;
+    }
+    /* 个人信息 */
+    .userinfo {
+        gap: 15rem;
+    }
+    .userinfo>.cell {
+        width: 450rem;
+        gap:5rem;
+    }
+    .userinfo>.cell>.text {
+        width: 80rem;
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    .userinfo>.avator>.img {
+        width: 60rem;
+        height: 60rem;
+    }
+    .userinfo>.username>.nameinput {
+        height: 30rem;
+        padding: 0 5rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    .userinfo>.aboutme>.aboutmeinput {
+        height: 105rem;
+        padding: 5rem;
+        font-size: 15rem;
+        line-height: 20rem;
+    }
+    .userinfo>.sex>.sexlabel {
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+        margin-right: 15rem;
+    }
+    .userinfo>.sex>.sexinput {
+        width: 15rem;
+        height: 15rem;
+    }
+    .userinfo>.date>.datelabel {
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    .userinfo>.date>.dateinput {
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    .userinfo>.date>.year {
+        width: 90rem;
+    }
+    .userinfo>.date>.month,.userinfo>.date>.day {
+        width: 60rem;
+    }
+    /* 收货地址 */
+    .address{
+        gap: 10rem;
+    }
+    .address>.subtitlenadd {
+        gap: 20rem;
+    }
+    .address>.addresstable>.tablehead {
+        font-size: 18rem !important;
+    }
+    .address>.addresstable>.tableline {
+        height: 40rem;
+        font-size: 14rem;
+        line-height: 40rem;
+    }
+    .address>.addresstable>.tableline>.tablecell {
+        border: 1rem solid var(--colorldgrey);
+    }
+    .address>.addresstable>.tableline>.name {
+        width: 210rem;
+    }
+    .address>.addresstable>.tableline>.detial {
+        width: 510rem;
+    }
+    .address>.addresstable>.tableline>.phone {
+        width: 210rem;
+    }
+    .address>.addresstable>.tableline>.command {
+        gap:7rem
+    }
+    .address>.addresstable>.tableline>.command>.defaulted {
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+        border: 1rem solid var(--colorblack);
+    }
+    /* 修改密码 */
+    .password {
+        width: 450rem;
+        gap: 15rem;
+    }
+    .password>.cell {
+        gap: 5rem;
+    }
+    .password>.cell>.text {
+        width: 80rem;
+        height: 30rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    .password>.cell>.passwordinput {
+        height: 30rem;
+        padding: 0 5rem;
+        font-size: 15rem;
+        line-height: 30rem;
+    }
+    /* 帐号管理 */
+    .acountmanage {
+        width: 450rem;
+        gap: 10rem;
+    }
+    .acountmanage>.command {
+        gap: 15rem;
+    }
+    .cutline {
+        margin: 10rem 0;
+    }
+}

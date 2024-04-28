@@ -137,6 +137,13 @@
             name:'History',
         });
     }
+    // 前往消息页面
+    function _gotomessagepage() {
+        _spc_leftbarselected(3);
+        router.push({
+            name:'Message',
+        });
+    }
 
     //请求购物车信息
     const cartlist = ref([]);
@@ -272,8 +279,13 @@
                         "
                         @click="_gotohistorypage()"
                     ><history /></Icons>
-                    <Icons class="massages icon button" @mouseover="_popoverpanelshow(false)"><message /></Icons>
-                    <Icons class="nav_service icon button" @mouseover="_popoverpanelshow(false)"><service /></Icons>
+                    <Icons class="massages icon button"
+                        @mouseover="_popoverpanelshow(false)"
+                        @click="_gotomessagepage()"
+                    ><message /></Icons>
+                    <Icons class="service icon button"
+                        @mouseover="_popoverpanelshow(false)"
+                    ><service /></Icons>
                 </ul>
             </div>
         </div>
