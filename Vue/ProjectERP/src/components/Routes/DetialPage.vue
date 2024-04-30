@@ -26,14 +26,16 @@ import axios from 'axios';
     });
     //添加历史记录
     function _addhistory() {
-        axios({
-            url:'addhistory',
-            method:'post',
-            params:{
-                userid:localStorage.getItem('user'),
-                goodid:props.goodid
-            }
-        })
+        if(store.state.user_islogin) {
+            axios({
+                url:'addhistory',
+                method:'post',
+                params:{
+                    userid:localStorage.getItem('user'),
+                    goodid:props.goodid
+                }
+            })
+        }
     }
     _addhistory();
     //读取商品信息
@@ -86,7 +88,7 @@ import axios from 'axios';
     });
     user.value.userid = localStorage.getItem('user');
     if(!store.state.user_islogin) {
-        user.value.address[0] = '请登录';
+        user.value.address[0].address = '请登录';
     }else{
         axios({
             url:'/getUserMain',
@@ -167,12 +169,14 @@ import axios from 'axios';
     const addressarrow = shallowRef(new Object);
     addressarrow.value = down_arrow;
     function _addresslarge() {
-        if(!addresslarge.value) {
-            addresslarge.value = true;
-            addressarrow.value = up_arrow;
-        }else{
-            addresslarge.value = false;
-            addressarrow.value = down_arrow;
+        if(store.state.user_islogin) {
+            if(!addresslarge.value) {
+                addresslarge.value = true;
+                addressarrow.value = up_arrow;
+            }else{
+                addresslarge.value = false;
+                addressarrow.value = down_arrow;
+            }
         }
     }
 
@@ -214,32 +218,36 @@ import axios from 'axios';
 
     //收藏
     function _changefavorite() {
-        if(!good.value.isfavorite) {
-            axios({
-                url:'/addfavorite',
-                method:'post',
-                params:{
-                    userid:localStorage.getItem('user'),
-                    goodid:good.value.id
-                }
-            }).then(res =>{
-                good.value.isfavorite = true;
-            }).catch(err=>{
-                console.log(err);
-            });
+        if(store.state.user_islogin) {
+            if(!good.value.isfavorite) {
+                axios({
+                    url:'/addfavorite',
+                    method:'post',
+                    params:{
+                        userid:localStorage.getItem('user'),
+                        goodid:good.value.id
+                    }
+                }).then(res =>{
+                    good.value.isfavorite = true;
+                }).catch(err=>{
+                    console.log(err);
+                });
+            }else{
+                axios({
+                    url:'/removefavorite',
+                    method:'post',
+                    params:{
+                        userid:localStorage.getItem('user'),
+                        goodid:[good.value.id]
+                    }
+                }).then(res =>{
+                    good.value.isfavorite = false;
+                }).catch(err=>{
+                    console.log(err);
+                });
+            }
         }else{
-            axios({
-                url:'/removefavorite',
-                method:'post',
-                params:{
-                    userid:localStorage.getItem('user'),
-                    goodid:[good.value.id]
-                }
-            }).then(res =>{
-                good.value.isfavorite = false;
-            }).catch(err=>{
-                console.log(err);
-            });
+            alert('请登录');
         }
     }
 
@@ -257,21 +265,25 @@ import axios from 'axios';
 
     //添加购物车
     function _addcart() {
-        if(!good.value.iscart) {
-            axios({
-                url:'/addcart',
-                method:'post',
-                params:{
-                    userid:localStorage.getItem('user'),
-                    goodid:good.value.id
-                }
-            }).then(res =>{
-                good.value.iscart = true;
-            }).catch(err=>{
-                console.log(err);
-            });
+        if(!good.value.isfavorite) {
+            if(!good.value.iscart) {
+                axios({
+                    url:'/addcart',
+                    method:'post',
+                    params:{
+                        userid:localStorage.getItem('user'),
+                        goodid:good.value.id
+                    }
+                }).then(res =>{
+                    good.value.iscart = true;
+                }).catch(err=>{
+                    console.log(err);
+                });
+            }else{
+                store._showmessage('已在购物车中');
+            }
         }else{
-            store._showmessage('已在购物车中');
+            alert('请登录');
         }
     }
 
@@ -281,7 +293,7 @@ import axios from 'axios';
             commentstype.value = type;
             commentsort.value = sort;
             axios({
-                url:'/comments',
+                url:'/getGoodComments',
                 method:'get',
                 params:{
                     goodid:props.goodid,
@@ -343,28 +355,32 @@ import axios from 'axios';
 
     //点赞评论
     function _likecomment(commentid,index) {
-        if(!comments.value[index].isliked) {
-            axios({
-                url:'/likecomment',
-                method:'post',
-                params:{
-                    userid:localStorage.getItem('user'),
-                    commentid:commentid
-                }
-            }).then(res=>{
-            });
-            comments.value[index].isliked = true;
+        if(!good.value.isfavorite) {
+            if(!comments.value[index].isliked) {
+                axios({
+                    url:'/likecomment',
+                    method:'post',
+                    params:{
+                        userid:localStorage.getItem('user'),
+                        commentid:commentid
+                    }
+                }).then(res=>{
+                });
+                comments.value[index].isliked = true;
+            }else{
+                axios({
+                    url:'/dislikecomment',
+                    method:'post',
+                    params:{
+                        userid:localStorage.getItem('user'),
+                        commentid:commentid
+                    }
+                }).then(res=>{
+                });
+                comments.value[index].isliked = false;
+            }
         }else{
-            axios({
-                url:'/dislikecomment',
-                method:'post',
-                params:{
-                    userid:localStorage.getItem('user'),
-                    commentid:commentid
-                }
-            }).then(res=>{
-            });
-            comments.value[index].isliked = false;
+            alert('请登录');
         }
     }
 
@@ -372,12 +388,16 @@ import axios from 'axios';
     const isreplying = ref(-1);
     const replytext = ref('')
     function _showreplybox(index) {
-        if(isreplying.value != index) {
-            isreplying.value = index;
-        }else {
-            isreplying.value = -1;
+        if(!good.value.isfavorite) {
+            if(isreplying.value != index) {
+                isreplying.value = index;
+            }else {
+                isreplying.value = -1;
+            }
+            replytext.value = '';
+        }else{
+            alert('请登录');
         }
-        replytext.value = '';
     }
     function _replysent(commentid) {
         if(replytext.value != '') {

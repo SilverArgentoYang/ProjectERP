@@ -65,25 +65,25 @@ const store = {
             setTimeout(function() {
                 document.body.removeChild(messagebox);
             },300);
-        },100);
+        },100);s
     },
 
     //个人空间左侧菜单
-    _spc_leftbarselected(selected) {
+    _spc_leftbarselected :function(selected) {
         this.state.spc_leftbarselected = selected;
     },
 
     //收藏夹历史记录管理
-    _fav_command(params) {
+    _fav_command :function(params) {
         this.state.fav_command = params;
     },
-    _fav_commandhistoryadd(id) {
+    _fav_commandhistoryadd :function(id) {
         this.state.fav_commandhistory.push(id);
     },
-    _fav_commandhistoryread() {
+    _fav_commandhistoryread :function() {
         return this.state.fav_commandhistory;
     },
-    _fav_commandreset() {
+    _fav_commandreset :function() {
         this.state.fav_commandhistory.length = 0;
     }
 }
