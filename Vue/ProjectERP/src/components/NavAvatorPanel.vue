@@ -1,6 +1,7 @@
 <script setup>
     //VUE引用
-    import { inject, ref } from 'vue';
+    import axios from 'axios';
+import { inject, ref } from 'vue';
 import { useRouter } from 'vue-router';
     const router = useRouter();
 
@@ -16,6 +17,9 @@ import { useRouter } from 'vue-router';
     function _spc_leftbarselected(selected) {
         store._spc_leftbarselected(selected);
     }
+    function _nav_avatorpanelshow(isshow) {
+        store._nav_avatorpanelshow(isshow);
+    }
 
     //props导入
     const props = defineProps({
@@ -26,7 +30,8 @@ import { useRouter } from 'vue-router';
                 userid:'',
                 user_name:'Undefine',
                 vip_level:'Undefine',
-                vip_count:'Undefine'
+                vip_count:'Undefine',
+                isroot:false
             }
         }
     });
@@ -43,6 +48,25 @@ import { useRouter } from 'vue-router';
         _spc_leftbarselected(5);
         router.push({
             name:'Setting',
+        });
+    }
+    //跳转后台
+    function _gotobackstage() {
+        if(props.user.isroot) {
+            _nav_avatorpanelshow(false);
+            router.push({
+                name:'BackStage'
+            });
+        }
+    }
+    //退出登录
+    function _userlogout(){
+        _nav_avatorpanelshow(false);
+        localStorage.setItem('user','null');
+        store.user_islogin();
+        store._user_avator('./src/Resource/Imgs/DefaultAvatar512.jpg');
+        router.push({
+            name:'Home'
         });
     }
 </script>
@@ -69,9 +93,14 @@ import { useRouter } from 'vue-router';
             <div class="text">系统设置</div>
             <Icons class="arrow"><right_arrow /></Icons>
         </div>
-        <div class="options button" @click="store._userlogout();">
+        <div class="options button" @click="_userlogout()">
             <Icons class="icon"><outlog /></Icons>
             <div class="text">退出登录</div>
+            <Icons class="arrow"><right_arrow /></Icons>
+        </div>
+        <div class="options button" @click="_gotobackstage();" v-if="user.isroot">
+            <Icons class="icon"><outlog /></Icons>
+            <div class="text">进入后台</div>
             <Icons class="arrow"><right_arrow /></Icons>
         </div>
 

@@ -179,11 +179,12 @@ import { useRouter } from 'vue-router';
         user.value.address[index].isdefault = true;
     }
     //切换帐号
-    function _outlog() {
+    function _userlogout(){
+        localStorage.setItem('user','null');
+        store.user_islogin();
+        store._user_avator('./src/Resource/Imgs/DefaultAvatar512.jpg');
         router.push({
             name:'Home'
-        }).then(()=>{
-            store._userlogout();
         })
     }
     //注销帐号
@@ -196,10 +197,11 @@ import { useRouter } from 'vue-router';
                     useid:localStorage.getItem('user')
                 }
             })
+            localStorage.setItem('user','null');
+            store.user_islogin();
+            store._user_avator('./src/Resource/Imgs/DefaultAvatar512.jpg');
             router.push({
                 name:'Home'
-            }).then(()=>{
-                store._userlogout();
             })
         }
     }
@@ -323,7 +325,7 @@ import { useRouter } from 'vue-router';
         <div class="acountmanage">
             <div class="subtitle">帐号管理</div>
             <div class="command">
-                <div class="changeaccount button" @click="_outlog()">切换帐号</div>
+                <div class="changeaccount button" @click="_userlogout()">切换帐号</div>
                 <div class="deleteaccount button" @click="_deleteacount()">注销帐号</div>
             </div>
         </div>

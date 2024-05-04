@@ -24,6 +24,8 @@ const store = {
         //收藏夹历史记录管理
         fav_command:false,
         fav_commandhistory:[],
+        //头像显示
+        user_avator:'./src/Resource/Imgs/DefaultAvatar512.jpg'
     }),
 
     //这里控制状态的方法
@@ -41,31 +43,22 @@ const store = {
         this.state.nav_popoverpanelshow = isshow;
     },
     //登录
-    _userlogin :function(userid){
-        localStorage.setItem('user',userid);
-        location.reload();
-    },
-    _setloginstate :function(){
-        this.state.user_islogin = true;
-    },
-    //退出登录
-    _userlogout :function(){
-        localStorage.setItem('user','null');
-        location.reload();
+    user_islogin :function(islogin){
+        this.state.user_islogin = islogin;
     },
 
     //弹出浮窗
     _showmessage :function(message) {
         var messagebox = document.createElement('div');
         messagebox.textContent = message;
-        messagebox.style="position:fixed;top:5%;left:50%;padding:5px;background-color:#000000;color:#ffffff;transition:opacity 0.3s ease-in-out;z-index:10;border-radius:5px;opcity:0.8"
+        messagebox.style="position:fixed;top:5%;left:50%;padding:5px;background-color:#000000;font-size:18px;color:#ffffff;transition:opacity 0.3s ease-in-out;z-index:10;border-radius:5px;opcity:0.8"
         document.body.appendChild(messagebox);
         setTimeout(function() {
             messagebox.style.opacity = 0;
             setTimeout(function() {
                 document.body.removeChild(messagebox);
             },300);
-        },100);s
+        },200);
     },
 
     //个人空间左侧菜单
@@ -85,6 +78,11 @@ const store = {
     },
     _fav_commandreset :function() {
         this.state.fav_commandhistory.length = 0;
+    },
+
+    //用户头像
+    _user_avator :function(avtor) {
+        this.state.user_avator = avtor;
     }
 }
 

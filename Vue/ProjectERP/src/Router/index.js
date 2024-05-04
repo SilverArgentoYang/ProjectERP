@@ -1,5 +1,6 @@
 import {createRouter,createWebHashHistory} from 'vue-router';
 
+import MainPage from '../components/MainPage.vue';
 import HomePage from '../components/Routes/HomePage.vue';
 import KindPage from '../components/Routes/KindPage.vue';
 import DetialPage from '../components/Routes/DetialPage.vue';
@@ -12,25 +13,41 @@ import NotFound from '../components/NotFound.vue';
 import Message from '../components/Routes/PersonalSpaceChildren/Message.vue';
 import Setting from '../components/Routes/PersonalSpaceChildren/Setting.vue';
 
+import Backstage from '../components/Backstage/BackstageMain.vue';
+import LoginLogup from '../components/LoginLogup.vue';
+
 const routes = [
-    {path:"/Home",name:'Home', redirect:"/"},
-    {path:"/",component:HomePage},
-    {path:"/SearchNTag/:title/:titletype",name:'SearchNTag',component:KindPage,props:true},
-    {path:"/Detial/:goodid",name:'Detial',component:DetialPage,props:true},
     {
-        path:"/Personal",
-        name:'Personal',
-        component:PersonalSpace,
-        props:true,
+        path:"/ForwardStage",
+        name:'ForwardStage',
+        redirect:"/"
+    },
+    {
+        path:"/",
+        component:MainPage,
         children:[
-            {path:"OrderManage",name:'OrderManage',component:OrderManage,props:true},
-            {path:"Cart",name:'Cart',component:Cart,props:true},
-            {path:"Favorite",name:'Favorite',component:Favorite,props:true},
-            {path:"Message",name:'Message',component:Message,props:true},
-            {path:"History",name:'History',component:History,props:true},
-            {path:"Setting",name:'Setting',component:Setting,props:true},
+            {path:"/Home",name:'Home', redirect:"/"},
+            {path:"/",component:HomePage},
+            {path:"/SearchNTag/:title/:titletype",name:'SearchNTag',component:KindPage,props:true},
+            {path:"/Detial/:goodid",name:'Detial',component:DetialPage,props:true},
+            {
+                path:"/Personal",
+                name:'Personal',
+                component:PersonalSpace,
+                props:true,
+                children:[
+                    {path:"OrderManage",name:'OrderManage',component:OrderManage,props:true},
+                    {path:"Cart",name:'Cart',component:Cart,props:true},
+                    {path:"Favorite",name:'Favorite',component:Favorite,props:true},
+                    {path:"Message",name:'Message',component:Message,props:true},
+                    {path:"History",name:'History',component:History,props:true},
+                    {path:"Setting",name:'Setting',component:Setting,props:true},
+                ]
+            },
         ]
     },
+    {path:"/BackStage",name:'BackStage',component:Backstage},
+    {path:"/LoginLogup",name:'LoginLogup',component:LoginLogup},
     {path:"/:path(.*)",component:NotFound}
 ];
 

@@ -15,5 +15,5 @@
 </script>
 
 <template>
-  <MainPage></MainPage>
+  <RouterView></RouterView>
 </template>

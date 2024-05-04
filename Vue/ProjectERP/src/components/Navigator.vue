@@ -65,44 +65,36 @@
     function _jumptohomepage() {
         router.push({
             name:'Home'
-        }).then(()=>{
-            location.reload();
-        });
+        })
     }
 
-    //登录和注册
-    const loguser = ref({
-        avator:'',
+    //获取用户信息
+    const user = ref({
         userid:'',
         user_name:'',
         vip_level:'',
         vip_count:'',
+        isroot:''
     });
-    const panellist = ref([]);
-    //初始化登录状态
     function _setlogstate() {
-        if(localStorage.getItem('user') == null || localStorage.getItem('user') == 'null'){
-            //未登录
-            loguser.value.avator = defaul_avator;
-        }else{
-            // 登录状态
-            axios({
-                url:'/getUserMain',
-                method:'get',
-                params:{
-                    userid:localStorage.getItem('user')
-                }
-            }).then(res => {
-                loguser.value.userid = res.data.user.userid;
-                loguser.value.avator = res.data.user.avator;
-                loguser.value.user_name = res.data.user.user_name;
-                loguser.value.vip_level = res.data.user.vip_level;
-                loguser.value.vip_count = res.data.user.vip_count;
-            });
-            store._setloginstate();
-        }
+        axios({
+            url:'/getUserMain',
+            method:'get',
+            params:{
+                userid:localStorage.getItem('user')
+            }
+        }).then(res => {
+            user.value.userid = res.data.user.userid;
+            user.value.user_name = res.data.user.user_name;
+            user.value.vip_level = res.data.user.vip_level;
+            user.value.vip_count = res.data.user.vip_count;
+            user.value.isroot = res.data.user.isroot;
+            store._user_avator(res.data.user.avator);
+        });
     }
-    _setlogstate();
+    if(store.state.user_islogin){
+        _setlogstate();
+    }
 
     //读取分类
     const nav_labels = ref([]);
@@ -118,79 +110,110 @@
 
     // 前往购物车页面
     function _gotocartpage() {
-        _spc_leftbarselected(1);
-        router.push({
-            name:'Cart',
-        });
+        if(store.state.user_islogin) {
+            _spc_leftbarselected(1);
+            router.push({
+                name:'Cart',
+            });
+        }else{
+            store._showmessage('请登录');
+        }
     }
     // 前往收藏夹页面
     function _gotofavoritepage() {
-        _spc_leftbarselected(2);
-        router.push({
-            name:'Favorite',
-        });
+        if(store.state.user_islogin) {
+            _spc_leftbarselected(2);
+            router.push({
+                name:'Favorite',
+            });
+        }else{
+            store._showmessage('请登录');
+        }
     }
     // 前往历史记录页面
     function _gotohistorypage() {
-        _spc_leftbarselected(4);
-        router.push({
-            name:'History',
-        });
+        if(store.state.user_islogin) {
+            _spc_leftbarselected(4);
+            router.push({
+                name:'History',
+            });
+        }else{
+            store._showmessage('请登录');
+        }
     }
     // 前往消息页面
     function _gotomessagepage() {
-        _spc_leftbarselected(3);
-        router.push({
-            name:'Message',
-        });
+        if(store.state.user_islogin) {
+            _spc_leftbarselected(3);
+            router.push({
+                name:'Message',
+            });
+        }else{
+            store._showmessage('请登录');
+        }
     }
 
     //请求购物车信息
+    const panellist = ref([]);
     const cartlist = ref([]);
     function _getcart() {
-        axios({
-            url:'/getCart',
-            method:'get',
-            params:{
-                userid:localStorage.getItem('user')
-            }
-        }).then(res=>{
-            cartlist.value = res.data.cart.slice();
-        })
+        if(store.state.user_islogin) {
+            axios({
+                url:'/getCart',
+                method:'get',
+                params:{
+                    userid:localStorage.getItem('user')
+                }
+            }).then(res=>{
+                cartlist.value = res.data.cart.slice();
+            })
+        }
     }
     //请求收藏夹信息
     const favoritelist = ref([]);
     function _getfavorite() {
-        axios({
-            url:'/getFavorite',
-            method:'get',
-            params:{
-                userid:localStorage.getItem('user')
-            }
-        }).then(res=>{
-            favoritelist.value = res.data.favorites.slice();
-        })
+        if(store.state.user_islogin) {
+            axios({
+                url:'/getFavorite',
+                method:'get',
+                params:{
+                    userid:localStorage.getItem('user')
+                }
+            }).then(res=>{
+                favoritelist.value = res.data.favorites.slice();
+            })
+        }
     }
     //请求历史记录信息
     const historylist = ref([]);
     function _gethistory() {
-        axios({
-            url:'/getHistory',
-            method:'get',
-            params:{
-                userid:localStorage.getItem('user')
-            }
-        }).then(res=>{
-            res.data.history.goods.forEach(item => {
-                item.forEach(item => {
-                    historylist.value.push(item);
+        if(store.state.user_islogin) {
+            axios({
+                url:'/getHistory',
+                method:'get',
+                params:{
+                    userid:localStorage.getItem('user')
+                }
+            }).then(res=>{
+                res.data.history.goods.forEach(item => {
+                    item.forEach(item => {
+                        historylist.value.push(item);
+                    });
                 });
-            });
-        })
+            })
+        }
     }
     _getcart();
     _getfavorite();
     _gethistory();
+    //登录
+    function _userlogin() {
+        if(!store.state.user_islogin) {
+            router.push({
+                name:'LoginLogup',
+            });
+        }
+    }
 </script>
 
 <template>
@@ -236,13 +259,13 @@
                                 'button':true,
                                 'islogin':store.state.user_islogin
                             }"
-                            :src="loguser.avator"
-                            @click="loguser=store._userlogin('001')"
+                            :src="store.state.user_avator"
+                            @click="_userlogin()"
                         >
                         <div><NavAvatorPanel
                             class="avatorpanel"
                             :hidden="!store.state.nav_avatorpanelshow"
-                            :user="loguser"
+                            :user="user"
                         /></div>
                 </div>
 
