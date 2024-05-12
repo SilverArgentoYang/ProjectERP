@@ -1,0 +1,108 @@
+
+.navigatorbody {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0 0 10px var(--shadowblack);
+}
+
+/* 搜索框 */
+.searchbox {
+    width: 440px;
+    height: 35px;
+    display: flex;
+    border: 1px solid var(--colorldgrey);
+    border-radius: 7px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+.searchbox>.input {
+    flex: 1;
+    height: 100%;
+    border: none;
+    font-size: 16px;
+}
+.searchbox>.input:focus {
+    outline: none;
+}
+.searchbox>.icon {
+    width: 30px;
+    height: 100%;
+    fill: var(--colorgrey);
+}
+
+/* 左侧 */
+.navigate {
+    flex: 1;
+    height: 100%;
+    padding: 0 15px;
+    display: flex;
+}
+.navigate>.navnode {
+    height: 100%;
+    display: flex;
+    gap:5px;
+    align-items: center;
+    font-size: 16px;
+    color: var(--colordgrey);
+}
+.navigate>.navnode>.icon {
+    width: 25px;
+    height: 25px;
+    fill: var(--colorgrey);
+}
+
+/* 右侧 */
+.right {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    margin-right: 50px;
+}
+.right>.userinfo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.right>.userinfo>.img {
+    width: 30px;
+    height: 30px;
+    object-fit:cover;
+    border-radius: 15px;    
+}
+.right>.userinfo>.username {
+    font-size: 16px;
+    color: var(--colordgrey);
+}
+.right>.userinfo>.icon {
+    width: 25px;
+    height: 25px;
+    fill: var(--colorgrey);
+}
+
+/* 活动组件 */
+.userpanel {
+    width: 110px;
+    background-color: var(--colorwhite);
+    position: absolute;
+    top: 100%;
+    box-shadow: 0 0 10px var(--shadowblack);
+    border-radius: 15px 0 15px 15px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+.userpanel>.panelitem {
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    color: var(--colordgrey);
+    text-align: center;
+    line-height: 25px;
+}
+.userpanel>.cutline {
+    margin: 5px 0;
+}

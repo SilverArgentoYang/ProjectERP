@@ -44,6 +44,7 @@ const routes = [
                     {path:"Setting",name:'Setting',component:Setting,props:true},
                 ]
             },
+            {path:"/:path(.*)",component:NotFound}
         ]
     },
     {path:"/BackStage",name:'BackStage',component:Backstage},

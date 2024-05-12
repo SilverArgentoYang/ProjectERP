@@ -51,7 +51,7 @@ const store = {
     _showmessage :function(message) {
         var messagebox = document.createElement('div');
         messagebox.textContent = message;
-        messagebox.style="position:fixed;top:5%;left:50%;padding:5px;background-color:#000000;font-size:18px;color:#ffffff;transition:opacity 0.3s ease-in-out;z-index:10;border-radius:5px;opcity:0.8"
+        messagebox.style="position:fixed;top:50%;left:50%;padding:5px;background-color:#000000;font-size:18px;color:#ffffff;transition:opacity 0.3s ease-in-out;z-index:10;border-radius:5px;opcity:0.8"
         document.body.appendChild(messagebox);
         setTimeout(function() {
             messagebox.style.opacity = 0;
