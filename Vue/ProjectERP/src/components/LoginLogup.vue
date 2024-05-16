@@ -80,8 +80,7 @@ import { useRouter } from 'vue-router';
 
 <template>
     <div class="loginbody">
-        <div class="left"></div>
-        <div class="over">
+        <form class="over" @submit.prevent="_login()">
             <div class="title">{{title}}</div>
             <input class="input username"
                 type="text"
@@ -107,8 +106,8 @@ import { useRouter } from 'vue-router';
             >
             <div class="button loginlogon" @click="_login()">{{loginlogon}}</div>
             <div class="button change" @click="_changestate()">{{change}}</div>
-        </div>
-        <div class="right"></div>
+            <input type="submit" style="width: 0; height: 0;border: none;">
+        </form>
     </div>
 </template>
     

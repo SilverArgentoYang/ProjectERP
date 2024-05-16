@@ -2,7 +2,7 @@
 .loginbody {
     width: 100%;
     height: 100%;
-    background-color: var(--colorlogin);
+    background: url(../Resource/Imgs/bg1024.jpg) no-repeat center/cover;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -74,7 +74,7 @@
         user_name:'',
         vip_level:'',
         vip_count:'',
-        isroot:''
+        isroot:false
     });
     function _setlogstate() {
         axios({

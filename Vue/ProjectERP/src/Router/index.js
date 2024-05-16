@@ -47,9 +47,13 @@ const routes = [
             {path:"/:path(.*)",component:NotFound}
         ]
     },
-    {path:"/BackStage",name:'BackStage',component:Backstage},
+    {
+        path:"/BackStage",
+        name:'BackStage',
+        component:Backstage,
+        props:true
+    },
     {path:"/LoginLogup",name:'LoginLogup',component:LoginLogup},
-    {path:"/:path(.*)",component:NotFound}
 ];
 
 const router = createRouter({
