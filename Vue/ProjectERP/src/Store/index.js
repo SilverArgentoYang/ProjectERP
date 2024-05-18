@@ -25,7 +25,9 @@ const store = {
         fav_command:false,
         fav_commandhistory:[],
         //头像显示
-        user_avator:'./src/Resource/Imgs/DefaultAvatar512.jpg'
+        user_avator:'./src/Resource/Imgs/DefaultAvatar512.jpg',
+        //后台侧边栏
+        backstage_sidebar:[0,0]
     }),
 
     //这里控制状态的方法
@@ -83,6 +85,12 @@ const store = {
     //用户头像
     _user_avator :function(avtor) {
         this.state.user_avator = avtor;
+    },
+
+    //后台侧边栏
+    _backstage_sidebar:function(title,subtitle) {
+        this.state.backstage_sidebar[0] = title;
+        this.state.backstage_sidebar[1] = subtitle;
     }
 }
 
