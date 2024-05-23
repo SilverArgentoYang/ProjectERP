@@ -1,0 +1,235 @@
+
+.kindlistbody {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+/* 顶栏 */
+.banner {
+    width: 100%;
+    height: 50px;
+    box-shadow: 0 0 10px var(--shadowblack);
+    border-radius: 15px;
+    display: flex;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+.banner>.search {
+    display: flex;
+    height: 100%;
+    gap: 10px;
+    align-items: center;
+}
+.banner>.search>.text {
+    font-size: 16px;
+    color: var(--colorddgrey);
+}
+.banner>.search>.searchbox {
+    width: 320px;
+    height: 35px;
+    border-radius: 7px;
+    border: 1px solid var(--colorldgrey);
+    font-size: 16px;
+    color: var(--colorddgrey);
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+.banner>.search>.searchbox:focus {
+    outline: none;
+}
+.banner>.search>.searchbutton {
+    padding: 0 25px;
+    height: 35px;
+    background-color: var(--colorblue);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--colorwhite);
+    text-align: center;
+    line-height: 35px;
+}
+.banner>.command {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.banner>.command>.commandbutton {
+    padding: 0 25px;
+    height: 35px;
+    background-color: var(--colorblue);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--colorwhite);
+    text-align: center;
+    line-height: 35px;
+}
+
+/* 主体 */
+.bodymain {
+    width: 100%;
+    box-shadow: 0 0 10px var(--shadowblack);
+    border-radius: 15px;
+    padding: 25px 25px;
+    box-sizing: border-box;
+}
+.bodymain>.maintable {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+.bodymain>.maintable tr {
+    height: 50px;
+}
+.bodymain>.maintable th {
+    border: 1px solid var(--colorldgrey);
+    background-color: var(--colorblue);
+    font-size: 18px;
+    font-weight: normal;
+    color: var(--colorwhite);
+}
+.bodymain>.maintable td {
+    border: 1px solid var(--colorldgrey);
+    font-size: 16px;
+    text-align: center;
+}
+.bodymain>.maintable .id {
+    width: 50px;
+}
+.bodymain>.maintable .name {
+    width: 200px;
+}
+.bodymain>.maintable .number {
+    width: 100px;
+}
+.bodymain>.maintable .time {
+    width: 150px;
+}
+.bodymain>.maintable .command {
+    width: 250px;
+}
+.bodymain>.maintable td.command>div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.bodymain>.maintable td.command>div>.commandbutton {
+    padding: 0 25px;
+    height: 35px;
+    background-color: var(--colorblue);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--colorwhite);
+    text-align: center;
+    line-height: 35px;
+}
+
+/* 菜单 */
+.backblack {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: var(--shadowblack);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.popover {
+    background-color: var(--colorwhite);
+}
+.panelinput {
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    resize: none;
+}
+.panelinput:focus {
+    outline: none;
+}
+
+@media only screen and (max-width: 1680px) {
+    .kindlistbody {
+        gap: 15rem;
+    }
+    /* 顶栏 */
+    .banner {
+        height: 50rem;
+        box-shadow: 0 0 10rem var(--shadowblack);
+        padding: 0 25rem;
+    }
+    .banner>.search {
+        gap: 10rem;
+    }
+    .banner>.search>.text {
+        font-size: 16rem;
+    }
+    .banner>.search>.searchbox {
+        width: 320rem;
+        height: 35rem;
+        font-size: 16rem;
+        padding: 0 10rem;
+    }
+    .banner>.search>.searchbutton {
+        padding: 0 25rem;
+        height: 35rem;
+        font-size: 16rem;
+        line-height: 35rem;
+    }
+    .banner>.command>.commandbutton {
+        padding: 0 25rem;
+        height: 35rem;
+        font-size: 16rem;
+        line-height: 35rem;
+    }
+    
+    /* 主体 */
+    .bodymain {
+        box-shadow: 0 0 10rem var(--shadowblack);
+        padding: 25rem 25rem;
+    }
+    .bodymain>.maintable tr {
+        height: 50rem;
+    }
+    .bodymain>.maintable th {
+        font-size: 18rem;
+    }
+    .bodymain>.maintable td {
+        font-size: 16rem;
+    }
+    .bodymain>.maintable .id {
+        width: 50rem;
+    }
+    .bodymain>.maintable .name {
+        width: 200rem;
+    }
+    .bodymain>.maintable .number {
+        width: 100rem;
+    }
+    .bodymain>.maintable .time {
+        width: 150rem;
+    }
+    .bodymain>.maintable .command {
+        width: 250rem;
+    }
+    .bodymain>.maintable td.command>div {
+        gap: 15rem;
+    }
+    .bodymain>.maintable td.command>div>.commandbutton {
+        padding: 0 25rem;
+        height: 35rem;
+        font-size: 16rem;
+        line-height: 35rem;
+    }
+    .panelinput {
+        font-size: 16rem;
+    }
+}

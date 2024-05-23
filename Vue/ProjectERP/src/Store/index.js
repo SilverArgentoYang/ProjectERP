@@ -27,7 +27,14 @@ const store = {
         //头像显示
         user_avator:'./src/Resource/Imgs/DefaultAvatar512.jpg',
         //后台侧边栏
-        backstage_sidebar:[0,0]
+        backstage_sidebar:[0,0],
+        //后台路径
+        backstage_paths:[{
+            path:'BHome',
+            name:'主站'
+        }],
+        //浮窗显示
+        backstage_popovershow:false
     }),
 
     //这里控制状态的方法
@@ -91,6 +98,29 @@ const store = {
     _backstage_sidebar:function(title,subtitle) {
         this.state.backstage_sidebar[0] = title;
         this.state.backstage_sidebar[1] = subtitle;
+    },
+    // 选择/pop路径
+    _gotopath:function(index) {
+        var path = this.state.backstage_paths[0].path;
+        for(;this.state.backstage_paths.length>index + 1;) {
+            path = this.state.backstage_paths.pop().path;
+        }
+        path = this.state.backstage_paths[this.state.backstage_paths.length - 1].path;
+        return path;
+    },
+    // 添加路径
+    _addpath:function(level,path,name) {
+        for(;this.state.backstage_paths.length>level;) {
+            this.state.backstage_paths.pop();
+        }
+        this.state.backstage_paths.push({
+            path:path,
+            name:name
+        });
+    },
+    //浮窗显示
+    _backstage_popovershow:function(isshow) {
+        this.state.backstage_popovershow = isshow;
     }
 }
 

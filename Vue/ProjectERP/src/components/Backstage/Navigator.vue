@@ -41,18 +41,11 @@ const router = useRouter();
     }
     //路径
     const paths = ref([{
-        path:'BackStage',
+        path:'BHome',
         name:'主站'
     }]);
     function _gotopath(index) {
-        var path = paths.value[0].path;
-        if(paths.value.length > 1) {
-            for(;value.length>=index;) {
-                path = paths.value.pop().path;
-            }
-        }
-        console.log('path',path);
-        console.log('paths',paths.value);
+        var path = store._gotopath(index);
         router.push({
             name:path
         });
@@ -100,7 +93,10 @@ const router = useRouter();
 <template>
     <div class="navigatorbody">
         <div class="navigate">
-            <div class="button navnode" v-for="item,index in paths" @click="_gotopath(index)">
+            <div class="button navnode"
+                v-for="item,index in store.state.backstage_paths"
+                @click="_gotopath(index)"
+            >
                 <Icons class="icon"><right_arrow /></Icons>
                 {{item.name}}
             </div>

@@ -55,7 +55,7 @@ import { useRouter } from 'vue-router';
         if(props.user.isroot) {
             _nav_avatorpanelshow(false);
             router.push({
-                name:'BackStage'
+                name:'BHome'
             });
         }
     }

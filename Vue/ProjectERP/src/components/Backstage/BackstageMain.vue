@@ -36,15 +36,25 @@ import { useRouter } from 'vue-router';
         }
         switch(subtitle) {
             case 1: {
+                router.push({
+                    name:'BKind'
+                })
                 break;
             }
         }
+    }
+    //返回前台
+    function _returnfontstage() {
+        store._gotopath(0);
+        router.push({
+            name:'Home'
+        });
     }
 </script>
 
 <template>
     <div class="top">
-        <div class="logo">
+        <div class="button logo" @click="_returnfontstage()">
             <img class="img" :src="nav_logo" alt="">
         </div>
         <Navigator class="navigator"></Navigator>
@@ -185,7 +195,7 @@ import { useRouter } from 'vue-router';
             </div>
         </div>
 
-        <div class="mainarea"></div>
+        <router-view class="mainarea"></router-view>
     </div>
 </template>
     

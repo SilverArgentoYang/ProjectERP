@@ -75,6 +75,54 @@
     flex: 1;
     overflow-y: scroll;
     padding-left: 15px;
-    padding-right: 60px;
+    padding-right: 15px;
     padding-top: 15px;
+}
+
+@media only screen and (max-width: 1680px) {
+    /* 主体 */
+    .mainarea {
+        padding-left: 15rem;
+        padding-right: 15rem;
+        padding-top: 15rem;
+    }
+}
+@media only screen and (max-height: 600px) {
+    .logo {
+        width: 220rem;
+    }
+    /* 侧边栏 */
+    .mainbody {
+        height: calc(100% - 50rem);
+    }
+    .sidebar {
+        width: 220rem;
+        box-shadow: 0 0 10rem var(--shadowblack);
+    }
+    .sidebartitleitem {
+        height: 50rem;
+        padding: 0 15rem;
+    }
+    .sidebartitleitem>.text {
+        font-size: 16rem;
+    }
+    .sidebartitleitem>.icon {
+        width: 25rem;
+        height: 25rem;
+    }
+    .sidebarsubitem {
+        height: 50rem;
+        font-size: 16rem;
+        line-height: 50rem;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    /* 顶部 */
+    .top {
+        height: 50rem;
+    }
+    .logo>.img {
+        width: 200rem;
+        height: 40rem;
+    }
 }
