@@ -14,19 +14,27 @@ import PopoverPanel from "./PopoverPanel.vue";
     function createkind() {
         store._backstage_popovershow(true);
     }
+
+    //浮动菜单内容
+    const popover=[
+        {
+            type:'text',
+            text:'分类名称',
+            defualtvalue:''
+        },
+        {
+            type:'texteara',
+            text:'备注',
+            defualtvalue:''
+        }
+    ];
 </script>
 
 <template>
     <div class="kindlistbody">
         <!-- 菜单 -->
         <div class="backblack" v-show="store.state.backstage_popovershow">
-            <PopoverPanel class="popover" :input="2" posturl="">
-                <template #title>创建分类</template>
-                <template #text0>名称</template>
-                <template #input0><input class="panelinput" type=""></template>
-                <template #text1>备注</template>
-                <template #input1><textarea class="panelinput" rows="5" /></template>
-            </PopoverPanel>
+            <PopoverPanel class="popover" :inputs="popover" posturl=""></PopoverPanel>
         </div>
 
         <!-- 顶栏 -->

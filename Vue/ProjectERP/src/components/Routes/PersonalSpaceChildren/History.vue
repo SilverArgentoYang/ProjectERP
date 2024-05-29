@@ -59,7 +59,7 @@ import {ref,inject} from 'vue';
             var commandhistory = [];
             commandhistory = _fav_commandhistoryread();
             axios({
-                url:'/removehistory',
+                url:'/postRemoveHistory',
                 method:'post',
                 params:{
                     userid:localStorage.getItem('user'),

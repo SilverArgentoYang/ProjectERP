@@ -28,7 +28,7 @@ import axios from 'axios';
     function _addhistory() {
         if(store.state.user_islogin) {
             axios({
-                url:'addhistory',
+                url:'postAddHistory',
                 method:'post',
                 params:{
                     userid:localStorage.getItem('user'),
@@ -221,7 +221,7 @@ import axios from 'axios';
         if(store.state.user_islogin) {
             if(!good.value.isfavorite) {
                 axios({
-                    url:'/addfavorite',
+                    url:'/postAddFavorite',
                     method:'post',
                     params:{
                         userid:localStorage.getItem('user'),
@@ -234,7 +234,7 @@ import axios from 'axios';
                 });
             }else{
                 axios({
-                    url:'/removefavorite',
+                    url:'/postRemoveFavorite',
                     method:'post',
                     params:{
                         userid:localStorage.getItem('user'),
@@ -268,7 +268,7 @@ import axios from 'axios';
         if(!good.value.isfavorite) {
             if(!good.value.iscart) {
                 axios({
-                    url:'/addcart',
+                    url:'/postAddCart',
                     method:'post',
                     params:{
                         userid:localStorage.getItem('user'),
@@ -358,7 +358,7 @@ import axios from 'axios';
         if(!good.value.isfavorite) {
             if(!comments.value[index].isliked) {
                 axios({
-                    url:'/likecomment',
+                    url:'/postLikeComment',
                     method:'post',
                     params:{
                         userid:localStorage.getItem('user'),
@@ -369,7 +369,7 @@ import axios from 'axios';
                 comments.value[index].isliked = true;
             }else{
                 axios({
-                    url:'/dislikecomment',
+                    url:'/postDislikeComment',
                     method:'post',
                     params:{
                         userid:localStorage.getItem('user'),
@@ -402,7 +402,7 @@ import axios from 'axios';
     function _replysent(commentid) {
         if(replytext.value != '') {
             axios({
-                url:'/replycomment',
+                url:'/postReplyComment',
                 method:'post',
                 params:{
                     userid:localStorage.getItem('user'),
