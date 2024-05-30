@@ -1,5 +1,6 @@
 <script setup>
-import { inject } from 'vue';
+import axios from 'axios';
+import { inject, ref } from 'vue';
 
 
     //inject
@@ -17,12 +18,45 @@ import { inject } from 'vue';
         posturl:{
             type:String,
             defualt:''
+        },
+        key:{
+            type:String,
+            defualt:''
         }
     });
-    
+    const values = ref([]);
+    props.inputs.forEach(item => {
+        values.value.push(item.defualtvalue);
+    });
+
+    //emit
+    const emit = defineEmits(['confirm']);
+
     //确认
     function _confirm() {
-        store._backstage_popovershow(false);
+        axios({
+            url:props.posturl,
+            method:'post',
+            params:{
+                value0:values.value[0]?values.value[0]:null,
+                value1:values.value[1]?values.value[1]:null,
+                value2:values.value[2]?values.value[2]:null,
+                value3:values.value[3]?values.value[3]:null,
+                value4:values.value[4]?values.value[4]:null,
+                value5:values.value[5]?values.value[5]:null,
+                value6:values.value[6]?values.value[6]:null,
+                value7:values.value[7]?values.value[7]:null,
+                value8:values.value[8]?values.value[8]:null,
+                value9:values.value[9]?values.value[9]:null,
+            }
+        }).then(res=>{
+            if(res.data.success=='true'){
+                emit('confirm',values.value);
+                store._backstage_popovershow(false);
+            }else{
+                store._showmessage('内容不正确');
+            }
+        });
     }
     //取消
     function _cancel() {
@@ -35,8 +69,8 @@ import { inject } from 'vue';
         <div class="title"><slot name="title"></slot></div>
         <div class="inputbox" v-for="item,index in inputs">
             <div class="text">{{item.text}}:</div>
-            <input class="input" v-if="item.type=='text'">
-            <textarea class="input" v-if="item.type=='texteara'" rows="4"/>
+            <input class="input" v-if="item.type=='text'" v-model="values[index]">
+            <textarea class="input" v-if="item.type=='texteara'" rows="4" v-model="values[index]"/>
         </div>
         <div class="command">
             <div class="commandbutton button confirm" @click="_confirm()">确认</div>
