@@ -62,15 +62,77 @@ import { inject, ref } from 'vue';
     function _cancel() {
         store._backstage_popovershow(false);
     }
+
+    //拉取标签
+    const tag = ref([]);
+    function _gettags() {
+        axios({
+            url:'/getTagsGoods',
+            method:'get',
+            params:{}
+        }).then(res=>{
+            tags.value = res.data.tags.slice();
+        })
+    }
+    _gettags();
+
+    //拉取分类
+    const kinds = ref([]);
+    function _getkinds() {
+        axios({
+            url:'/getLabelsNav',
+            method:'get',
+            params:{}
+        }).then(res=>{
+            res.data.nav_labels.forEach(item => {
+                kinds.value.push({
+                    id:item.id,
+                    name:item.name
+                });
+            });
+        })
+    }
+    _getkinds();
+
+    //修改图片
+    var Uploader = document.getElementById('FileUpload');
+    function _changeimg(index) {
+        Uploader.click();
+        Uploader.addEventListener('change',function() {
+            var fileObj = Uploader.files[0];
+            if (typeof (fileObj) == "undefined" || fileObj.size <= 0) {
+                alert("请选择图片");
+                return;
+            }
+            axios({
+                url:'/postUploadImg',
+                method:'post',
+                params:{
+                    img:fileObj,
+                    oldimg:values.value[index]
+                }
+            }).then(res=>{
+                values.value[index] = res.data.newimgurl;
+            })
+        })
+    }
 </script>
 
 <template>
     <div class="popoverbody">
         <div class="title"><slot name="title"></slot></div>
+        <input type="file" name="FileUpload" id="FileUpload" hidden>
         <div class="inputbox" v-for="item,index in inputs">
             <div class="text">{{item.text}}:</div>
             <input class="input" v-if="item.type=='text'" v-model="values[index]">
             <textarea class="input" v-if="item.type=='texteara'" rows="4" v-model="values[index]"/>
+            <img class="inputimg" v-if="item.type=='img'"  :src="values[index]" alt="" @click="_changeimg()">
+            <div class="input tags" v-if="item.type=='tags'">
+                <div class="tagitem" v-for="itemj in tags">{{ itemj.name }}</div>
+            </div>
+            <select class="input" name="" id="" v-if="item.type=='kind'">
+                <option v-for="itemj,indexj in kinds" :value="'opt'+indexj">{{ itemj.name }}</option>
+            </select>
         </div>
         <div class="command">
             <div class="commandbutton button confirm" @click="_confirm()">确认</div>
@@ -119,6 +181,24 @@ import { inject, ref } from 'vue';
     .inputbox>.input:focus {
         outline: none;
     }
+    .inputbox>.inputimg {
+        width: 100px;
+        height: 100px;
+    }
+    .inputbox>.tags {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+    .inputbox>.tags>.tagitem {
+        height: 30px;
+        padding: 0 25px;
+        border: 1px dashed var(--colorgrey);
+        border-radius: 15px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 15px;
+    }
     
     .command {
         width: 100%;
@@ -165,6 +245,20 @@ import { inject, ref } from 'vue';
             border-radius: 7rem;
             font-size: 16rem;
             padding: 0 10rem;
+        }
+        .inputbox>.inputimg {
+            width: 100rem;
+            height: 100rem;
+        }
+        .inputbox>.tags {
+            padding: 10rem;
+        }
+        .inputbox>.tags>.tagitem {
+            height: 30rem;
+            padding: 0 25rem;
+            border-radius: 15rem;
+            line-height: 30rem;
+            font-size: 15rem;
         }
         
         .command {

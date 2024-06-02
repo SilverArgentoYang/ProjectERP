@@ -41,6 +41,12 @@ import { useRouter } from 'vue-router';
                 })
                 break;
             }
+            case 2: {
+                router.push({
+                    name:'BGood'
+                })
+                break;
+            }
         }
     }
     //返回前台

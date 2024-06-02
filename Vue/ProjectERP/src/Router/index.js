@@ -16,6 +16,7 @@ import Setting from '../components/Routes/PersonalSpaceChildren/Setting.vue';
 import Backstage from '../components/Backstage/BackstageMain.vue';
 import BackstageHome from '../components/Backstage/BackstageHome.vue';
 import KindListPage from '../components/Backstage/KindListPage.vue';
+import GoodListPage from '../components/Backstage/GoodListPage.vue';
 
 import LoginLogup from '../components/LoginLogup.vue';
 
@@ -58,6 +59,7 @@ const routes = [
         children:[
             {path:"/BackStage/BHome",name:'BHome',component:BackstageHome},
             {path:"/BackStage/BKind",name:'BKind',component:KindListPage},
+            {path:"/BackStage/BGood",name:'BGood',component:GoodListPage},
             {path:"/BackStage/:path(.*)",component:NotFound}
         ]
     },

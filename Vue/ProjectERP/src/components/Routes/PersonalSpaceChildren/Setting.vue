@@ -59,14 +59,14 @@ import { useRouter } from 'vue-router';
                 return;
             }
             axios({
-                url:'/postUpdateUserAavator',
+                url:'/postUploadImg',
                 method:'post',
                 params:{
-                    useid:localStorage.getItem('user'),
-                    avator:fileObj
+                    img:fileObj,
+                    oldimg:user.value.avator
                 }
             }).then(res=>{
-                user.value.avator = res.data.newavtorurl;
+                user.value.avator = res.data.newimgurl;
             })
         })
     }

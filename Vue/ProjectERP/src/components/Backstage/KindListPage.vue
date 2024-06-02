@@ -176,4 +176,39 @@ import PopoverPanel from "./PopoverPanel.vue";
     
 <style scoped>
     @import url(../../css/Backstage/KindListPage.css);
+    .bodymain>.maintable tr>td {
+        height: 50px;
+    }
+    .bodymain>.maintable .id {
+        width: 50px;
+    }
+    .bodymain>.maintable .name {
+        width: 200px;
+    }
+    .bodymain>.maintable .number {
+        width: 100px;
+    }
+    .bodymain>.maintable .time {
+        width: 150px;
+    }
+    .bodymain>.maintable .command {
+        width: 250px;
+    }
+    @media only screen and (max-width: 1680px) {
+        .bodymain>.maintable .id {
+            width: 50rem;
+        }
+        .bodymain>.maintable .name {
+            width: 200rem;
+        }
+        .bodymain>.maintable .number {
+            width: 100rem;
+        }
+        .bodymain>.maintable .time {
+            width: 150rem;
+        }
+        .bodymain>.maintable .command {
+            width: 250rem;
+        }
+    }
 </style>
