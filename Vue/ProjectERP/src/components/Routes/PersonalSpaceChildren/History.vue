@@ -38,8 +38,23 @@ import {ref,inject} from 'vue';
                 userid:localStorage.getItem('user')
             }
         }).then(res=>{
-            history.value.time = res.data.history.time.slice();
-            history.value.goods = res.data.history.goods.slice();
+            history.value.time.length=0;
+            res.data.history.time.forEach(item => {
+                history.value.time.push(item);
+            });
+            history.value.goods.length=0;
+            res.data.history.goods.forEach((item,index) => {
+                history.value.goods.push([])
+                item.forEach(itemj => {
+                    history.value.goods[index].push({
+                        id:itemj.id,
+                        img:itemj.img,
+                        realprice:itemj.realprice,
+                        fakeprice:itemj.fakeprice,
+                        name:itemj.name
+                    });
+                });
+            });
         });
     }
     _gethistory();

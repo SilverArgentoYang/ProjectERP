@@ -17,7 +17,16 @@ import {ref,inject} from 'vue';
                 userid:localStorage.getItem('user')
             }
         }).then(res=>{
-            cart.value = res.data.cart.slice();
+            cart.value.length=0;
+            res.data.cart.forEach(item => {
+                cart.value.push({
+                    checked:false,
+                    img:item.img,
+                    name:item.name,
+                    realprice:item.realprice,
+                    count:item.count,
+                })
+            });
         })
     }
     _getCart();

@@ -103,7 +103,12 @@
             url:'/getLabelsNav',
             method:'get'
         }).then(res => {
-            nav_labels.value = res.data.nav_labels;
+            res.data.nav_labels.forEach(item => {
+                nav_labels.value.push({
+                    id:item.id,
+                    name:item.name
+                })
+            });
         });
     }
     _setlabels();
@@ -165,7 +170,15 @@
                     userid:localStorage.getItem('user')
                 }
             }).then(res=>{
-                cartlist.value = res.data.cart.slice();
+                res.data.cart.forEach(item => {
+                    cartlist.value.push({
+                        id:item.id,
+                        img:item.img,
+                        fakeprice:item.fakeprice,
+                        realprice:item.realprice,
+                        name:item.name
+                    })
+                });
             })
         }
     }
@@ -180,7 +193,15 @@
                     userid:localStorage.getItem('user')
                 }
             }).then(res=>{
-                favoritelist.value = res.data.favorites.slice();
+                res.data.favorites.forEach(item => {
+                    favoritelist.value.push({
+                        id:item.id,
+                        img:item.img,
+                        fakeprice:item.fakeprice,
+                        realprice:item.realprice,
+                        name:item.name
+                    })
+                });
             })
         }
     }
@@ -196,8 +217,14 @@
                 }
             }).then(res=>{
                 res.data.history.goods.forEach(item => {
-                    item.forEach(item => {
-                        historylist.value.push(item);
+                    item.forEach(itemj => {
+                        historylist.value.push({
+                            id:itemj.id,
+                            img:itemj.img,
+                            fakeprice:itemj.fakeprice,
+                            realprice:itemj.realprice,
+                            name:itemj.name
+                        });
                     });
                 });
             })

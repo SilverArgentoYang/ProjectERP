@@ -64,14 +64,31 @@ import { inject, ref } from 'vue';
     }
 
     //拉取标签
-    const tag = ref([]);
+    const tags = ref([]);
     function _gettags() {
         axios({
             url:'/getTagsGoods',
             method:'get',
             params:{}
         }).then(res=>{
-            tags.value = res.data.tags.slice();
+            res.data.tags.forEach(item => {
+                tags.value.push({
+                    id:item.id,
+                    name:item.name,
+                    selected:false
+                })
+            });
+            props.inputs.forEach((itemi) => {
+                if(itemi.type=='tags'&&itemi.defualtvalue!='') {
+                    itemi.defualtvalue.forEach(item => {
+                        tags.value.forEach(itemj => {
+                            if(item == itemj.id){
+                                itemj.selected=true;
+                            }
+                        });
+                    });
+                }
+            });
         })
     }
     _gettags();
@@ -95,8 +112,8 @@ import { inject, ref } from 'vue';
     _getkinds();
 
     //修改图片
-    var Uploader = document.getElementById('FileUpload');
     function _changeimg(index) {
+        var Uploader = document.getElementById('FileUpload');
         Uploader.click();
         Uploader.addEventListener('change',function() {
             var fileObj = Uploader.files[0];
@@ -116,6 +133,52 @@ import { inject, ref } from 'vue';
             })
         })
     }
+
+    //选择分类
+    const kindselect = ref(-1);
+    function _kindselect(index) {
+        values.value[index] = kindselect.value;
+
+    }
+
+    //选择标签
+    const tagselect = ref([]);
+    function _tagselect(index,indexj,id) {
+        var sindex = -1;
+        tagselect.value.forEach((item,index) => {
+            if(item == id) {
+                sindex = index;
+            }
+        });
+        if(sindex != -1) {
+            if (tagselect.value.length <= 1) {
+                tagselect.value.pop();
+            }else{
+                for(var i=sindex;i<tagselect.value.length-1;i++) {
+                    tagselect.value[i] = tagselect.value[i+1];
+                }
+                tagselect.value.pop();
+            }
+            tags.value[indexj].selected = false;
+        }else{
+            tagselect.value.push(id);
+            tags.value[indexj].selected = true;
+        }
+        values.value[index] = tagselect.value.slice();
+    }
+
+    //初始化分类
+    function _initkind() {
+        props.inputs.forEach((item) => {
+            if(item.type=='kind') {
+                kindselect.value = item.defualtvalue;
+            }
+            if(item.type=='tags'&&item.defualtvalue!='') {
+                tagselect.value = item.defualtvalue.slice();
+            }
+        });
+    }
+    _initkind();
 </script>
 
 <template>
@@ -126,12 +189,12 @@ import { inject, ref } from 'vue';
             <div class="text">{{item.text}}:</div>
             <input class="input" v-if="item.type=='text'" v-model="values[index]">
             <textarea class="input" v-if="item.type=='texteara'" rows="4" v-model="values[index]"/>
-            <img class="inputimg" v-if="item.type=='img'"  :src="values[index]" alt="" @click="_changeimg()">
+            <img class="inputimg" v-if="item.type=='img'"  :src="values[index]" alt="" @click="_changeimg(index)">
             <div class="input tags" v-if="item.type=='tags'">
-                <div class="tagitem" v-for="itemj in tags">{{ itemj.name }}</div>
+                <div :class="{'tagitem':true,'selected':itemj.selected}" v-for="itemj,indexj in tags" @click="_tagselect(index,indexj,itemj.id)">{{ itemj.name }}</div>
             </div>
-            <select class="input" name="" id="" v-if="item.type=='kind'">
-                <option v-for="itemj,indexj in kinds" :value="'opt'+indexj">{{ itemj.name }}</option>
+            <select class="input" v-model="kindselect" v-if="item.type=='kind'" @change="_kindselect()">
+                <option v-for="itemj,indexj in kinds" :value="indexj">{{ itemj.name }}</option>
             </select>
         </div>
         <div class="command">
@@ -184,6 +247,7 @@ import { inject, ref } from 'vue';
     .inputbox>.inputimg {
         width: 100px;
         height: 100px;
+        object-fit: cover;
     }
     .inputbox>.tags {
         display: flex;
@@ -218,6 +282,10 @@ import { inject, ref } from 'vue';
         color: var(--colorwhite);
         text-align: center;
         line-height: 35px;
+    }
+    .selected{
+        background-color: var(--colordred);
+        color: var(--colorwhite);
     }
     @media only screen and (max-width: 1680px) {
         .popoverbody {

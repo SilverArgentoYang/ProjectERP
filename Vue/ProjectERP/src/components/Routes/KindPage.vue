@@ -40,7 +40,13 @@
             comp:props.title
         }
     }).then(res=>{
-        tags.value = res.data.tags.slice(); 
+        tags.value.length=0;
+        res.data.tags.forEach(item => {
+            tags.value.push({
+                choosing:false,
+                name:item.name
+            })
+        });
     });
 
     //读取商品
@@ -68,7 +74,16 @@
         method:'get',
         params:data.value
     }).then(res => {
-        goods.value = res.data.goods.slice();
+        goods.value.length=0;
+        res.data.goods.forEach(item => {
+            goods.value.push({
+                id:item.id,
+                img:item.img,
+                fakeprice:item.fakeprice,
+                realprice:item.realprice,
+                name : item.name
+            })
+        });
     })
 
     //页码
@@ -107,7 +122,16 @@
                 tags:tagchoose
             }
         }).then(res=> {
-            goods.value = res.data.goods.slice();
+            goods.value.length=0;
+            res.data.goods.forEach(item => {
+                goods.value.push({
+                    id:item.id,
+                    img:item.img,
+                    fakeprice:item.fakeprice,
+                    realprice:item.realprice,
+                    name : item.name
+                })
+            });
         });
     }
 
@@ -129,7 +153,16 @@
                 pricehigh
             }
         }).then(res=> {
-            this.goods = res.data.goods.slice();
+            goods.value.length=0;
+            res.data.goods.forEach(item => {
+                goods.value.push({
+                    id:item.id,
+                    img:item.img,
+                    fakeprice:item.fakeprice,
+                    realprice:item.realprice,
+                    name : item.name
+                })
+            });
         });
     }
 </script>

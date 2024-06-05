@@ -35,7 +35,16 @@ import {ref,inject} from 'vue';
                 userid:localStorage.getItem('user')
             }
         }).then(res=>{
-            favorites.value = res.data.favorites.slice();
+            favorites.value.length=0;
+            res.data.favorites.forEach(item => {
+                favorites.value.push({
+                    id:item.id,
+                    img:item.img,
+                    realprice:item.realprice,
+                    fakeprice:item.fakeprice,
+                    name:item.name
+                })
+            });
         });
     }
     _getfavorites();

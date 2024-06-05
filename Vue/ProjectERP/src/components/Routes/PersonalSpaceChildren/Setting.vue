@@ -42,8 +42,20 @@ import { useRouter } from 'vue-router';
             user.value.user_name = res.data.user.user_name;
             user.value.aboutme = res.data.user.aboutme;
             user.value.sex = res.data.user.sex;
-            user.value.date = res.data.user.date.slice();
-            user.value.address = res.data.user.address.slice();
+            user.value.date[0] = res.data.user.date[0];
+            user.value.date[1] = res.data.user.date[1];
+            user.value.date[2] = res.data.user.date[2];
+            user.value.address.length=0;
+            res.data.user.address.forEach(item => {
+                user.value.address.push({
+                    editing:false,
+                    isdefault:item.isdefault,
+                    id:item.id,
+                    name:item.name,
+                    address:item.address,
+                    phone:item.phone
+                })
+            });
         })
     }
     _getuserinfo();

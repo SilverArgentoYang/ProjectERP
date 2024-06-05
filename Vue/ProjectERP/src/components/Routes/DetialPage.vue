@@ -65,13 +65,27 @@ import axios from 'axios';
     }).then(res=> {
         good.value.id = props.goodid;
         good.value.isfavorite = res.data.good.isfavorite;
-        good.value.imgs = res.data.good.imgs.slice();
+        good.value.iscart = res.data.good.iscart;
+        good.value.imgs.length=0;
+        res.data.good.imgs.forEach(item => {
+            good.value.imgs.push(item);
+        });
         good.value.name = res.data.good.name;
         good.value.salecount = res.data.good.salecount;
         good.value.realprice = res.data.good.realprice;
         good.value.fakeprice = res.data.good.fakeprice;
-        good.value.class = res.data.good.class.slice();
-        good.value.detialimg = res.data.good.detialimg.slice();
+        good.value.class.length=0;
+        res.data.good.class.forEach(item => {
+            good.value.class.push({
+                id:item.id,
+                name:item.name,
+                img:item.img
+            });
+        });
+        good.value.detialimg.length=0;
+        res.data.good.detialimg.forEach(item => {
+            good.value.detialimg.push(item);
+        });
     }).catch(err=>{
         console.log(err);
     });
@@ -97,7 +111,21 @@ import axios from 'axios';
                 userid:localStorage.getItem('user')
             }
         }).then(res=> {
-            user.value.address = res.data.user.address.slice();
+            var addressdefualt = 0;
+            user.value.address.length=0;
+            res.data.user.address.forEach((item,index) => {
+                user.value.address.push({
+                    id:item.id,
+                    name:item.name,
+                    address:item.address,
+                    phone:item.phone
+                })
+                if(item.isdefault) {
+                    addressdefualt = index;
+                }
+            });
+            _addresschoose(addressdefualt);
+            _addresslarge();
         }).catch(err=>{
             console.log(err);
         });
@@ -131,7 +159,37 @@ import axios from 'axios';
             sort:commentsort.value
         }
     }).then(res=>{
-        comments.value = res.data.comments.slice();
+        comments.value.length=0;
+        res.data.comments.forEach((item,index) => {
+            comments.value.push({
+                commentid:item.commentid,
+                isliked:item.isliked,
+                user:{
+                    userid:item.user.userid,
+                    username:item.user.username,
+                    img:item.user.img
+                },
+                info:{
+                    time:item.info.time,
+                    boughtclass:item.info.boughtclass
+                },
+                text:item.text,
+                img:item.img,
+                childcomments:[]
+            });
+            if(item.childcomments) {
+                item.childcomments.forEach(itemj => {
+                    comments.value[index].childcomments.push({
+                        commentid: itemj.commentid,
+                        user: {
+                            userid: itemj.user.userid,
+                            username: itemj.user.username
+                        },
+                        text: itemj.text
+                    })
+                });
+            }
+        });
     }).catch(err=>{
         console.log(err);
     });
@@ -153,7 +211,16 @@ import axios from 'axios';
             number:10
         }
     }).then((res)=>{
-        suggestgoods.value = res.data.goods.slice();
+        suggestgoods.value.length=0;
+        res.data.goods.forEach(item => {
+            suggestgoods.value.push({
+                id:item.id,
+                img:item.img,
+                fakeprice:item.fakeprice,
+                realprice:item.realprice,
+                name : item.name
+            })
+        });
     }).catch(err=>{
         console.log(err);
     });
@@ -265,7 +332,7 @@ import axios from 'axios';
 
     //添加购物车
     function _addcart() {
-        if(!good.value.isfavorite) {
+        if(!store.state.user_islogin) {
             if(!good.value.iscart) {
                 axios({
                     url:'/postAddCart',
@@ -301,7 +368,37 @@ import axios from 'axios';
                     sort:commentsort.value
                 }
             }).then(res=>{
-                comments.value = res.data.comments.slice();
+                comments.value.length=0;
+                res.data.comments.forEach((item,index) => {
+                    comments.value.push({
+                        commentid:item.commentid,
+                        isliked:item.isliked,
+                        user:{
+                            userid:item.user.userid,
+                            username:item.user.username,
+                            img:item.user.img
+                        },
+                        info:{
+                            time:item.info.time,
+                            boughtclass:item.info.boughtclass
+                        },
+                        text:item.text,
+                        img:item.img,
+                        childcomments:[]
+                    });
+                    if(item.childcomments) {
+                        item.childcomments.forEach(itemj => {
+                            comments.value[index].childcomments.push({
+                                commentid: itemj.commentid,
+                                user: {
+                                    userid: itemj.user.userid,
+                                    username: itemj.user.username
+                                },
+                                text: itemj.text
+                            })
+                        });
+                    }
+                });
             }).catch(err=>{
                 console.log(err);
             });

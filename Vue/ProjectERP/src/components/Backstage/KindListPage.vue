@@ -41,7 +41,17 @@ import PopoverPanel from "./PopoverPanel.vue";
             method:'get',
             params:{}
         }).then(res=>{
-            tabledata.value = res.data.nav_labels.slice();
+            tabledata.value.length=0;
+            res.data.nav_labels.forEach(item => {
+                tabledata.value.push({
+                    id:item.id,
+                    name:item.name,
+                    count:item.count,
+                    note:item.note,
+                    time:[item.time[0],item.time[1],item.time[2]],
+                    show:true
+                })
+            });
         });
     }
     _getdata();
@@ -58,12 +68,13 @@ import PopoverPanel from "./PopoverPanel.vue";
     }
 
     //修改分类
-    function _changekind(index,name,note) {
+    function _changekind(index) {
+        var item = tabledata.value[index];
         popoverposturl.value = '/postLabelChange';
         popoverkey.value[0] = 'change';
         popoverkey.value[1] = index;
-        popover.value[0].defualtvalue = name;
-        popover.value[1].defualtvalue = note;
+        popover.value[0].defualtvalue = item.name;
+        popover.value[1].defualtvalue = item.note;
         store._backstage_popovershow(true);
     }
 
@@ -163,7 +174,7 @@ import PopoverPanel from "./PopoverPanel.vue";
                         <td>{{item.time[0]}}-{{item.time[1]}}-{{item.time[2]}}</td>
                         <td class="command">
                             <div>
-                                <div class="commandbutton change button" @click="_changekind(index,item.name,item.note)">修改</div>
+                                <div class="commandbutton change button" @click="_changekind(index)">修改</div>
                                 <div class="commandbutton delete button" @click="_deletekind(index)">弃用</div>
                             </div>
                         </td>

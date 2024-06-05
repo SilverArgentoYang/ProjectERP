@@ -1,9 +1,4 @@
 
-.kindlistbody {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
 /* 顶栏 */
 .banner {
     width: 100%;
@@ -89,6 +84,7 @@
     border-radius: 15px;
     padding: 25px 25px;
     box-sizing: border-box;
+    margin-top: 15px;
 }
 .bodymain>.maintable {
     width: 100%;
@@ -147,9 +143,6 @@
 }
 
 @media only screen and (max-width: 1680px) {
-    .kindlistbody {
-        gap: 15rem;
-    }
     /* 顶栏 */
     .banner {
         height: 50rem;
@@ -194,6 +187,7 @@
     .bodymain {
         box-shadow: 0 0 10rem var(--shadowblack);
         padding: 25rem 25rem;
+        margin-top: 15rem;
     }
     .bodymain>.maintable tr {
         height: 50rem;

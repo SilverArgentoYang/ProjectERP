@@ -31,7 +31,16 @@
             number:5
         }
     }).then((res)=>{
-        rowpapergoods.value = res.data.goods.slice();
+        rowpapergoods.value.length=0;
+        res.data.goods.forEach(item => {
+            rowpapergoods.value.push({
+                id:item.id,
+                img:item.img,
+                fakeprice:item.fakeprice,
+                realprice:item.realprice,
+                name : item.name
+            })
+        });
     });
 
     //读取推荐商品
@@ -51,7 +60,16 @@
             number:6
         }
     }).then((res)=>{
-        suggestgoods.value = res.data.goods.slice();
+        suggestgoods.value.length=0;
+        res.data.goods.forEach(item => {
+            suggestgoods.value.push({
+                id:item.id,
+                img:item.img,
+                fakeprice:item.fakeprice,
+                realprice:item.realprice,
+                name : item.name
+            })
+        });
     });
 
     //读取所有商品
@@ -68,7 +86,16 @@
         url:'/getGoodsMain',
         method:'get'
     }).then(res => {
-        goods.value = res.data.goods.slice();
+        goods.value.length=0;
+        res.data.goods.forEach(item => {
+            goods.value.push({
+                id:item.id,
+                img:item.img,
+                fakeprice:item.fakeprice,
+                realprice:item.realprice,
+                name : item.name
+            })
+        });
     });
     
     //跳转详情页
