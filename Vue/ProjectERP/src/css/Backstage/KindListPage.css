@@ -76,6 +76,20 @@
     text-align: center;
     line-height: 35px;
 }
+.banner>.switch {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.banner>.switch>.switchitem {
+    font-size: 16px;
+}
+.banner>.switch>.selected {
+    color: var(--colorblue);
+    border-bottom: 2px solid var(--colorblue);
+}
+
 
 /* 主体 */
 .bodymain {

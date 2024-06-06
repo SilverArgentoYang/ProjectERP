@@ -17,6 +17,9 @@ import Backstage from '../components/Backstage/BackstageMain.vue';
 import BackstageHome from '../components/Backstage/BackstageHome.vue';
 import KindListPage from '../components/Backstage/KindListPage.vue';
 import GoodListPage from '../components/Backstage/GoodListPage.vue';
+import TagsListPage from '../components/Backstage/TagsListPage.vue';
+import OrderManagePage from '../components/Backstage/OrderManagePage.vue';
+import DeliveryPage from '../components/Backstage/DeliveryPage.vue';
 
 import LoginLogup from '../components/LoginLogup.vue';
 
@@ -60,6 +63,9 @@ const routes = [
             {path:"/BackStage/BHome",name:'BHome',component:BackstageHome},
             {path:"/BackStage/BKind",name:'BKind',component:KindListPage},
             {path:"/BackStage/BGood",name:'BGood',component:GoodListPage},
+            {path:"/BackStage/BTags",name:'BTags',component:TagsListPage},
+            {path:"/BackStage/BOrder",name:'BOrder',component:OrderManagePage},
+            {path:"/BackStage/BDelivery",name:'BDelivery',component:DeliveryPage},
             {path:"/BackStage/:path(.*)",component:NotFound}
         ]
     },

@@ -47,6 +47,24 @@ import { useRouter } from 'vue-router';
                 })
                 break;
             }
+            case 3: {
+                router.push({
+                    name:'BTags'
+                })
+                break;
+            }
+            case 4: {
+                router.push({
+                    name:'BOrder'
+                })
+                break;
+            }
+            case 5: {
+                router.push({
+                    name:'BDelivery'
+                })
+                break;
+            }
         }
     }
     //返回前台

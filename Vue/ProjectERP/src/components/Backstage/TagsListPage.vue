@@ -6,21 +6,16 @@ import PopoverPanel from "./PopoverPanel.vue";
     const store = inject('store');
 
     //侧边栏
-    store._backstage_sidebar(1,1);
+    store._backstage_sidebar(1,3);
 
     //路径
-    store._addpath(1,'BKind','分类列表');
+    store._addpath(1,'BTags','标签列表');
 
     //浮动菜单内容
     const popover = ref([
         {
             type:'text',
-            text:'分类名称',
-            defualtvalue:''
-        },
-        {
-            type:'texteara',
-            text:'备注',
+            text:'标签',
             defualtvalue:''
         }
     ]);
@@ -30,24 +25,22 @@ import PopoverPanel from "./PopoverPanel.vue";
         id:'',
         name:'',
         count:'',
-        note:'',
         time:['','',''],
         show:true
     }]);
 
     function _getdata() {
         axios({
-            url:'/getLabelsNav',
+            url:'/getTagsGoods',
             method:'get',
             params:{}
         }).then(res=>{
             tabledata.value.length=0;
-            res.data.nav_labels.forEach(item => {
+            res.data.tags.forEach(item => {
                 tabledata.value.push({
                     id:item.id,
                     name:item.name,
                     count:item.count,
-                    note:item.note,
                     time:[item.time[0],item.time[1],item.time[2]],
                     show:true
                 })
@@ -56,34 +49,32 @@ import PopoverPanel from "./PopoverPanel.vue";
     }
     _getdata();
 
-    //创建分类
+    //创建标签
     const popoverkey = ref(['null',0]);
     const popoverposturl = ref('');
     function _createkind() {
-        popoverposturl.value = '/postLabelCreate';
+        popoverposturl.value = '/postTagCreate';
         popoverkey.value[0] = 'create'
         popover.value[0].defualtvalue = '';
-        popover.value[1].defualtvalue = '';
         store._backstage_popovershow(true);
     }
 
-    //修改分类
+    //修改标签
     function _changekind(index) {
         var item = tabledata.value[index];
-        popoverposturl.value = '/postLabelChange';
+        popoverposturl.value = '/postTagChange';
         popoverkey.value[0] = 'change';
         popoverkey.value[1] = index;
         popover.value[0].defualtvalue = item.name;
-        popover.value[1].defualtvalue = item.note;
         store._backstage_popovershow(true);
     }
 
-    //弃用分类
+    //弃用标签
     function _deletekind(index) {
         var r = confirm('是否确认删除');
         if(r) {
             axios({
-                url:'/postLabelDelete',
+                url:'/postTagDelete',
                 method:'post',
                 params:{
                     id:tabledata.value[index].id
@@ -109,17 +100,15 @@ import PopoverPanel from "./PopoverPanel.vue";
                     id:tabledata.value.length>0?Number(tabledata.value[tabledata.value.length-1].id)+1:0,
                     name:value[0],
                     count:'0',
-                    note:value[1],
                     time:[new Date().getFullYear(),('0' + (new Date().getMonth() + 1)).slice(-2),('0' + new Date().getDate()).slice(-2)],
                     show:true
                 });
             }
             if(popoverkey.value[0]=='change'){
                 tabledata.value[popoverkey.value[1]].name = value[0];
-                tabledata.value[popoverkey.value[1]].note = value[1];
             }
         }else{
-            store._showmessage('分类名称不能为空');
+            store._showmessage('标签名称不能为空');
         }
     }
 
@@ -146,13 +135,13 @@ import PopoverPanel from "./PopoverPanel.vue";
         <!-- 顶栏 -->
         <div class="banner">
             <form class="search" @submit.prevent="_search(searchtext)">
-                <div class="text">分类名称</div>
+                <div class="text">标签名称</div>
                 <input class="searchbox" type="text" v-model="searchtext">
                 <div class="searchbutton button" @click="_search(searchtext)">查询</div>
                 <input type="submit" style="width: 0; height: 0;border: none;">
             </form>
             <div class="command">
-                <div class="commandbutton createkind button" @click="_createkind()">创建分类</div>
+                <div class="commandbutton createkind button" @click="_createkind()">创建标签</div>
             </div>
         </div>
         <!-- 主体 -->
@@ -161,9 +150,8 @@ import PopoverPanel from "./PopoverPanel.vue";
                 <thead>
                     <tr>
                         <th class="id">ID</th>
-                        <th class="name">分类名称</th>
-                        <th class="number">商品数量</th>
-                        <th class="extext">备注</th>
+                        <th class="name">标签名称</th>
+                        <th class="number">使用数量</th>
                         <th class="time">创建时间</th>
                         <th class="command">操作</th>
                     </tr>
@@ -173,7 +161,6 @@ import PopoverPanel from "./PopoverPanel.vue";
                         <td>{{ item.id }}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.count}}</td>
-                        <td>{{ item.note }}</td>
                         <td>{{item.time[0]}}-{{item.time[1]}}-{{item.time[2]}}</td>
                         <td class="command">
                             <div>
@@ -189,21 +176,18 @@ import PopoverPanel from "./PopoverPanel.vue";
 </template>
     
 <style scoped>
-    @import url(../../css/Backstage/KindListPage.css);
+@import url(../../css/Backstage/KindListPage.css);
     .bodymain>.maintable tr>td {
         height: 50px;
     }
     .bodymain>.maintable .id {
-        width: 50px;
-    }
-    .bodymain>.maintable .name {
-        width: 200px;
+        width: 70px;
     }
     .bodymain>.maintable .number {
-        width: 100px;
+        width: 280px;
     }
     .bodymain>.maintable .time {
-        width: 150px;
+        width: 250px;
     }
     .bodymain>.maintable .command {
         width: 250px;
@@ -213,16 +197,13 @@ import PopoverPanel from "./PopoverPanel.vue";
             height: 50rem;
         }
         .bodymain>.maintable .id {
-            width: 50rem;
-        }
-        .bodymain>.maintable .name {
-            width: 200rem;
+            width: 70rem;
         }
         .bodymain>.maintable .number {
-            width: 100rem;
+            width: 280rem;
         }
         .bodymain>.maintable .time {
-            width: 150rem;
+            width: 250rem;
         }
         .bodymain>.maintable .command {
             width: 250rem;

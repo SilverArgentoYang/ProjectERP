@@ -148,17 +148,20 @@ import PopoverPanel from "./PopoverPanel.vue";
 
     //删除商品
     function _deletegood(index) {
-        axios({
-            url:'/postGoodDelete',
-            method:'post',
-            params:{
-                id:tabledata.value[index].id
-            }
-        }).then(res=>{
-            if(res.data.success=='true') {
-                tabledata.value[index].state = '已下架'
-            }
-        });
+        var r = confirm('是否确认删除');
+        if(r) {
+            axios({
+                url:'/postGoodDelete',
+                method:'post',
+                params:{
+                    id:tabledata.value[index].id
+                }
+            }).then(res=>{
+                if(res.data.success=='true') {
+                    tabledata.value[index].state = '已下架'
+                }
+            });
+        }
     }
 
     //菜单提交
