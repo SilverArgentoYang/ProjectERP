@@ -65,6 +65,12 @@ import { useRouter } from 'vue-router';
                 })
                 break;
             }
+            case 6: {
+                router.push({
+                    name:'BDepartment'
+                })
+                break;
+            }
         }
     }
     //返回前台

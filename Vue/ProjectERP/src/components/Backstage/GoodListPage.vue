@@ -165,16 +165,18 @@ import PopoverPanel from "./PopoverPanel.vue";
     }
 
     //菜单提交
-    function confirm(value) {
+    function emitconfirm(value) {
         if(value[1].replace(/\s*/g,"")!="") {
             var confirmtags = [];
-            value[4].forEach(item => {
-                tags.value.forEach(itemj => {
-                    if(item==itemj.id){
-                        confirmtags.push(itemj);
-                    }
+            if(value[4] != '') {
+                value[4].forEach(item => {
+                    tags.value.forEach(itemj => {
+                        if(item==itemj.id){
+                            confirmtags.push(itemj);
+                        }
+                    });
                 });
-            });
+            }
             if(popoverkey.value[0]=='create'){
                 tabledata.value.push({
                     id:tabledata.value.length>0?Number(tabledata.value[tabledata.value.length-1].id)+1:0,
@@ -184,7 +186,7 @@ import PopoverPanel from "./PopoverPanel.vue";
                     count:value[3],
                     sale:'0',
                     state:'在售',
-                    tags:confirmtags,
+                    tags:confirmtags.slice(),
                     time:[new Date().getFullYear(),('0' + (new Date().getMonth() + 1)).slice(-2),('0' + new Date().getDate()).slice(-2)],
                     kind:value[5],
                     show:true
@@ -195,7 +197,7 @@ import PopoverPanel from "./PopoverPanel.vue";
                 tabledata.value[popoverkey.value[1]].name = value[1];
                 tabledata.value[popoverkey.value[1]].price = value[2];
                 tabledata.value[popoverkey.value[1]].count = value[3];
-                tabledata.value[popoverkey.value[1]].tags = confirmtags;
+                tabledata.value[popoverkey.value[1]].tags = confirmtags.slice();
                 tabledata.value[popoverkey.value[1]].kind = value[5];
             }
         }else{
@@ -265,7 +267,7 @@ import PopoverPanel from "./PopoverPanel.vue";
     <div class="goodlistbody">
         <!-- 菜单 -->
         <div class="backblack" v-if="store.state.backstage_popovershow">
-            <PopoverPanel class="popover" :inputs="popover" :posturl="popoverposturl" :key="popoverkey[0]" @confirm="confirm"></PopoverPanel>
+            <PopoverPanel class="popover" :inputs="popover" :posturl="popoverposturl" :key="popoverkey[0]" @confirm="emitconfirm"></PopoverPanel>
         </div>
 
         <!-- 顶栏 -->

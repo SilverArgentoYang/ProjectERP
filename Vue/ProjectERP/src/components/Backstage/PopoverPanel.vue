@@ -167,6 +167,62 @@ import { inject, ref } from 'vue';
         values.value[index] = tagselect.value.slice();
     }
 
+    //部门职能
+    const ability = ref([]);
+    const abilityselect = ref([]);
+    function _getability() {
+        axios({
+            url:'/getDepartmentAbility',
+            method:'get',
+            params:{}
+        }).then(res=>{
+            res.data.ability.forEach(item => {
+                ability.value.push({
+                    id:item.id,
+                    name:item.name,
+                    selected:false
+                })
+            });
+            props.inputs.forEach((itemi) => {
+                if(itemi.type=='ability'&&itemi.defualtvalue!='') {
+                    itemi.defualtvalue.forEach(item => {
+                        ability.value.forEach(itemj => {
+                            if(item == itemj.id){
+                                itemj.selected=true;
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    }
+    _getability();
+
+    //部门职能选择
+    function _ability(index,indexj,id) {
+        var sindex = -1;
+        abilityselect.value.forEach((item,index) => {
+            if(item == id) {
+                sindex = index;
+            }
+        });
+        if(sindex != -1) {
+            if (abilityselect.value.length <= 1) {
+                abilityselect.value.pop();
+            }else{
+                for(var i=sindex;i<abilityselect.value.length-1;i++) {
+                    abilityselect.value[i] = abilityselect.value[i+1];
+                }
+                abilityselect.value.pop();
+            }
+            ability.value[indexj].selected = false;
+        }else{
+            abilityselect.value.push(id);
+            ability.value[indexj].selected = true;
+        }
+        values.value[index] = abilityselect.value.slice();
+    }
+
     //初始化分类
     function _initkind() {
         props.inputs.forEach((item) => {
@@ -175,6 +231,9 @@ import { inject, ref } from 'vue';
             }
             if(item.type=='tags'&&item.defualtvalue!='') {
                 tagselect.value = item.defualtvalue.slice();
+            }
+            if(item.type=='ability'&&item.defualtvalue!='') {
+                abilityselect.value = item.defualtvalue.slice();
             }
         });
     }
@@ -196,6 +255,9 @@ import { inject, ref } from 'vue';
             <select class="input" v-model="kindselect" v-if="item.type=='kind'" @change="_kindselect()">
                 <option v-for="itemj,indexj in kinds" :value="indexj">{{ itemj.name }}</option>
             </select>
+            <div class="input tags" v-if="item.type=='ability'">
+                <div :class="{'tagitem':true,'selected':itemj.selected}" v-for="itemj,indexj in ability" @click="_ability(index,indexj,itemj.id)">{{ itemj.name }}</div>
+            </div>
         </div>
         <div class="command">
             <div class="commandbutton button confirm" @click="_confirm()">确认</div>

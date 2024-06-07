@@ -93,7 +93,7 @@ import PopoverPanel from "./PopoverPanel.vue";
     }
 
     //菜单提交
-    function confirm(value) {
+    function emitconfirm(value) {
         if(value[0].replace(/\s*/g,"")!="") {
             if(popoverkey.value[0]=='create'){
                 tabledata.value.push({
@@ -129,7 +129,7 @@ import PopoverPanel from "./PopoverPanel.vue";
     <div class="kindlistbody">
         <!-- 菜单 -->
         <div class="backblack" v-if="store.state.backstage_popovershow">
-            <PopoverPanel class="popover" :inputs="popover" :posturl="popoverposturl" :key="popoverkey[0]" @confirm="confirm"></PopoverPanel>
+            <PopoverPanel class="popover" :inputs="popover" :posturl="popoverposturl" :key="popoverkey[0]" @confirm="emitconfirm"></PopoverPanel>
         </div>
 
         <!-- 顶栏 -->
