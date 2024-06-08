@@ -1,7 +1,7 @@
 <script setup>
     import { inject, ref, shallowRef } from 'vue';
-import Navigator from './Navigator.vue';
-import { useRouter } from 'vue-router';
+    import Navigator from './Navigator.vue';
+    import { useRouter } from 'vue-router';
     const router = useRouter();
     //inject
     const store = inject('store');
@@ -71,6 +71,12 @@ import { useRouter } from 'vue-router';
                 })
                 break;
             }
+          case 7: {
+            router.push({
+              name:'BMember'
+            })
+            break;
+          }
         }
     }
     //返回前台

@@ -169,7 +169,7 @@ import PopoverPanel from "./PopoverPanel.vue";
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item,index in tabledata" v-show="item.show">
+                    <tr v-for="(item,index) in tabledata" v-show="item.show">
                         <td>{{ item.id }}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.count}}</td>

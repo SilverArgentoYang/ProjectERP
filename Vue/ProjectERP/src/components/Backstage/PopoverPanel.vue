@@ -223,6 +223,30 @@ import { inject, ref } from 'vue';
         values.value[index] = abilityselect.value.slice();
     }
 
+    //拉取部门
+    const department = ref([]);
+    function _getdepartment() {
+      axios({
+        url:'/getDepartment',
+        method:'get',
+        params:{}
+      }).then(res=>{
+        res.data.department.forEach(item => {
+          department.value.push({
+            id:item.id,
+            name:item.name
+          });
+        });
+      })
+    }
+    _getdepartment();
+
+    //选择部门
+    const departmentselect = ref(-1);
+    function _departmentselect(index) {
+      values.value[index] = departmentselect.value;
+    }
+
     //初始化分类
     function _initkind() {
         props.inputs.forEach((item) => {
@@ -234,6 +258,9 @@ import { inject, ref } from 'vue';
             }
             if(item.type=='ability'&&item.defualtvalue!='') {
                 abilityselect.value = item.defualtvalue.slice();
+            }
+            if(item.type=='department'&&item.defualtvalue!='') {
+              departmentselect.value = item.defualtvalue;
             }
         });
     }
@@ -253,11 +280,14 @@ import { inject, ref } from 'vue';
                 <div :class="{'tagitem':true,'selected':itemj.selected}" v-for="itemj,indexj in tags" @click="_tagselect(index,indexj,itemj.id)">{{ itemj.name }}</div>
             </div>
             <select class="input" v-model="kindselect" v-if="item.type=='kind'" @change="_kindselect()">
-                <option v-for="itemj,indexj in kinds" :value="indexj">{{ itemj.name }}</option>
+                <option v-for="(itemj,indexj) in kinds" :value="indexj">{{ itemj.name }}</option>
             </select>
             <div class="input tags" v-if="item.type=='ability'">
-                <div :class="{'tagitem':true,'selected':itemj.selected}" v-for="itemj,indexj in ability" @click="_ability(index,indexj,itemj.id)">{{ itemj.name }}</div>
+                <div :class="{'tagitem':true,'selected':itemj.selected}" v-for="(itemj,indexj) in ability" @click="_ability(index,indexj,itemj.id)">{{ itemj.name }}</div>
             </div>
+            <select class="input" v-model="departmentselect" v-if="item.type=='department'" @change="_departmentselect(index)">
+              <option v-for="(itemj,indexj) in department" :value="indexj">{{ itemj.name }}</option>
+            </select>
         </div>
         <div class="command">
             <div class="commandbutton button confirm" @click="_confirm()">确认</div>
