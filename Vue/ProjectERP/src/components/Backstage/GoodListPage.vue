@@ -148,7 +148,7 @@ import PopoverPanel from "./PopoverPanel.vue";
 
     //删除商品
     function _deletegood(index) {
-        var r = confirm('是否确认删除');
+        var r = confirm('是否确认下架');
         if(r) {
             axios({
                 url:'/postGoodDelete',
@@ -207,17 +207,20 @@ import PopoverPanel from "./PopoverPanel.vue";
 
     //重新上架
     function _resale(index) {
+      var r = confirm('是否确认重新上架');
+      if(r) {
         axios({
-            url:'/postGoodResale',
-            method:'post',
-            params:{
-                id:tabledata.value[index].id
-            }
-        }).then(res=>{
-            if(res.data.success=='true') {
-                tabledata.value[index].state = '在售'
-            }
+          url: '/postGoodResale',
+          method: 'post',
+          params: {
+            id: tabledata.value[index].id
+          }
+        }).then(res => {
+          if (res.data.success == 'true') {
+            tabledata.value[index].state = '在售'
+          }
         });
+      }
     }
 
     //查询

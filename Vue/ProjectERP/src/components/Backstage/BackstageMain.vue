@@ -77,6 +77,12 @@
             })
             break;
           }
+          case 8: {
+            router.push({
+              name:'BUser'
+            })
+            break;
+          }
         }
     }
     //返回前台
@@ -225,7 +231,7 @@
                 <div class="button sidebartitleitem" @click="_backstage_sidebar_title(7)">
                     <div class="text">消息管理</div>
                     <Icons class="icon"
-                        :IsInList="store.state.backstage_sidebar[0]==1?down_arrow:right_arrow"
+                        :IsInList="store.state.backstage_sidebar[0]==7?down_arrow:right_arrow"
                     ></Icons>
                 </div>
             </div>

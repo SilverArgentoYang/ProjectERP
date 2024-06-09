@@ -9,7 +9,7 @@ const store = inject('store');
 store._backstage_sidebar(3, 7);
 
 //路径
-store._addpath(1, 'BKind', '分类列表');
+store._addpath(1, 'BMember', '员工管理');
 
 //浮动菜单内容
 const popover = ref([
@@ -239,7 +239,7 @@ function _search(text) {
           <th class="uncheck">未打卡</th>
           <th class="phone">联系方式</th>
           <th class="note">备注</th>
-          <th class="time">创建时间</th>
+          <th class="time">注册时间</th>
           <th class="command">操作</th>
         </tr>
         </thead>
@@ -257,8 +257,8 @@ function _search(text) {
           <td>{{item.time[0]}}-{{item.time[1]}}-{{item.time[2]}}</td>
           <td class="command">
             <div>
-              <div class="commandbutton change button" @click="_changekind(index)">修改</div>
-              <div class="commandbutton delete button" @click="_deletekind(index)">弃用</div>
+              <div class="commandbutton change button" @click="_changekind(index)">修改信息</div>
+              <div class="commandbutton delete button" @click="_deletekind(index)">删除</div>
             </div>
           </td>
         </tr>
