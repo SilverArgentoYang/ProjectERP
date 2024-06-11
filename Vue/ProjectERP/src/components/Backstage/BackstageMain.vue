@@ -83,6 +83,12 @@
             })
             break;
           }
+          case 9: {
+            router.push({
+              name:'BShop'
+            })
+            break;
+          }
         }
     }
     //返回前台

@@ -23,6 +23,7 @@ import DeliveryPage from '../components/Backstage/DeliveryPage.vue';
 import Department from '../components/Backstage/Department.vue';
 import MemberManage from "../components/Backstage/MemberManage.vue";
 import UserManage from "../components/Backstage/UserManage.vue";
+import ShopSetting from "../components/Backstage/ShopSetting.vue";
 
 import LoginLogup from '../components/LoginLogup.vue';
 
@@ -72,6 +73,7 @@ const routes = [
             {path:"/BackStage/BDepartment",name:'BDepartment',component:Department},
             {path:"/BackStage/BMember",name:'BMember',component:MemberManage},
             {path:"/BackStage/BUser",name:'BUser',component:UserManage},
+            {path:"/BackStage/BShop",name:'BShop',component:ShopSetting},
             {path:"/BackStage/:path(.*)",component:NotFound}
         ]
     },
