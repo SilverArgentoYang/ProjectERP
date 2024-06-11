@@ -241,6 +241,24 @@
             });
         }
     }
+
+    //拉取数据
+    const settingdata = ref({
+      logo:'',
+      mainimg:'',
+    });
+    const logo = ref('');
+    function _getlogo() {
+      axios({
+        url:'/getShopSetting',
+        method:'get',
+        params:{}
+      }).then(res=>{
+        settingdata.value.logo = res.data.settingdata.logo;
+        settingdata.value.mainimg = res.data.settingdata.mainimg;
+      });
+    }
+    _getlogo();
 </script>
 
 <template>
@@ -248,8 +266,8 @@
 
         <!-- 头图 -->
         <div class = "headimg">
-            <img class="IMG" :src="nav_bg" alt="">
-            <img class="LOGO button" :src="nav_logo" alt="" @click="_jumptohomepage()">
+            <img class="IMG" :src="settingdata.mainimg" alt="">
+            <img class="LOGO button" :src="settingdata.logo" alt="" @click="_jumptohomepage()">
         </div>
 
         <!-- 导航栏 -->

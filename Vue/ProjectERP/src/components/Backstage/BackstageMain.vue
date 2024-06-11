@@ -2,6 +2,7 @@
     import { inject, ref, shallowRef } from 'vue';
     import Navigator from './Navigator.vue';
     import { useRouter } from 'vue-router';
+    import axios from "axios";
     const router = useRouter();
     //inject
     const store = inject('store');
@@ -98,12 +99,25 @@
             name:'Home'
         });
     }
+
+    //拉取logo
+    const logo = ref('');
+    function _getlogo() {
+      axios({
+        url:'/getShopSetting',
+        method:'get',
+        params:{}
+      }).then(res=>{
+        logo.value = res.data.settingdata.logo;
+      });
+    }
+    _getlogo();
 </script>
 
 <template>
     <div class="top">
         <div class="button logo" @click="_returnfontstage()">
-            <img class="img" :src="nav_logo" alt="">
+            <img class="img" :src="logo" alt="">
         </div>
         <Navigator class="navigator"></Navigator>
     </div>
