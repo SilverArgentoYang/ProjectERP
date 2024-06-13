@@ -90,6 +90,12 @@
             })
             break;
           }
+          case 10: {
+            router.push({
+              name:'BSystem'
+            })
+            break;
+          }
         }
     }
     //返回前台

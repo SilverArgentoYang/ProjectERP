@@ -126,3 +126,85 @@
     justify-content: center;
     gap: 15px;
 }
+
+@media only screen and (max-width: 1680px) {
+    .shopsettingbody {
+        gap: 10rem;
+    }
+
+    .banner {
+        height: 50rem;
+        box-shadow: 0 0 10rem var(--shadowblack);
+        border-radius: 15rem;
+        padding: 0 25rem;
+    }
+    .thisbutton {
+        padding: 0 25rem;
+        height: 35rem;
+        border-radius: 5rem;
+        font-size: 16rem;
+        line-height: 35rem;
+    }
+
+    .subtitle {
+        height: 24rem;
+        font-size: 16rem;
+        line-height: 24rem;
+    }
+    .boldtext {
+        height: 24rem;
+        font-size: 16rem;
+        line-height: 24rem;
+    }
+    .editbox {
+        width: 200rem;
+    }
+    .logo {
+        width: 150rem;
+        height: 150rem;
+    }
+    .icon {
+        width: 15rem;
+        height: 15rem;
+    }
+    .bannerimg {
+        height: 140rem;
+    }
+
+    .avatorbox {
+        gap: 10rem;
+    }
+    .avatorbox>.righttext {
+        gap: 10rem;
+    }
+    .avatorbox>.righttext>.name {
+        gap: 5rem;
+    }
+    .address {
+        gap: 5rem;
+    }
+
+    .colorselector {
+        width: 34rem;
+        height: 34rem;
+        border-radius: 5rem;
+        box-shadow: 0 0 10rem var(--shadowblack);
+    }
+    .colors {
+        width: 30rem;
+        height: 30rem;
+        border-radius: 5rem;
+        margin: 2rem 2rem;
+    }
+
+    .replytable th {
+        height: 50rem;
+        font-size: 18rem;
+    }
+    .replytable td {
+        font-size: 16rem;
+    }
+    .replytable td.command>div {
+        gap: 15rem;
+    }
+}

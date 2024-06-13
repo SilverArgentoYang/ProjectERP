@@ -26,6 +26,11 @@ img {
   height: 1px;
   background-color: var(--colorgrey);
 }
+.cutline2 {
+  width: 1px;
+  height: 100%;
+  background-color: var(--colorgrey);
+}
 
 html {
   width: 100%;

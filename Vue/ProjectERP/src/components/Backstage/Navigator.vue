@@ -78,6 +78,12 @@ const router = useRouter();
         }
     }
     //进入修改密码界面
+    function _gotosetting() {
+      _optionpanelshow(false);
+      router.push({
+        name:'BSystem'
+      })
+    }
     //退出登录
     function _userlogout(){
         _optionpanelshow(false);
@@ -108,7 +114,7 @@ const router = useRouter();
         </form>
         <div class="right">
             <div style="position: relative;"><div class="userpanel" v-show="optionpanelopen">
-                <div class="button panelitem">修改密码</div>
+                <div class="button panelitem" @click="_gotosetting()">修改密码</div>
                 <div class="cutline"></div>
                 <div class="button panelitem" @click="_userlogout()">退出登录</div>
             </div></div>
