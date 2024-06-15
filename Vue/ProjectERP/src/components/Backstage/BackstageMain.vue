@@ -96,6 +96,48 @@
             })
             break;
           }
+          case 11: {
+            // router.push({
+            //   name:'BSystem'
+            // })
+            break;
+          }
+          case 12: {
+            router.push({
+              name:'BDaily'
+            })
+            break;
+          }
+          case 13: {
+            router.push({
+              name:'BMonth'
+            })
+            break;
+          }
+          case 14: {
+            router.push({
+              name:'BYear'
+            })
+            break;
+          }
+          case 15: {
+            router.push({
+              name:'BComment'
+            })
+            break;
+          }
+          case 16: {
+            // router.push({
+            //   name:'BComment'
+            // })
+            break;
+          }
+          case 17: {
+            router.push({
+              name:'BAbout'
+            })
+            break;
+          }
         }
     }
     //返回前台
@@ -130,6 +172,8 @@
     <div class="mainbody">
         <div class="sidebar">
             <div class="sidebaritem">
+
+<!--              商品管理-->
                 <div class="button sidebartitleitem" @click="_backstage_sidebar_title(1)">
                     <div class="text">商品管理</div>
                     <Icons class="icon"
@@ -160,6 +204,8 @@
                         v-show="store.state.backstage_sidebar[0]==1"
                         @click="_backstage_sidebar_subtitle(3)"
                     >标签列表</div>
+
+<!--              订单管理-->
                 <div class="button sidebartitleitem" @click="_backstage_sidebar_title(2)">
                     <div class="text">订单管理</div>
                     <Icons class="icon"
@@ -182,6 +228,8 @@
                         v-show="store.state.backstage_sidebar[0]==2"
                         @click="_backstage_sidebar_subtitle(5)"
                     >物流列表</div>
+
+<!--              帐号管理-->
                 <div class="button sidebartitleitem" @click="_backstage_sidebar_title(3)">
                     <div class="text">帐号管理</div>
                     <Icons class="icon"
@@ -212,6 +260,8 @@
                         v-show="store.state.backstage_sidebar[0]==3"
                         @click="_backstage_sidebar_subtitle(8)"
                     >会员管理</div>
+
+<!--              设置管理-->
                 <div class="button sidebartitleitem" @click="_backstage_sidebar_title(4)">
                     <div class="text">设置管理</div>
                     <Icons class="icon"
@@ -242,24 +292,78 @@
                         v-show="store.state.backstage_sidebar[0]==4"
                         @click="_backstage_sidebar_subtitle(11)"
                     >支付设置</div>
+
+<!--              财务账单-->
                 <div class="button sidebartitleitem" @click="_backstage_sidebar_title(5)">
                     <div class="text">财务账单</div>
                     <Icons class="icon"
                         :IsInList="store.state.backstage_sidebar[0]==5?down_arrow:right_arrow"
                     ></Icons>
                 </div>
-                <div class="button sidebartitleitem" @click="_backstage_sidebar_title(6)">
-                    <div class="text">数据管理</div>
-                    <Icons class="icon"
-                        :IsInList="store.state.backstage_sidebar[0]==6?down_arrow:right_arrow"
-                    ></Icons>
-                </div>
+              <div :class="{
+                            'sidebarsubitem':true,
+                            'button':true,
+                            'sidebarsubitemactive':store.state.backstage_sidebar[1]==12
+                        }"
+                   v-show="store.state.backstage_sidebar[0]==5"
+                   @click="_backstage_sidebar_subtitle(12)"
+              >每日账单</div>
+              <div :class="{
+                            'sidebarsubitem':true,
+                            'button':true,
+                            'sidebarsubitemactive':store.state.backstage_sidebar[1]==13
+                        }"
+                   v-show="store.state.backstage_sidebar[0]==5"
+                   @click="_backstage_sidebar_subtitle(13)"
+              >月度账单</div>
+              <div :class="{
+                            'sidebarsubitem':true,
+                            'button':true,
+                            'sidebarsubitemactive':store.state.backstage_sidebar[1]==14
+                        }"
+                   v-show="store.state.backstage_sidebar[0]==5"
+                   @click="_backstage_sidebar_subtitle(14)"
+              >年度账单</div>
+
+<!--              数据管理-->
+<!--                <div class="button sidebartitleitem" @click="_backstage_sidebar_title(6)">-->
+<!--                    <div class="text">数据管理</div>-->
+<!--                    <Icons class="icon"-->
+<!--                        :IsInList="store.state.backstage_sidebar[0]==6?down_arrow:right_arrow"-->
+<!--                    ></Icons>-->
+<!--                </div>-->
+
+<!--              消息管理-->
                 <div class="button sidebartitleitem" @click="_backstage_sidebar_title(7)">
                     <div class="text">消息管理</div>
                     <Icons class="icon"
                         :IsInList="store.state.backstage_sidebar[0]==7?down_arrow:right_arrow"
                     ></Icons>
                 </div>
+                  <div :class="{
+                            'sidebarsubitem':true,
+                            'button':true,
+                            'sidebarsubitemactive':store.state.backstage_sidebar[1]==15
+                        }"
+                       v-show="store.state.backstage_sidebar[0]==7"
+                       @click="_backstage_sidebar_subtitle(15)"
+                  >评论列表</div>
+                  <div :class="{
+                            'sidebarsubitem':true,
+                            'button':true,
+                            'sidebarsubitemactive':store.state.backstage_sidebar[1]==16
+                        }"
+                       v-show="store.state.backstage_sidebar[0]==7"
+                       @click="_backstage_sidebar_subtitle(16)"
+                  >客服消息</div>
+                  <div :class="{
+                            'sidebarsubitem':true,
+                            'button':true,
+                            'sidebarsubitemactive':store.state.backstage_sidebar[1]==17
+                        }"
+                       v-show="store.state.backstage_sidebar[0]==7"
+                       @click="_backstage_sidebar_subtitle(17)"
+                  >关于本站</div>
             </div>
         </div>
 

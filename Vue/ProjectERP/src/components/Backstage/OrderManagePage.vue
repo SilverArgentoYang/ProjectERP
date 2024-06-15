@@ -153,7 +153,7 @@ import PopoverPanel from "./PopoverPanel.vue";
     .bodymain>.maintable .img {
         width: 100px;
     }
-    .bodymain>.maintable .name {
+    .bodymain>.maintable .command {
         width: 330px;
     }
     .bodymain>.maintable .price {
@@ -190,7 +190,7 @@ import PopoverPanel from "./PopoverPanel.vue";
         .bodymain>.maintable .img {
             width: 100rem;
         }
-        .bodymain>.maintable .name {
+        .bodymain>.maintable .command {
             width: 330rem;
         }
         .bodymain>.maintable .price {
