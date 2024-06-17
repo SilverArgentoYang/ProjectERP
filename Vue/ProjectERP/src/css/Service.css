@@ -1,0 +1,99 @@
+
+/* 标题 */
+.title {
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.cutline {
+    margin: 10px 0;
+}
+.thisbutton {
+    height: 30px;
+    padding: 0 25px;
+    border-radius: 5px;
+    background-color: var(--colorred);
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    color: var(--colorwhite);
+    margin-right: 15px;
+}
+
+.additem {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.additem .iconbox {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--colorgrey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.additem .iconbox .icon {
+    width: 60px;
+    height: 60px;
+    fill: var(--colorgrey);
+}
+.additem .text {
+    font-size: 25px;
+}
+
+.mainbox {
+    width: 100%;
+    height: 600px;
+    background-color: var(--colorslgrey);
+}
+.mainbox .messageshow {
+    width: 100%;
+    height: 450px;
+    overflow-y: scroll;
+}
+.mainbox .messageshow::-webkit-scrollbar {
+    display: none;
+}
+
+.mainbox .inputbox {
+    width: 100%;
+}
+.mainbox .inputbox .functions {
+    width: 100%;
+    height: 25px;
+    display: flex;
+    gap: 15px;
+    margin-left: 15px;
+}
+.mainbox .inputbox .functions .icon {
+    width: 25px;
+    height: 25px;
+    fill: var(--colorgrey);
+}
+.mainbox .inputbox .input {
+    width: 100%;
+    height: 60px;
+    resize: none;
+    border: none;
+    background-color: var(--colorslgrey);
+    font-size: 16px;
+    padding: 0 15px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+.mainbox .inputbox .input:focus {
+    outline: none;
+}
+.mainbox .inputbox .send {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: end;
+}

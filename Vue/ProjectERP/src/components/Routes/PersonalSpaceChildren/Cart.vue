@@ -8,6 +8,10 @@ import {ref,inject} from 'vue';
         name:'商品名称',
         realprice:'15.25',
         count:'1',
+        type:{
+          id:'0',
+          name:'none'
+        }
     }]);
     function _getCart() {
         axios({
@@ -25,6 +29,10 @@ import {ref,inject} from 'vue';
                     name:item.name,
                     realprice:item.realprice,
                     count:item.count,
+                    type:{
+                      id:item.type.id,
+                      name:item.type.name,
+                    }
                 })
             });
         })
@@ -114,7 +122,7 @@ import {ref,inject} from 'vue';
                 <div class="mainitem">
                     <input class="checkbox" type="checkbox" @click="_checkboxswich(index)" v-model="item.checked">
                     <img class="img" :src="item.img" alt="">
-                    <div class="info">{{ item.name }}</div>
+                    <div class="info">{{ item.name }}-{{item.type.name}}</div>
                     <div class="price">￥{{item.realprice}}</div>
                     <div class="count">
                         <input class="counttextbox"

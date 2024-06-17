@@ -21,6 +21,8 @@ import reply from './Icons/Reply.vue';
 import close from './Icons/Close.vue'
 import Edit from "./Icons/Edit.vue";
 import Aply from "./Icons/Aply.vue";
+import Add from "./Icons/Add.vue";
+import SelectImg from "./Icons/SelectImg.vue";
 
 import nav_bg from './Imgs/bg1024.jpg';
 import nav_logo from './Imgs/LOGO512.png';
@@ -51,6 +53,8 @@ const resources = {
     close,
     Edit,
     Aply,
+    Add,
+    SelectImg,
 
     nav_bg,
     nav_logo,

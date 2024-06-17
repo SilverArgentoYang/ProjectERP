@@ -51,13 +51,20 @@ import { useRouter } from 'vue-router';
                 });
                 break;
             }
-            // 进入历史记录页面
+            // 进入设置页面
             case 5:{
                 router.push({
                     name:'Setting'
                 });
                 break;
             }
+            // 进入联系客服页面
+          case 6:{
+            router.push({
+              name:'Service'
+            });
+            break;
+          }
         }
     }
 </script>

@@ -12,6 +12,7 @@ import History from '../components/Routes/PersonalSpaceChildren/History.vue';
 import NotFound from '../components/NotFound.vue';
 import Message from '../components/Routes/PersonalSpaceChildren/Message.vue';
 import Setting from '../components/Routes/PersonalSpaceChildren/Setting.vue';
+import Service from '../components/Routes/PersonalSpaceChildren/Service.vue';
 
 import Backstage from '../components/Backstage/BackstageMain.vue';
 import BackstageHome from '../components/Backstage/BackstageHome.vue';
@@ -59,6 +60,7 @@ const routes = [
                     {path:"Message",name:'Message',component:Message,props:true},
                     {path:"History",name:'History',component:History,props:true},
                     {path:"Setting",name:'Setting',component:Setting,props:true},
+                    {path:"Service",name:'Service',component:Service,props:true},
                 ]
             },
             {path:"/:path(.*)",component:NotFound}
