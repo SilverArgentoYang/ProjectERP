@@ -157,6 +157,17 @@
             store._showmessage('请登录');
         }
     }
+    // 前往客服页面
+    function _gotoservicepage() {
+      if(store.state.user_islogin) {
+        _spc_leftbarselected(3);
+        router.push({
+          name:'Service',
+        });
+      }else{
+        store._showmessage('请登录');
+      }
+    }
 
     //请求购物车信息
     const panellist = ref([]);
@@ -353,6 +364,7 @@
                     ><message /></Icons>
                     <Icons class="service icon button"
                         @mouseover="_popoverpanelshow(false)"
+                           @click="_gotoservicepage()"
                     ><service /></Icons>
                 </ul>
             </div>

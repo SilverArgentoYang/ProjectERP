@@ -97,9 +97,9 @@
             break;
           }
           case 11: {
-            // router.push({
-            //   name:'BSystem'
-            // })
+            router.push({
+              name:'BPayment'
+            })
             break;
           }
           case 12: {
@@ -127,9 +127,9 @@
             break;
           }
           case 16: {
-            // router.push({
-            //   name:'BComment'
-            // })
+            router.push({
+              name:'BService'
+            })
             break;
           }
           case 17: {

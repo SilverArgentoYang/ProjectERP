@@ -26,10 +26,12 @@ import MemberManage from "../components/Backstage/MemberManage.vue";
 import UserManage from "../components/Backstage/UserManage.vue";
 import ShopSetting from "../components/Backstage/ShopSetting.vue";
 import SystemSetting from "../components/Backstage/SystemSetting.vue";
+import PaymentSetting from "../components/Backstage/PaymentSetting.vue";
 import DailyIncome from "../components/Backstage/DailyIncome.vue";
 import MonthIncome from "../components/Backstage/MonthIncome.vue";
 import YearIncome from "../components/Backstage/YearIncome.vue";
 import CommentsPage from "../components/Backstage/CommentsPage.vue";
+import ServicePage from "../components/Backstage/ServicePage.vue";
 import AboutSite from "../components/Backstage/AboutSite.vue";
 
 import LoginLogup from '../components/LoginLogup.vue';
@@ -83,10 +85,12 @@ const routes = [
             {path:"/BackStage/BUser",name:'BUser',component:UserManage},
             {path:"/BackStage/BShop",name:'BShop',component:ShopSetting},
             {path:"/BackStage/BSystem",name:'BSystem',component:SystemSetting},
+            {path:"/BackStage/BPayment",name:'BPayment',component:PaymentSetting},
             {path:"/BackStage/BDaily",name:'BDaily',component:DailyIncome},
             {path:"/BackStage/BMonth",name:'BMonth',component:MonthIncome},
             {path:"/BackStage/BYear",name:'BYear',component:YearIncome},
             {path:"/BackStage/BComment",name:'BComment',component:CommentsPage},
+            {path:"/BackStage/BService",name:'BService',component:ServicePage},
             {path:"/BackStage/BAbout",name:'BAbout',component:AboutSite},
             {path:"/BackStage/:path(.*)",component:NotFound}
         ]
