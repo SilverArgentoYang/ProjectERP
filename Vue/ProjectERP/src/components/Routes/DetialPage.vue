@@ -452,7 +452,7 @@ import axios from 'axios';
 
     //点赞评论
     function _likecomment(commentid,index) {
-        if(!good.value.isfavorite) {
+        if(store.state.user_islogin) {
             if(!comments.value[index].isliked) {
                 axios({
                     url:'/postLikeComment',
@@ -485,7 +485,7 @@ import axios from 'axios';
     const isreplying = ref(-1);
     const replytext = ref('')
     function _showreplybox(index) {
-        if(!good.value.isfavorite) {
+        if(store.state.user_islogin) {
             if(isreplying.value != index) {
                 isreplying.value = index;
             }else {

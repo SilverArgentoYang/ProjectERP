@@ -19,6 +19,7 @@ const store = {
         },
         //登录状态
         user_islogin:false,
+        userhash:'',
         //个人空间左侧菜单
         spc_leftbarselected:0,
         //收藏夹历史记录管理
@@ -52,8 +53,9 @@ const store = {
         this.state.nav_popoverpanelshow = isshow;
     },
     //登录
-    user_islogin :function(islogin){
+    user_islogin :function(islogin,userhash){
         this.state.user_islogin = islogin;
+        this.state.userhash = userhash;
     },
 
     //弹出浮窗

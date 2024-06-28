@@ -59,8 +59,8 @@ import { useRouter } from 'vue-router';
                     }
                 }).then(res=>{
                     if(res.data.successful) {
-                        localStorage.setItem('user',res.data.userid);
-                        store.user_islogin(true);
+                        localStorage.setItem('user',res.data.userhash);
+                        store.user_islogin(true,res.data.userhash);
                         _jumptohomepage();
                     }else{
                         if(res.data.error == 1) {
@@ -73,7 +73,34 @@ import { useRouter } from 'vue-router';
                 });
             }
         }else{
-            state.value = false;
+          if(username.value==''||password.value==''||confirmpassword.value=='') {
+            store._showmessage('用户名或密码为空');
+          }else{
+            if(password.value!=confirmpassword.value){
+              store._showmessage('密码不一致');
+            }else{
+              axios({
+                url:'/postLogon',
+                method:'post',
+                params:{
+                  username:username.value,
+                  password:password.value
+                }
+              }).then(res=>{
+                if(res.data.successful) {
+                  store._showmessage('注册成功');
+                  _changestate(false);
+                }else{
+                  if(res.data.error == 1) {
+                    store._showmessage('用户名不符合规范');
+                  }
+                  if(res.data.error == 2) {
+                    store._showmessage('用户名已存在');
+                  }
+                }
+              });
+            }
+          }
         }
     }
 </script>

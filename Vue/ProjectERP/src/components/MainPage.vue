@@ -7,8 +7,18 @@ import axios from "axios";
     const store = inject('store');
     //自动登录
     function _autologin() {
-        if(localStorage.getItem('user')&&localStorage.getItem('user')!='null') {
-            store.user_islogin(true);
+        if(localStorage.getItem('user')) {
+            axios({
+              url:'/postLogin',
+              method:'post',
+              params:{
+                userhash:localStorage.getItem('user')
+              }
+            }).then(res=>{
+              if(res.data.successful){
+                store.user_islogin(true,localStorage.getItem('user'));
+              }
+            })
         }
     }
     _autologin();

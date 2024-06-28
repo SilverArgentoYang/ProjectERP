@@ -81,7 +81,7 @@
             url:'/getUserMain',
             method:'get',
             params:{
-                userid:localStorage.getItem('user')
+                userid:store.state.userhash,
             }
         }).then(res => {
             user.value.userid = res.data.user.userid;
@@ -92,9 +92,7 @@
             store._user_avator(res.data.user.avator);
         });
     }
-    if(store.state.user_islogin){
-        _setlogstate();
-    }
+    _setlogstate();
 
     //读取分类
     const nav_labels = ref([]);
@@ -284,12 +282,12 @@
         <!-- 导航栏 -->
         <div class="navigator">
             <!-- 左侧 -->
-            <div class="labels">
+            <ul class="labels">
                 <li class="button"
                     v-for="item in nav_labels"
                     @click="_jumptokind(item.name,'label')
                 ">{{ item.name }}</li>
-            </div>
+            </ul>
 
             <!-- 搜索框 -->
             <div class="searchbox">
@@ -317,6 +315,7 @@
                             }"
                             :src="store.state.user_avator"
                             @click="_userlogin()"
+                             alt=""
                         >
                         <div><NavAvatorPanel
                             class="avatorpanel"
